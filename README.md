@@ -32,8 +32,8 @@
 |zip-code|integer(7)|null: false|
 |prefecture|integer|null: false|
 |city|string|null: false|
-|street-number|null: false|
-|apartment||
+|street-number|string|null: false|
+|apartment|string||
 |telephone|integer||
 ### Association
 - belongs_to :user
