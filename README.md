@@ -115,6 +115,3 @@
 |seller|integer|null:false|
 ### Association
 - has_many :products
-
-
-坂井が編集しました。
