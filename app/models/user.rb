@@ -7,5 +7,6 @@ class User < ApplicationRecord
   validates :nickname, presence: true
 
   has_one :profile
+  accepts_nested_attributes_for :profile
   has_one :address
 end
