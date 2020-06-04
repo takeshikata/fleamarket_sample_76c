@@ -1,8 +1,8 @@
 class CreateCategories < ActiveRecord::Migration[5.2]
   def change
     create_table :categories do |t|
-      t.string :name
-      t.integer :ancestry
+      t.string :name, null: false
+      t.string :ancester,
       t.timestamps
     end
   end
