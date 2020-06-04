@@ -49,7 +49,7 @@
 |shipping_payer|references|null: false, foreign_key: true|
 |consignor_address|references|null: false, foreign_key: true|
 |preparation_term|references|null: false, foreign_key: true|
-|price|references|null: false, foreign_key: true|
+|price|integer|null: false|
 ### Association
 - belongs_to :user
 - has_many :images
