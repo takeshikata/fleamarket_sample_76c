@@ -32,9 +32,9 @@
 |zip-code|integer(7)|null: false|
 |prefecture|integer|null: false|
 |city|string|null: false|
-|street-number||
+|street-number|null: false|
 |apartment||
-|telephone|integer|null: false|
+|telephone|integer||
 ### Association
 - belongs_to :user
 ## Productsテーブル
