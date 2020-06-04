@@ -42,7 +42,7 @@
 |------|----|-------|
 |user|references|null: false, foreign_key: true|
 |name|string|null: false|
-|introduction|string|null: false|
+|introduction|text|null: false|
 |category|references|null: false, foreign_key: true|
 |brand|references|null: false, foreign_key: true|
 |product_condition|references|null: false, foreign_key: true|
@@ -105,7 +105,7 @@
 ## shipping_regionテーブル
 |Column|Type|Options|
 |------|----|-------|
-|adderess|integer|null:false|
+|region|integer|null:false|
 ### Association
 - has_many :products
 ## shipping_payerテーブル
