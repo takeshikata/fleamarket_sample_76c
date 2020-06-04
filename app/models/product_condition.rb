@@ -1,0 +1,2 @@
+class ProductCondition < ApplicationRecord
+end
