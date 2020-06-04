@@ -127,7 +127,7 @@
 | term | integer | null:false |
 ### Association
 - has_many :products
-## consignor_addressテーブル
+## consigner_addressテーブル
 | Column | Type | Options |
 |------|----|-------|
 | adderss | integer | null:false |
