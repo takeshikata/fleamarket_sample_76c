@@ -5,8 +5,8 @@
 |email|string|null: false, unique: true|
 |password|string|null: false|
 ### Association
-- belongs_to :profile
-- belongs_to :address
+- has_one :profile
+- has_one :address
 ## Profileテーブル
 |Column|Type|Options|
 |------|----|-------|
@@ -39,19 +39,19 @@
 - belongs_to :user
 
 ## categoryテーブル
-| Column | Type | Options |
+|Column|Type|Options|
 |------|----|-------|
-| id | string |
-| category | integer |foreign_key:true|
-| ancestry | integer |
+|id|string|
+|category|integer|foreign_key:true|
+|ancestry|integer|
 
 ### Association
 - has_many :products
 
 ## product_conditionテーブル
-| Column | Type | Options |
+|Column|Type|Options|
 |------|----|-------|
-| condition | integer | null: false |
+|condition|integer|null: false|
 ### Association
 - belongs_to :product
 ### Condition
@@ -96,47 +96,47 @@
 - belongs_to :consignor_address
 - belongs_to :shipping_payer
 ## imageテーブル
-| Column | Type | Options |
+|Column|Type|Options|
 |------|----|-------|
-| image | string |
+|image|string|
 |product|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :products
 ## categoryテーブル
-| Column | Type | Options |
+|Column|Type|Options|
 |------|----|-------|
-| category | string |
-| ancestry | integer |
+|category|string|
+|ancestry|integer|
 ### Association
 - has_many :products
 ## brandテーブル
-| Column | Type | Options |
+|Column|Type|Options|
 |------|----|-------|
-| name | string |
+|name|string|
 ### Association
 - has_many :products
 ## product_conditionテーブル
-| Column | Type | Options |
+|Column|Type|Options|
 |------|----|-------|
-| condition | integer | null:false |
+|condition|integer|null:false|
 ### Association
 - has_many :products
 ## preparation_termテーブル
-| Column | Type | Options |
+|Column|Type|Options|
 |------|----|-------|
-| term | integer | null:false |
+|term|integer|null:false|
 ### Association
 - has_many :products
 ## shipping_regionテーブル
-| Column | Type | Options |
+|Column|Type|Options|
 |------|----|-------|
-| adderss | integer | null:false |
+|adderss|integer|null:false|
 ### Association
 - has_many :products
 ## shipping_payerテーブル
-| Column | Type | Options |
+|Column|Type|Options|
 |------|----|-------|
-| buyer | integer | null:false |
-| seller | integer | null:false |
+|buyer|integer|null:false|
+|seller|integer|null:false|
 ### Association
 - has_many :products
