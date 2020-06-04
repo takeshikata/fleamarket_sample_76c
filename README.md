@@ -88,12 +88,12 @@
 |price|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :user
-- has_many :image
+- has_many :images
 - belongs_to :category
 - belongs_to :brand
 - belongs_to :product_condition
 - belongs_to :preparation_term
-- belongs_to :consignor_address
+- belongs_to :shipping_region
 - belongs_to :shipping_payer
 ## imageテーブル
 |Column|Type|Options|
@@ -130,7 +130,7 @@
 ## shipping_regionテーブル
 |Column|Type|Options|
 |------|----|-------|
-|adderss|integer|null:false|
+|adderess|integer|null:false|
 ### Association
 - has_many :products
 ## shipping_payerテーブル
