@@ -10,7 +10,7 @@
 ## Profileテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|references|null: false,foreign_key: true|
+|user|references|null: false,foreign_key: true|
 |first-name|string|null: false|
 |last-name|string|null: false|
 |first-name-kana|string|null: false|
@@ -42,9 +42,9 @@
 | Column | Type | Options |
 |------|----|-------|
 | id | string |
-| category | string |
+| category | integer |foreign_key:true|
 | ancestry | integer |
-| product_id | string | foreign_key:true |
+
 ### Association
 - has_many :products
 
@@ -52,7 +52,6 @@
 | Column | Type | Options |
 |------|----|-------|
 | condition | integer | null: false |
-| products_id | references | null: false,foreign_key: true |
 ### Association
 - belongs_to :product
 ### Condition
@@ -66,8 +65,7 @@
 ##preparation_termテーブル
 |Column|Type|Options|
 |------|----|-------|
-|product|references|null: false, foreign_key: true|
-|term|integer|null: false| term=1(1~2days),term=2(2~3days),term=3(4~7days)
+|term|integer|null: false|
 ### Association
 - has_many :products
 ### term
@@ -132,7 +130,7 @@
 ## consignor_addressテーブル
 | Column | Type | Options |
 |------|----|-------|
-| adders | integer | null:false |
+| adderss | integer | null:false |
 ### Association
 - has_many :products
 ## shipping_payerテーブル
