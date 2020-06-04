@@ -21,7 +21,7 @@
 ### Association
 - belongs_to :user
 
-##Addressテーブル
+## Addressテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false, foreign_key: true|
@@ -32,48 +32,12 @@
 |zip-code|integer(7)|null: false|
 |prefecture|integer|null: false|
 |city|string|null: false|
-|street-number|string|null: false|
-|apartment|string|null: false|
+|street-number||
+|apartment||
 |telephone|integer|null: false|
 ### Association
 - belongs_to :user
-
-## categoryテーブル
-|Column|Type|Options|
-|------|----|-------|
-|id|string|
-|category|integer|foreign_key:true|
-|ancestry|integer|
-
-### Association
-- has_many :products
-
-## product_conditionテーブル
-|Column|Type|Options|
-|------|----|-------|
-|condition|integer|null: false|
-### Association
-- belongs_to :product
-### Condition
-1:新品、未使用
-2:未使用に近い
-3:目立った傷た汚れなし
-4:やや傷や汚れあり
-5:傷や汚れあり
-6:全体的に状態が悪い
-
-##preparation_termテーブル
-|Column|Type|Options|
-|------|----|-------|
-|term|integer|null: false|
-### Association
-- has_many :products
-### term
-1:1-2日
-2:2-3日
-3:4-7日
-
-【Productsテーブル】
+## Productsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false, foreign_key: true|
@@ -105,7 +69,7 @@
 ## categoryテーブル
 |Column|Type|Options|
 |------|----|-------|
-|category|string|
+|name|string|
 |ancestry|integer|
 ### Association
 - has_many :products
@@ -121,12 +85,23 @@
 |condition|integer|null:false|
 ### Association
 - has_many :products
+### Condition
+1:新品、未使用
+2:未使用に近い
+3:目立った傷た汚れなし
+4:やや傷や汚れあり
+5:傷や汚れあり
+6:全体的に状態が悪い
 ## preparation_termテーブル
 |Column|Type|Options|
 |------|----|-------|
 |term|integer|null:false|
 ### Association
 - has_many :products
+### term
+1:1-2日
+2:2-3日
+3:4-7日
 ## shipping_regionテーブル
 |Column|Type|Options|
 |------|----|-------|
