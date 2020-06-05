@@ -70,7 +70,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |name|string|
-|ancestry|integer|
+|ancestry|string|
 ### Association
 - has_many :products
 ## brandテーブル
