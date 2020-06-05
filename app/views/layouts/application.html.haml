@@ -7,5 +7,24 @@
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
+    %body
+      .header
+        .header__top
+          .header__top__title フリマ
+          .header__top__search
+            %input.form-text{:placeholder => "何かお探しですか？", :type => "seach"}/
+            %button.seach
+              %i.fa.fa-search
+        .header__nav
+          .header__nav__left
+            .category-search
+              %a{:href => "index"} カテゴリーから探す
+            .brand-search
+              %a{:href => "index"} ブランドから探す
+          .header__nav__right
+            .new-register
+              %a{:href => "index"} 新規登録
+            .login
+              %a{:href => "index"}
+                ログイン
     = yield

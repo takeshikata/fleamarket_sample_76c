@@ -1,0 +1,68 @@
+.wrapper
+  .header
+  .main
+    .content
+      .content__product
+        %h3
+          サコッシュバッグ
+      .content__box
+        .content__box__image
+          .content__box__image--main
+            image_url
+          .content__box__image__subs
+            - 10.times do
+              .content__box__image__subs--sub
+                image
+
+        %table.content__box__detail
+          %tbody
+            %tr
+              %th
+                出品者
+              %td
+                ユーザー名
+            %tr
+              %th
+                カテゴリー
+              %td
+                カテゴリー
+            %tr
+              %th
+                ブランド名
+              %td
+                ノースフェイス
+            %tr
+              %th
+                商品の状態
+              %td
+                ほぼ新品
+            %tr
+              %th
+                配送料の負担
+              %td
+                送料込み
+            %tr
+              %th
+                配送の方法
+              %td
+                普通郵便
+            %tr
+              %th
+                配送元の地域
+              %td
+                北海道
+            %tr
+              %th
+                発送の目安
+              %td
+                2~3日で発送
+
+      .content__price
+        .content__price__tax-included
+          ¥ 3600 
+          %span (税込)
+        .content__price__postage
+          送料込み
+      .content__perchase
+        = link_to "購入画面に進む", "#", class: "content__perchase--btn"
+      .content__owner-comment
