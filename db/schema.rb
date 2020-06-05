@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_060800) do
+ActiveRecord::Schema.define(version: 2020_06_04_115738) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -37,14 +37,14 @@ ActiveRecord::Schema.define(version: 2020_06_05_060800) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
-    t.string "ancestry"
+    t.string "ancestry", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "product_id", null: false
-    t.string "image"
+    t.string "image", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_images_on_product_id"
@@ -74,10 +74,8 @@ ActiveRecord::Schema.define(version: 2020_06_05_060800) do
     t.bigint "product_condition_id", null: false
     t.bigint "shipping_payer_id", null: false
     t.bigint "shipping_region_id", null: false
-    t.bigint "preparation_term_id", null: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["category_id"], name: "index_products_on_category_id"
-    t.index ["preparation_term_id"], name: "index_products_on_preparation_term_id"
     t.index ["product_condition_id"], name: "index_products_on_product_condition_id"
     t.index ["shipping_payer_id"], name: "index_products_on_shipping_payer_id"
     t.index ["shipping_region_id"], name: "index_products_on_shipping_region_id"
@@ -129,7 +127,6 @@ ActiveRecord::Schema.define(version: 2020_06_05_060800) do
   add_foreign_key "images", "products"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
-  add_foreign_key "products", "preparation_terms"
   add_foreign_key "products", "product_conditions"
   add_foreign_key "products", "shipping_payers"
   add_foreign_key "products", "shipping_regions"
