@@ -71,8 +71,8 @@
 ## categoryテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|string|null: false|
-|ancestry|integer|
+|name|string|
+|ancestry|string|
 ### Association
 - has_many :products
 ## brandテーブル
