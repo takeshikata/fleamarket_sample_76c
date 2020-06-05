@@ -8,6 +8,7 @@
 ### Association
 - has_one :profile
 - has_one :address
+- has_many :products
 ## Profileテーブル
 |Column|Type|Options|
 |------|----|-------|
@@ -70,14 +71,14 @@
 ## categoryテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|string|
+|name|string|null: false|
 |ancestry|integer|
 ### Association
 - has_many :products
 ## brandテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|string|
+|name|string|null: false|
 ### Association
 - has_many :products
 ## product_conditionテーブル
