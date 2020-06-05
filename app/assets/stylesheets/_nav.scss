@@ -1,0 +1,98 @@
+.header{
+  width: 100vw;
+  height: 100px;
+  /* background-color: grey; */
+  &__top{
+    height: 50px;
+    width: 100%;
+    /* background-color: lightgray; */
+    display: flex;
+    justify-content: center;
+    &__title{
+      height: 50px;
+      width: 100px;
+      /* background-color: #ffffff; */
+      line-height: 50px;
+      text-align: center;
+    }
+    &__search{
+      height: 50px;
+      width: 65%;
+      /* background-color: lightcyan; */
+      position: relative;
+    }
+  }
+  &__nav {
+    height:50px;
+    width:100%;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+    &__left {
+      width: 33%;
+      display: flex;
+    }
+    &__right {
+      width: 33%;
+      display: flex;
+    }
+  }
+}
+.form-text{
+  width: 90%;
+  height: 40px;
+  margin: 5px;
+  position: absolute;
+  right: 44px;
+}
+.seach{
+  height: 40px;
+  width: 40px;
+  margin-top: 5px;
+  position: absolute;
+  right: 5px;
+}
+
+.category-search {
+  height: 50px;
+  width: 50%;
+  font-size: 11px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 50px;
+  background-color:whitesmoke;
+}
+.brand-search {
+  height: 50px;
+  width: 50%;
+  font-size: 11px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 50px;
+  background-color: whitesmoke;
+}
+
+.new-register {
+  height: 50px;
+  width: 50%;
+  font-size: 11px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 50px;
+  background-color:whitesmoke;
+}
+.login {
+  height: 50px;
+  width: 50%;
+  font-size: 11px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 50px;
+  background-color: whitesmoke;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
