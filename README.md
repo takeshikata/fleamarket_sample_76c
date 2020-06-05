@@ -11,13 +11,13 @@
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false,foreign_key: true|
-|first-name|string|null: false|
-|last-name|string|null: false|
-|first-name-kana|string|null: false|
-|last-name-kana|string|null: false|
-|birth-year|integer|null: false|
-|birth-month|integer|null: false|
-|birth-date|integer|null: false|
+|first_name|string|null: false|
+|last_name|string|null: false|
+|first_name_kana|string|null: false|
+|last_name_kana|string|null: false|
+|birth_year|integer|null: false|
+|birth_month|integer|null: false|
+|birth_date|integer|null: false|
 ### Association
 - belongs_to :user
 
@@ -25,14 +25,14 @@
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false, foreign_key: true|
-|first-name|string|null: false|
-|last-name|string|null: false|
-|first-name-kana|string|null: false|
-|last-name-kana|string|null: false|
-|zip-code|integer(7)|null: false|
+|first_name|string|null: false|
+|last_name|string|null: false|
+|first_name_kana|string|null: false|
+|last_name_kana|string|null: false|
+|zip_code|integer(7)|null: false|
 |prefecture|integer|null: false|
 |city|string|null: false|
-|street-number|string|null: false|
+|street_number|string|null: false|
 |apartment|string||
 |telephone|integer||
 ### Association
