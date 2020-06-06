@@ -1,0 +1,92 @@
+
+.content
+  = form_with(model: @product, @image, local: true) do |f|
+    %h2
+      商品の情報を入力
+    .product__block__form
+      .product__block__form__upload
+        %h3
+          出品画像
+          %span 必須
+        %p 最大10枚までアップロードできます
+        .drop__box
+          .prev-content
+          .label-content
+            %label{for: "product_image", class: "label-box"}
+          .hidden-content
+            = f.fields_for :images do |i|
+              = i.file_field :image, class: "hidden-field"
+              %input{class:"hidden-field", type: "file"}
+              %input{class:"hidden-field", type: "file"}
+              %input{class:"hidden-field", type: "file"}
+              %input{class:"hidden-field", type: "file"}
+              %input{class:"hidden-field", type: "file"}
+              %input{class:"hidden-field", type: "file"}
+              %input{class:"hidden-field", type: "file"}
+              %input{class:"hidden-field", type: "file"}
+              %input{class:"hidden-field", type: "file"}
+      .product__block__form__name
+        .name-label
+          %label
+            商品名
+            %span 必須
+          %div
+            = f.text_field :name, placeholder:"40文字まで"
+      .product__block__form__introduction
+        .introduction-label
+          %label
+            商品の説明
+            %span 必須
+          %div
+            = f.text_area :introduction, placeholder:"商品の説明"
+    .content__product-detail
+      .content_product-detail__category
+        %h4 
+          カテゴリー
+          %span 必須
+        = f.select :category_id, Category.names.keys, {prompt: "選択してください"}, class: "select"
+      .content_product-detail__condition
+        %h4
+          商品の状態
+          %span 必須
+        = f.select :product_condition_id, ProductCondition.conditions.keys, {prompt: "選択してください"}, class: "select"
+    .content__product-shipping
+      .content__product-shipping__region
+        %h4
+          配送元の地域
+          %span 必須
+        = f.select  :shipping_region_id, ShippingRegion.regions.keys, {prompt: "選択して下さい"}, class: "select"
+      .content__product-shipping__date
+        %h4
+          発送までの日数
+          %span 必須
+        = f.select :preparation_term_id, PreparationTerm.terms.keys, {prompt: "選択して下さい"}, class: "select"
+    .content__product-price
+      .content__product-price__limitation
+        価格(¥300~9,999,999)
+      .content__product-price__ssold
+        %h4
+          販売価格
+          %span 必須
+        = f.number_field :price, style: "text-align:right"
+    .content__product-submit
+      = f.submit "出品する"
+
+  -#  .content__product-shipping__payer
+  -# %h4
+  -#   配送料の負担
+  -#   %span 必須
+  -# = f.select :shipping_payer_id, ShippingPayer.payer.keys, {prompt: "選択して下さい"}, class: "select"
+
+-# , Category.all.map { |category| [category.name, category.id] }
+
+          -# .content__product-image
+  -#   = f.label :image
+  -#   = f.file_field :image, class: "content__product-image--file"
+  -# .content__product-name
+  -#   .content__product-name__item
+  -#     = f.label :productName, class: ""
+  -#     = f.text_field :productName, class: ""
+  -#   .content__product-name__detail
+  -#     = f.label :productDetail, class: ""
+  -#     = f.text_area :productDetail, class: ""
