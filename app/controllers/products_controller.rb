@@ -30,6 +30,12 @@ class ProductsController < ApplicationController
   end
 
   def show
+
+    @product = Product.find(params[:id])
+    @images = @product.images
+    @image = @images.first
+    @children = @product.category
+
   end
 
   private
