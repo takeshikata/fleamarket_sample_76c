@@ -1,6 +1,6 @@
 .wrapper
   / <div class="header">ヘッダー(部分テンプレート)</div>
-  .header-image イメージ画像を入れるかどうか
+  .header-image
   .category
     .title 人気のカテゴリー
     .tags
@@ -15,36 +15,16 @@
   .items
     .item-title レディース新着アイテム
     .boxs
-      .box
-        .image 画像
-        .text ワンピース
-      .box
-        .image
-        .text サンダル
-      .box
-        .image
-        .text スーツケース
-      .box
-        .image
-        .text 大人のおしゃれセット
-      .box
-        .image
-        .text ブーツ
-      .box
-        .image 画像
-        .text ワンピース
-      .box
-        .image
-        .text サンダル
-      .box
-        .image 画像
-        .text ワンピース
-      .box
-        .image
-        .text ブーツ
-      .box
-        .image
-        .text 大人のおしゃれセット
+      - @product_cat1.each do |cat1|
+        .box
+          = link_to product_path(cat1), class: "box__link" do
+            .image
+              - cat1.images.limit(1).each do |images|
+                = image_tag images.image.to_s, size: "100x100"
+            .price
+              = cat1.price
+            .text
+              = cat1.name
   .category
     .title 人気ブランド
     .tags
@@ -55,33 +35,14 @@
   .items
     .item-title レディース新着アイテム
     .boxs
-      .box
-        .image 画像
-        .text ワンピース
-      .box
-        .image
-        .text サンダル
-      .box
-        .image
-        .text スーツケース
-      .box
-        .image
-        .text 大人のおしゃれセット
-      .box
-        .image
-        .text ブーツ
-      .box
-        .image
-        .text スーツケース
-      .box
-        .image
-        .text 大人のおしゃれセット
-      .box
-        .image
-        .text サンダル
-      .box
-        .image
-        .text スーツケース
-      .box
-        .image
-        .text スーツケース
+      - @product_cat2.each do |cat2|
+        .box
+          = link_to product_path(cat2), class: "box__link" do
+            .image
+              - cat2.images.limit(1).each do |images|
+                = image_tag images.image.to_s, size: "100x100"
+            .price
+              = cat2.price
+            .text
+              = cat2.name
+
