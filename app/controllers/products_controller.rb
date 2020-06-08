@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   def index
+    
   end
 
   def new
@@ -15,5 +16,10 @@ class ProductsController < ApplicationController
   end
 
   def show
+  end
+
+  def search
+    @parents = Category.all.order("id ASC").limit(10)
+    @products = Product.search(params[:keyword])
   end
 end
