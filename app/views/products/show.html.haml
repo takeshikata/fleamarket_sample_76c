@@ -4,15 +4,15 @@
     .content
       .content__product
         %h3
-          サコッシュバッグ
+          = @product.name
       .content__box
         .content__box__image
           .content__box__image--main
-            image_url
+            = image_tag @image.image.to_s, size: "300x300"
           .content__box__image__subs
-            - 10.times do
-              .content__box__image__subs--sub
-                image
+            - @images.each.with_index(1) do |image, index|
+              .content__box__image__subs--sub                
+                = image_tag image.image.to_s, size: "60x60"
 
         %table.content__box__detail
           %tbody
@@ -20,49 +20,59 @@
               %th
                 出品者
               %td
-                ユーザー名
+                = @product.user.nickname
             %tr
               %th
                 カテゴリー
               %td
-                カテゴリー
+                = @children.root.name
+                %br
+                = @children.parent.name
+                %br
+                = @children.name
             %tr
               %th
                 ブランド名
               %td
-                ノースフェイス
+                = @product.brand.name
             %tr
               %th
                 商品の状態
               %td
-                ほぼ新品
+                = @product.product_condition.condition
             %tr
               %th
                 配送料の負担
               %td
-                送料込み
+                = @product.shipping_payer.buyer #条件分岐？
             %tr
-              %th
-                配送の方法
-              %td
-                普通郵便
+              -# %th        #テーブルないのでコメントアウトします
+              -#   配送の方法
+              -# %td
+              -#   普通郵便
             %tr
               %th
                 配送元の地域
               %td
-                北海道
+                = @product.shipping_region.region
             %tr
               %th
                 発送の目安
               %td
-                2~3日で発送
+                = @product.preparation_term.term
 
       .content__price
         .content__price__tax-included
-          ¥ 3600 
+          ¥ #{@product.price} 
           %span (税込)
         .content__price__postage
-          送料込み
+          %span 送料込み
       .content__perchase
         = link_to "購入画面に進む", "#", class: "content__perchase--btn"
       .content__owner-comment
+   
+
+      -# .content__edit
+      -#   = link_to "商品の編集", "#", class: "content__edit--btn"
+
+
