@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+  def new
+    @parents = Category.all.order("id ASC").limit(1)
+    @user = User.new
+    @profile = @user.build_profile
+  end
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
