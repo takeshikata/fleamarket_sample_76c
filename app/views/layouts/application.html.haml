@@ -10,21 +10,50 @@
     %body
       .header
         .header__top
-          .header__top__title フリマ
+          .header__top__title
+            = image_tag "http://furima.tokyo/assets/logo-d3d78326971d78b06e3d6f0ba666d025a8ad681286b4d9e00e7dbe8673bcfd23.svg", size: "100x50"
           .header__top__search
-            %input.form-text{:placeholder => "何かお探しですか？", :type => "seach"}/
-            %button.seach
-              %i.fa.fa-search
+            = form_with url: search_products_path, local: true, method: :get, class: "form" do |form|
+              = form.text_field :keyword, placeholder: "何かお探しですか？", class: "form-text"
+              %button.search
+                %i.fa-search
+                  = image_tag "https://cdn.icon-icons.com/icons2/1369/PNG/512/-search_90025.png", size: "40x40"
+
         .header__nav
           .header__nav__left
             .category-search
-              %a{:href => "index"} カテゴリーから探す
+              %ul.snav
+                %li
+                  = link_to "カテゴリー", "#"
+                  %ul
+                    - @parents.roots.each do |parent|
+                      %li
+                        = link_to "#" do
+                          = parent.name
+                        %ul
+                          - parent.children.each do |child|
+                            %li
+                              = link_to "#" do
+                                = child.name
+                              %ul
+                                - child.children.each do |grandchild|
+                                  %li
+                                    = link_to "#" do
+                                      = grandchild.name
+
             .brand-search
-              %a{:href => "index"} ブランドから探す
+              = link_to "ブランドから探す", "#", class: ""
           .header__nav__right
-            .new-register
-              %a{:href => "index"} 新規登録
-            .login
-              %a{:href => "index"}
-                ログイン
+            - if user_signed_in?
+              .new-register
+                = link_to "マイページ", "#"
+              .login
+                = link_to "ログアウト", destroy_user_session_path, method: :delete
+            - else
+              .new-register
+                = link_to "新規登録", new_user_registration_path, class: ""
+              .login
+                = link_to "ログイン", new_user_session_path, class: ""
+
+
     = yield
