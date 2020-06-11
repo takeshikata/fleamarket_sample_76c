@@ -80,4 +80,9 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'haml-rails'
-gem 'jquery-rails'
+
+gem 'font-awesome-sass'
+gem 'payjp'
+gem 'dotenv-rails'
+gem "jquery-rails"
+
