@@ -15,16 +15,27 @@
             %label{for: "product_image", class: "label-box"}
           .hidden-content
             = f.fields_for :images do |i|
-              = i.file_field :image, class: "hidden-field"
-              %input{class:"hidden-field", type: "file"}
-              %input{class:"hidden-field", type: "file"}
-              %input{class:"hidden-field", type: "file"}
-              %input{class:"hidden-field", type: "file"}
-              %input{class:"hidden-field", type: "file"}
-              %input{class:"hidden-field", type: "file"}
-              %input{class:"hidden-field", type: "file"}
-              %input{class:"hidden-field", type: "file"}
-              %input{class:"hidden-field", type: "file"}
+              .hidden-field
+                = i.file_field :image, name: 'product[images_attributes][1][image]', class: 'hidden-field--image1'
+                %icon.fas.fa-camera
+                = i.file_field :image, name: 'product[images_attributes][2][image]', class: 'hidden-field--image2'
+                %icon.fas.fa-camera
+                = i.file_field :image, name: 'product[images_attributes][3][image]', class: 'hidden-field--image3' 
+                %icon.fas.fa-camera
+                = i.file_field :image, name: 'product[images_attributes][4][image]', class: 'hidden-field--image4' 
+                %icon.fas.fa-camera
+                = i.file_field :image, name: 'product[images_attributes][5][image]', class: 'hidden-field--image5' 
+                %icon.fas.fa-camera
+                = i.file_field :image, name: 'product[images_attributes][6][image]', class: 'hidden-field--image6'
+                %icon.fas.fa-camera
+                = i.file_field :image, name: 'product[images_attributes][7][image]', class: 'hidden-field--image7'
+                %icon.fas.fa-camera
+                = i.file_field :image, name: 'product[images_attributes][8][image]', class: 'hidden-field--image8' 
+                %icon.fas.fa-camera
+                = i.file_field :image, name: 'product[images_attributes][9][image]', class: 'hidden-field--image9'
+                %icon.fas.fa-camera
+                = i.file_field :image, name: 'product[images_attributes][10][image]', class: 'hidden-field--image10'
+                %icon.fas.fa-camera
       .product__block__form__name
         .name-label
           %h4
@@ -70,10 +81,4 @@
           %span 必須
         = f.number_field :price, style: "text-align:right"
     .content__product-submit
-      = f.submit "出品する"
-
-  -#  .content__product-shipping__payer
-  -# %h4
-  -#   配送料の負担
-  -#   %span 必須
-  -# = f.select :shipping_payer_id, ShippingPayer.payer.keys, {prompt: "選択して下さい"}, class: "select"
+      =f.submit "出品する"
