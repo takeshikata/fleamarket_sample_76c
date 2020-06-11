@@ -11,8 +11,13 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.images.new
+    #@images = @product.build_images
+    @category_parent_array = Category.where(ancestry: nil).order(id: "ASC")
+    # @category_parent_array = ["---"]
+    # Category.where(ancestry: nil).each do |parent|
+    #      @category_parent_array << parent.name
+    # end
   end
-  
   def create
     @product = Product.create!(product_params)
     # binding.pry
@@ -23,22 +28,31 @@ class ProductsController < ApplicationController
       render :new
     end
   end
-  
+
   def edit
   end
-  
+
   def update
   end
-  
+
   def show
-    
     @product = Product.find(params[:id])
     @images = @product.images
     @image = @images.first
     @children = @product.category
-    
   end
-  
+
+  def get_category_children
+      #選択された親カテゴリーに紐付く子カテゴリーの配列を取得
+    @category_children = Category.find_by(id: "#{params[:parent_id]}", ancestry: nil).children
+  end
+
+  def get_category_grandchildren
+    #binding.pry
+      #選択された子カテゴリーに紐付く孫カテゴリーの配列を取得
+    @category_grandchildren = Category.find("#{params[:child_id]}").children
+  end
+
   private
   def product_params
     params.require(:product).permit(
@@ -52,19 +66,14 @@ class ProductsController < ApplicationController
       :preparation_term_id,
       :product_condition_id,
       images_attributes: [:image]
-      ).merge(user_id: current_user.id)
+    ).merge(user_id: current_user.id)
     end
-    
-    
+
     def set_category
       @category_parent_array = Category.where(ancestry: nil).limit(13)
     end
-    
+
     def set_parent
-      @parents = Category.all.order("id ASC").limit(10)
+      @parents = Category.all.order(id: "ASC").limit(10)
     end
-    
-    
   end
-  
-  
