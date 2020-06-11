@@ -1,0 +1,73 @@
+.content
+  = form_with(model: @product, local: true) do |f|
+    %h2
+      商品の情報を入力
+    .product__block__form
+      .product__block__form__upload
+        %h3
+          出品画像
+          %span 必須
+        %p 最大10枚までアップロードできます
+        .drop__box
+          .prev-content
+          .label-content
+            %label{for: "product_image", class: "label-box"}
+          -# 保留
+          -# .hidden-content
+          -#   = f.fields_for :images do |i|
+          -#     = i.file_field :image, class: "hidden-field"
+          -#     %input{class:"hidden-field", type: "file", name: "item[images_attributes][1][image]", id: "item_images_attributes_1_image"}
+              
+      .product__block__form__name
+        .name-label
+          %h4
+            商品名
+            %span 必須
+          %div
+            = f.text_field :name, placeholder:"40文字まで"
+​
+      .product__block__form__introduction
+        .introduction-label
+          %h4
+            商品の説明
+            %span 必須
+          %div
+            = f.text_area :introduction, placeholder:"商品の説明"
+      .listing-form-box
+        .listing-product-detail__category
+          = f.label 'カテゴリー', class: 'listing-default__label'
+          %span.listing-default--require 必須
+          .listing-select-wrapper
+            .listing-select-wrapper__box
+              = f.select :parent_name, @category_parent_array, {selected:@product.category.root.name}, {id: 'parent_category', name: 'product[root_category_id]'}
+            .category-wrapper-select__box
+              = f.select :child_id, options_for_select(@category_children_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "指定なし", selected: @product.category.parent.id}), {}, {id: 'child_category', name: ''}
+            .category-wrapper-select__box
+              = f.select :category_id, options_for_select(@category_grandchildren_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "指定なし", selected: @product.category.id}), {}, {id: 'grandchild_category', name: 'product[category_id]'}
+​
+        %h4
+          商品の状態
+          %span 必須
+        = f.select :product_condition_id, options_for_select(ProductCondition.conditions), {prompt: "選択して下さい"}, class: "select"
+    .content__product-shipping
+      .content__product-shipping__region
+        %h4
+          配送元の地域
+          %span 必須
+        = f.select  :shipping_region_id, options_for_select(ShippingRegion.regions), {prompt: "選択して下さい"}, class: "select"
+      .content__product-shipping__date
+        %h4
+          発送までの日数
+          %span 必須
+        = f.select :preparation_term_id, options_for_select(PreparationTerm.terms), {prompt: "選択して下さい"}, class: "select"
+    .content__product-price
+      .content__product-price__limitation
+        価格(¥300~9,999,999)
+      .content__product-price__ssold
+        %h4
+          販売価格
+          %span 必須
+        = f.number_field :price, style: "text-align:right"
+​
+      .content__product-submit
+        = f.submit "編集する"
