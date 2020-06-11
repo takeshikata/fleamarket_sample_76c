@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_115823) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
-    t.string "ancestry"
+    t.string "ancestry", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -51,13 +51,13 @@ ActiveRecord::Schema.define(version: 2020_06_04_115823) do
   end
 
   create_table "preparation_terms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "term", default: 0, null: false
+    t.integer "term", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "product_conditions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "condition", default: 0, null: false
+    t.integer "condition", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -69,10 +69,10 @@ ActiveRecord::Schema.define(version: 2020_06_04_115823) do
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "category_id"
-    t.bigint "brand_id"
+    t.bigint "category_id", null: false
+    t.bigint "brand_id", null: false
     t.bigint "product_condition_id", null: false
-    t.bigint "shipping_payer_id"
+    t.bigint "shipping_payer_id", null: false
     t.bigint "shipping_region_id", null: false
     t.bigint "preparation_term_id", null: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_115823) do
   end
 
   create_table "shipping_regions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "region", default: 0, null: false
+    t.integer "region", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
