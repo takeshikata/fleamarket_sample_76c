@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
     @images = Image.select("id", "image", "product_id")
     @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
   end
-  
+
   def new
     @product = Product.new
     @product.images.new
@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
     child_category = grandchild_category.parent
     parent_category = grandchild_category.root
     # binding.pry
-    
+
     @category_parent_array = []
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
@@ -64,6 +64,14 @@ class ProductsController < ApplicationController
     @images = @product.images
     @image = @images.first
     @children = @product.category
+  end
+
+  def destroy
+    @product = Product.find(params[:id])
+    if @product.user_id == current_user.id
+      @product.destroy
+      redirect_to product_path
+    end
   end
 
   def get_category_children
