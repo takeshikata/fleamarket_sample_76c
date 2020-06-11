@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   root 'products#index'
 
   resources :users, only: [:show, :edit, :update]
-  resources :products do
+  resources :products, only: [:index, :new, :create, :show] do
     collection do
       get 'search'
+      get 'get_category_children', defaults: { format: 'json' }
+      get 'get_category_grandchildren', defaults: { format: 'json' }
     end
   end
 
