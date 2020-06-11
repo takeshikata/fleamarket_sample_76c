@@ -1,9 +1,10 @@
 class ProductsController < ApplicationController
-  before_action :set_category, only: [:new, :create]
+  before_action :set_category, only: [:new, :create, :update, :edit]
   before_action :set_parent, except: [:delete]
+  before_action :set_product, only: [:edit, :update, :create]
 
   def index
-    @product_cat1 = Product.where(category_id: 200).limit(10).order(" created_at DESC ")
+    @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
     @images = Image.select("id", "image", "product_id")
     @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
   end
@@ -13,11 +14,8 @@ class ProductsController < ApplicationController
     @product.images.new
     #@images = @product.build_images
     @category_parent_array = Category.where(ancestry: nil).order(id: "ASC")
-    # @category_parent_array = ["---"]
-    # Category.where(ancestry: nil).each do |parent|
-    #      @category_parent_array << parent.name
-    # end
   end
+
   def create
     @product = Product.create!(product_params)
     # binding.pry
@@ -30,9 +28,35 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    grandchild_category = @product.category
+    child_category = grandchild_category.parent
+    parent_category = grandchild_category.root
+    # binding.pry
+    
+    @category_parent_array = []
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
+
+    @category_children_array = []
+    Category.where(ancestry: child_category.ancestry).each do |children|
+      @category_children_array << children
+    end
+
+    @category_grandchildren_array = []
+    Category.where(ancestry: grandchild_category.ancestry).each do |grandchildren|
+      @category_grandchildren_array << grandchildren
+    end
   end
 
   def update
+    if
+      @product = Product.update(product_params)
+      binding.pry
+      redirect_to root_path
+    else
+      render 'edit'
+    end
   end
 
   def show
@@ -67,13 +91,17 @@ class ProductsController < ApplicationController
       :product_condition_id,
       images_attributes: [:image]
     ).merge(user_id: current_user.id)
-    end
-
-    def set_category
-      @category_parent_array = Category.where(ancestry: nil).limit(13)
-    end
-
-    def set_parent
-      @parents = Category.all.order(id: "ASC").limit(10)
-    end
   end
+
+  def set_category
+    @category_parent_array = Category.where(ancestry: nil).limit(13)
+  end
+
+  def set_parent
+    @parents = Category.all.order(id: "ASC").limit(10)
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+end
