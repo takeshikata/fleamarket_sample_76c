@@ -25,6 +25,10 @@
               = cat1.price
             .text
               = cat1.name
+            -if cat1.purchaser_id.present?
+              .items-box_photo__sold
+                .items-box_photo__sold__inner
+                  SOLD
   .category
     .title 人気ブランド
     .tags
@@ -45,4 +49,8 @@
               = cat2.price
             .text
               = cat2.name
+            -if cat1.purchaser_id.present?
+              .items-box_photo__sold
+                .items-box_photo__sold__inner
+                  SOLD
 

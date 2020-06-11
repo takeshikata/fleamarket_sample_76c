@@ -333,3 +333,25 @@ others_8 = others.children.create(name: "事務/店舗用品")
 others_8.children.create([{name: "オフィス用品一般"},{name: "オフィス家具"},{name: "店舗用品"},{name: "OA機器"},{name: "ラッピング/包装"},{name: "その他"}])
 others_9 = others.children.create(name: "その他")
 others_9.children.create([{name: "すべて"}])
+
+# 47都道府県を追加
+47.times do |n|
+  ShippingRegion.create!(
+    region: n + 1
+  )
+end
+
+# 商品の状態を追加
+6.times do |n|
+  ProductCondition.create!(
+    condition: n + 1
+  )
+end
+
+# 発送までの日数を追加
+3.times do |n|
+  PreparationTerm.create!(
+    term: n + 1
+  )
+end
+

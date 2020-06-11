@@ -55,7 +55,17 @@
         %h4 
           カテゴリー
           %span 必須
-        = f.select :category_id, options_for_select( @category_parent_array.map {|c| [c[:name], c[:id]]}), {include_blank: "選択してください"}, class: "select"
+      .listing-form-box
+        .listing-product-detail__category
+          = f.label 'カテゴリー', class: 'listing-default__label'
+          %span.listing-default--require 必須
+          .listing-select-wrapper
+            .listing-select-wrapper__box
+              //親カテゴリーのセレクトボックスの生成
+              -# = f.select :category, @category_parent_array, {}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'}
+              -# %i.fas.fa-chevron-down.listing-select-wrapper__box--arrow-down
+              = f.collection_select :root_category_id, @category_parent_array, :id, :name, {prompt: "---"}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'}
+              %i.fas.fa-chevron-down.listing-select-wrapper__box--arrow-down
       .content_product-detail__condition
         %h4
           商品の状態

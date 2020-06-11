@@ -13,7 +13,10 @@
             - @images.each.with_index(1) do |image, index|
               .content__box__image__subs--sub                
                 = image_tag image.image.to_s, size: "60x60"
-
+                -if @product.purchaser_id.present?
+                  .items-box_photo__sold-show
+                    .items-box_photo__sold__inner
+                      SOLD
         %table.content__box__detail
           %tbody
             %tr
@@ -34,7 +37,7 @@
               %th
                 ブランド名
               %td
-                = @product.brand.name
+                ブランド
             %tr
               %th
                 商品の状態
@@ -44,7 +47,7 @@
               %th
                 配送料の負担
               %td
-                = @product.shipping_payer.buyer #条件分岐？
+                出品者 #条件分岐？
             %tr
               -# %th        #テーブルないのでコメントアウトします
               -#   配送の方法
@@ -60,7 +63,6 @@
                 発送の目安
               %td
                 = @product.preparation_term.term
-
       .content__price
         .content__price__tax-included
           ¥ #{@product.price} 
@@ -70,8 +72,6 @@
       .content__perchase
         = link_to "購入画面に進む", "#", class: "content__perchase--btn"
       .content__owner-comment
-   
-
       -# .content__edit
       -#   = link_to "商品の編集", "#", class: "content__edit--btn"
 
