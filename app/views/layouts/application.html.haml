@@ -46,7 +46,7 @@
           .header__nav__right
             - if user_signed_in?
               .new-register
-                = link_to "マイページ", "#"
+                = link_to "マイページ", user_path(current_user.id)
               .login
                 = link_to "ログアウト", destroy_user_session_path, method: :delete
             - else
