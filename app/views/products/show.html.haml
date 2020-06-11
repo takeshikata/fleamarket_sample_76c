@@ -11,7 +11,7 @@
             = image_tag @image.image.to_s, size: "300x300"
           .content__box__image__subs
             - @images.each.with_index(1) do |image, index|
-              .content__box__image__subs--sub                
+              .content__box__image__subs--sub
                 = image_tag image.image.to_s, size: "60x60"
                 -if @product.purchaser_id.present?
                   .items-box_photo__sold-show
@@ -65,7 +65,7 @@
                 = @product.preparation_term.term
       .content__price
         .content__price__tax-included
-          ¥ #{@product.price} 
+          ¥ #{@product.price}
           %span (税込)
         .content__price__postage
           %span 送料込み
@@ -75,4 +75,6 @@
       -# .content__edit
       -#   = link_to "商品の編集", "#", class: "content__edit--btn"
 
-
+      - if user_signed_in? && current_user.id == @product.user_id
+        = link_to '編集', "/tweets/#{@product.id}/edit", method: :get
+        = link_to '削除', "/tweets/#{@product.id}", method: :delete
