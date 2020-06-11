@@ -13,7 +13,7 @@
             - @images.each.with_index(1) do |image, index|
               .content__box__image__subs--sub                
                 = image_tag image.image.to_s, size: "60x60"
-                -if @product.perchace_id.present?
+                -if @product.purchaser_id.present?
                   .items-box_photo__sold-show
                     .items-box_photo__sold__inner
                       SOLD
