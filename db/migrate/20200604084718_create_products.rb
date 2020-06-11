@@ -11,6 +11,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       #t.references :shipping_region, type: :bigint, foreign_key: true
       #t.references :preparation_term, type: :bigint, foreign_key: true
       t.integer :price, null: false
+      t.integer :purchaser_id
       t.timestamps
     end
   end

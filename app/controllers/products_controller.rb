@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_category, only: [:new, :create, :update, :edit]
   before_action :set_parent, except: [:delete]
-  before_action :set_product, only: [:edit, :update, :create]
+  before_action :set_product, only: [:edit, :update]
 
   def index
     @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
@@ -52,11 +52,15 @@ class ProductsController < ApplicationController
   def update
     if
       @product = Product.update(product_params)
-      binding.pry
+      # binding.pry
       redirect_to root_path
     else
       render 'edit'
     end
+  end
+  
+  def destroy
+
   end
 
   def show

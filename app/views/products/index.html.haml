@@ -25,7 +25,7 @@
               = cat1.price
             .text
               = cat1.name
-            -if cat1.perchace_id.present?
+            -if cat1.purchaser_id.present?
               .items-box_photo__sold
                 .items-box_photo__sold__inner
                   SOLD
@@ -49,4 +49,8 @@
               = cat2.price
             .text
               = cat2.name
+            -if cat1.purchaser_id.present?
+              .items-box_photo__sold
+                .items-box_photo__sold__inner
+                  SOLD
 
