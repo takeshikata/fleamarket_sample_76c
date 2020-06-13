@@ -20,7 +20,14 @@ Rails.application.routes.draw do
       get 'get_category_grandchildren', defaults: { format: 'json' }
       get 'search'
     end
+
     resources :comments, only: :create
+
+    member do
+      get 'purchase'
+      get 'pay'
+    end
+
   end
 
   resources :cards, only: [:new, :create, :show, :destroy]

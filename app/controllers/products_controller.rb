@@ -1,7 +1,12 @@
 class ProductsController < ApplicationController
+  require "payjp"
   before_action :set_category, only: [:new, :create, :update, :edit]
-  before_action :set_parent, except: [:delete]
-  before_action :set_product, only: [:edit, :show, :update]
+
+  before_action :set_parent,   except: [:delete]
+  before_action :set_product,  only: [:edit, :show, :update, :purchase, :pay]
+  before_action :set_address,  only: [:purchase, :pay]
+  before_action :set_card,     only: [:purchase, :pay]
+
 
   def index
     @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
@@ -51,8 +56,8 @@ class ProductsController < ApplicationController
 
   def update
     if
-      @product = Product.update(product_params)
-      # binding.pry
+      product = Product.find(params[:id])
+      product.update(edit_product_params)
       redirect_to root_path
     else
       render 'edit'
@@ -77,6 +82,36 @@ class ProductsController < ApplicationController
     if @product.user_id == current_user.id
       @product.destroy
       redirect_to root_path
+    end
+  end
+
+  def purchase
+    # showからのページ遷移アクション
+    @images = @product.images
+    @image = @images.first
+  end
+
+  def pay
+    # 既に購入されていないか？ されていたらroot_path
+    if @product.purchaser_id.present?
+      redirect_to root_path
+    elsif @card.blank?
+      # カード情報がなければ、カード登録画面に遷移
+      redirect_to new_card_path
+    else
+      Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+      customer = Payjp::Customer.retrive(@card.payjp_id)
+      Payjp::Charge.create(
+        amount: @product.price,
+        customer: customer.id,
+        currency: 'jpy'
+      )
+      # 売り切れになるので、productの情報をアップデートして売り切れにする
+      if @product.update(purchaser_id: current_user.id)
+        redirect_to action: 'show', id: @product.id
+      else
+        redirect_to action: 'show', id: @product.id
+      end
     end
   end
 
@@ -118,4 +153,30 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
+
+
+  def set_address
+    @address = Address.where(user_id: current_user.id).first
+  end
+  
+  def set_card
+    @card = Card.where(user_id: current_user.id).first
+  end
+
+
+  def edit_product_params
+    params.require(:product).permit(
+      :name,
+      :introduction,
+      :price,
+      :category_id,
+      :brand_id,
+      :shipping_region_id,
+      :shipping_payer_id,
+      :preparation_term_id,
+      :product_condition_id,
+      images_attributes: [:image]
+    )
+  end
 end
+
