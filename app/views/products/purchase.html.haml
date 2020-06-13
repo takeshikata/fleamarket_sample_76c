@@ -1,0 +1,32 @@
+
+.content
+  .content__purchase
+    .content__purchase.purchase-confirm
+      購入内容の確認
+  .content__product
+    .content__product.item
+      .content__product.item__image
+        = image_tag @image.image.to_s
+      .content__product.item__right
+        .content__product.item__right--name
+          = @product.name
+        .content__product.item__right--price
+          ¥ #{@product.price} (税込み)
+          出品者負担
+  .content__card
+    .content__card.register-card
+      カード情報
+  .content__address
+    .content__address.user-box
+      .content__address.user-box__title
+        配送先
+        = link_to "変更する", "#", class: 'btn'
+      .content__address.user-box__address
+        .content__address.user-box__address--zipcode
+          = @address.zip_code.gsub(/(\d{3})(\d{4})/, '\1-\2')
+        .content__address.user-box__address--detail
+          #{@address.prefecture} #{@address.city} #{@address.street_number} #{@address.apartment}
+        .content__address.user-box__address--name
+          #{@address.last_name} #{@address.first_name}
+  .content__decided
+    = link_to "クレジットカードで支払う", pay_product_path(params[:id]), class: 'content__decided--btn btn'
