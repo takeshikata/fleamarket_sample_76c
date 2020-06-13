@@ -54,8 +54,8 @@ class ProductsController < ApplicationController
 
   def update
     if
-      @product = Product.update(product_params)
-      # binding.pry
+      product = Product.find(params[:id])
+      product.update(edit_product_params)
       redirect_to root_path
     else
       render 'edit'
@@ -150,6 +150,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+
   def set_address
     @address = Address.where(user_id: current_user.id).first
   end
@@ -158,4 +159,20 @@ class ProductsController < ApplicationController
     @card = Card.where(user_id: current_user.id).first
   end
 
+
+  def edit_product_params
+    params.require(:product).permit(
+      :name,
+      :introduction,
+      :price,
+      :category_id,
+      :brand_id,
+      :shipping_region_id,
+      :shipping_payer_id,
+      :preparation_term_id,
+      :product_condition_id,
+      images_attributes: [:image]
+    )
+  end
 end
+

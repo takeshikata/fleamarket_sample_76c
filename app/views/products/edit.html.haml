@@ -36,13 +36,22 @@
         .listing-product-detail__category
           = f.label 'カテゴリー', class: 'listing-default__label'
           %span.listing-default--require 必須
-          .listing-select-wrapper
-            .listing-select-wrapper__box
-              = f.select :parent_name, @category_parent_array, {selected:@product.category.root.name}, {id: 'parent_category', name: 'product[root_category_id]'}
-            .category-wrapper-select__box
-              = f.select :child_id, options_for_select(@category_children_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "指定なし", selected: @product.category.parent.id}), {}, {id: 'child_category', name: ''}
-            .category-wrapper-select__box
-              = f.select :category_id, options_for_select(@category_grandchildren_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "指定なし", selected: @product.category.id}), {}, {id: 'grandchild_category', name: 'product[category_id]'}
+          .listing-select-wrapper--edit
+            .listing-select-wrapper--edit__parent
+              = @product.category.parent.parent.name
+              -# = f.select :parent_name, @category_parent_array, {selected:@product.category.root.name}, {id: 'parent_category', name: 'product[root_category_id]'}
+              -# = f.collection_select :category_id, Category.roots, :id, :name ,{prompt: "選択してください", selected:  @product.category.parent.parent_id}, {class: 'listing-select-wrapper__box--select', id: 'parent_category_edit', name: "" }
+            .listing-select-wrapper--edit__child
+              = f.collection_select :category_id, @product.category.parent.parent.children, :id, :name ,{prompt: "選択してください", selected: @product.category.parent_id}, {class: 'listing-select-wrapper--edit__child--select', id: 'child_category_edit', name: "" }
+            .listing-select-wrapper--edit__grandchild
+              = f.collection_select :category_id,@product.category.parent.children, :id, :name ,{prompt: "選択してください", selected: @product.category.id}, {class: 'listing-select-wrapper--edit__grandchild--select', id: 'grandchild_category_edit', name: "product[category_id]" }
+          -# .listing-select-wrapper
+          -#   .listing-select-wrapper__box
+          -#     = f.select :parent_name, @category_parent_array, {selected:@product.category.root.name}, {id: 'parent_category', name: 'product[root_category_id]'}
+          -#   .category-wrapper-select__box__child
+          -#     = f.select :child_id, options_for_select(@category_children_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "指定なし", selected: @product.category.parent.id}), {}, {id: 'child_category', name: ''}
+          -#   .category-wrapper-select__box__grandchild
+          -#     = f.select :category_id, options_for_select(@category_grandchildren_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "指定なし", selected: @product.category.id}), {}, {id: 'grandchild_category', name: 'product[category_id]'}
 
         %h4
           商品の状態
