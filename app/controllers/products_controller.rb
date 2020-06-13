@@ -1,7 +1,10 @@
 class ProductsController < ApplicationController
+  require "payjp"
   before_action :set_category, only: [:new, :create, :update, :edit]
-  before_action :set_parent, except: [:delete]
-  before_action :set_product, only: [:edit, :update]
+  before_action :set_parent,   except: [:delete]
+  before_action :set_product,  only: [:edit, :update, :purchase, :pay]
+  before_action :set_address,  only: [:purchase, :pay]
+  before_action :set_card,     only: [:purchase, :pay]
 
   def index
     @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
@@ -78,6 +81,36 @@ class ProductsController < ApplicationController
     end
   end
 
+  def purchase
+    # showからのページ遷移アクション
+    @images = @product.images
+    @image = @images.first
+  end
+
+  def pay
+    # 既に購入されていないか？ されていたらroot_path
+    if @product.purchaser_id.present?
+      redirect_to root_path
+    elsif @card.blank?
+      # カード情報がなければ、カード登録画面に遷移
+      redirect_to new_card_path
+    else
+      Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+      customer = Payjp::Customer.retrive(@card.payjp_id)
+      Payjp::Charge.create(
+        amount: @product.price,
+        customer: customer.id,
+        currency: 'jpy'
+      )
+      # 売り切れになるので、productの情報をアップデートして売り切れにする
+      if @product.update(purchaser_id: current_user.id)
+        redirect_to action: 'show', id: @product.id
+      else
+        redirect_to action: 'show', id: @product.id
+      end
+    end
+  end
+
   def get_category_children
       #選択された親カテゴリーに紐付く子カテゴリーの配列を取得
     @category_children = Category.find_by(id: "#{params[:parent_id]}", ancestry: nil).children
@@ -117,6 +150,16 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+
+  def set_address
+    @address = Address.where(user_id: current_user.id).first
+  end
+  
+  def set_card
+    @card = Card.where(user_id: current_user.id).first
+  end
+
+
   def edit_product_params
     params.require(:product).permit(
       :name,
@@ -132,3 +175,4 @@ class ProductsController < ApplicationController
     )
   end
 end
+

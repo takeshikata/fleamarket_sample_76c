@@ -70,7 +70,8 @@
         .content__price__postage
           %span 送料込み
       .content__perchase
-        = link_to "購入画面に進む", "#", class: "content__perchase--btn"
+        -unless user_signed_in? && @product.user_id == current_user.id
+          = link_to "購入画面に進む", purchase_product_path(params[:id]), class: "content__perchase--btn"
       .content__owner-comment
       -# .content__edit
       -#   = link_to "商品の編集", "#", class: "content__edit--btn"
