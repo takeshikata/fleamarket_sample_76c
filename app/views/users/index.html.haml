@@ -33,7 +33,7 @@
           = link_to "ログアウト", log_out_path, method: :get
   .mypage-content
     %section.mypage-user-icon
-      = link_to "#" do
+      = link_to user_path(@user) do
         = image_tag "https://static.mercdn.net/images/member_photo_noimage_thumb.png", size: "50x50"
         %p ユーザー名
     %section.mypage-tab-content
