@@ -12,7 +12,8 @@
       .header
         .header__top
           .header__top__title
-            = image_tag "http://furima.tokyo/assets/logo-d3d78326971d78b06e3d6f0ba666d025a8ad681286b4d9e00e7dbe8673bcfd23.svg", size: "100x50"
+            = link_to products_path do
+              = image_tag "http://furima.tokyo/assets/logo-d3d78326971d78b06e3d6f0ba666d025a8ad681286b4d9e00e7dbe8673bcfd23.svg", size: "100x50"
           .header__top__search
             = form_with url: search_products_path, local: true, method: :get, class: "form" do |form|
               = form.text_field :keyword, placeholder: "何かお探しですか？", class: "form-text"
