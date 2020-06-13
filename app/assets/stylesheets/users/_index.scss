@@ -1,0 +1,169 @@
+.mypage-main{
+  width: 100%;
+  height: 100vh;
+  margin: 60px auto 0;
+  background: whitesmoke;
+  .mypage-side{
+    float: left;
+    width: 300px;
+    background: whitesmoke;
+    .mypage-nav{
+      ul.mypage-nav-list{
+        list-style: none;
+        li{
+          width: 100%;
+          height: 50px;
+          line-height: 50px;
+          padding-left: 10px;
+          margin-bottom: 5px;
+          background: white;
+          a{
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .mypage-content{
+    float: right;
+    width: 700px;
+    .mypage-user-icon{
+      position: relative;
+      height: 200px;
+      background: lightblue;
+      text-align: center;
+      a{
+        position: absolute;
+        display: block;
+        top: 20%;
+        left: 0;
+        right: 0;
+      }
+    }
+    .mypage-tab-content{
+      ul.mypage-tabs{
+        display: flex;
+        list-style: none;
+        margin: 0;
+        li{
+          height: 70px;
+          line-height: 70px;
+          width: 50%;
+          text-align: center;
+          background: gray;
+          a{
+            display: block;
+            // height: 80px;
+            // padding: 10px;
+          }
+        }
+      }
+      .tab-content{
+        ul.tab-content-list{
+          list-style: none;
+          margin: 0;
+          li{
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            margin-bottom: 5px;
+            background: white;
+            a{
+              display: block;
+            }
+          }
+        }
+      }
+    }
+    .mypage-tab-container{
+      margin: 30px 0 0;
+      h3.mypage-tab-head{
+        padding-left: 10px;
+      }
+      ul.mypage-tabs{
+        display: flex;
+        margin: 0;
+        list-style: none;
+        li{
+          height: 70px;
+          line-height: 70px;
+          width: 50%;
+          text-align: center;
+          background: gray;
+          a{
+            display: block;
+          }
+        }
+      }
+      .tab-content{
+        ul.product-list{
+          list-style: none;
+          margin: 0;
+          li{
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            margin-bottom: 5px;
+            background: white;
+            a{
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+  .logout-content{
+    float: right;
+    width: 700px;
+    height: 300px;
+    margin-top: 16px;
+    background: white;
+    .form{
+      position: relative;
+      height: 300px;
+      .logout-button{
+        position: absolute;
+        display: block;
+        width: 300px;
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background: red;
+      }
+    }
+  }
+  .profile{
+    float: right;
+    width: 700px;
+    height: 500px;
+    margin-top: 16px;
+    background: white;
+    section.profile-content{
+      h2{
+        text-align: center;
+      }
+    }
+  }
+  .address{
+    float: right;
+    width: 700px;
+    height: 500px;
+    margin-top: 16px;
+    background: white;
+    section.address-content{
+      h2{
+        text-align: center;
+      }
+    }
+  }
+}

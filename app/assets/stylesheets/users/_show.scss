@@ -1,0 +1,71 @@
+.user-details{
+  width: 700px;
+  height: 100vh;
+  margin: 80px auto 0;
+  background: whitesmoke;
+  .user-profile{
+    height: 800px;
+    .user-icon{
+      position: relative;
+      height: 400px;
+      background: lightblue;
+      text-align: center;
+      a{
+        position: absolute;
+        display: block;
+        top: 20%;
+        left: 0;
+        right: 0;
+      }
+    }
+    .user-evaluation{
+      height: 70px;
+      ul{
+        display: flex;
+        list-style: none;
+        margin: 0;
+        li{
+          display: flex;
+          height: 70px;
+          line-height: 70px;
+          i{
+            display: block;
+          }
+        }
+      }
+    }
+    .product-details{
+      ul.product-tabs{
+        display: flex;
+        margin: 0;
+        list-style: none;
+        li{
+          height: 70px;
+          line-height: 70px;
+          width: 50%;
+          text-align: center;
+          background: gray;
+          a{
+            display: block;
+          }
+        }
+      }
+      .tab-content{
+        ul.product-list{
+          list-style: none;
+          margin: 0;
+          li{
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            margin-bottom: 5px;
+            background: white;
+            a{
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}

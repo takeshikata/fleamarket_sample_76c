@@ -79,3 +79,19 @@
       - if user_signed_in? && current_user.id == @product.user_id
         = link_to '編集', "/products/#{@product.id}/edit", method: :get
         = link_to '削除', "/products/#{@product.id}", method: :delete
+
+      .comment-container
+        - if current_user
+          = form_with model: [@product, @comment], local: true, id: "new_comment" do |form|
+            = form.text_area :text, placeholder: "コメントする", rows: "2", class: "textbox"
+            = form.submit "SEND", class: "form__submit"
+        - else
+          %strong※※※ コメントの投稿には新規登録/ログインが必要です ※※※
+
+        %h4 < コメント一覧 >
+        - if @comments
+          - @comments.each do |comment|
+            %strong
+              %p
+                = link_to "#{comment.user.nickname} さん：", "/users/#{comment.user_id}"
+                = comment.text
