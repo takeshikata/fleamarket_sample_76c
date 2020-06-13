@@ -158,7 +158,7 @@ class ProductsController < ApplicationController
   def set_address
     @address = Address.where(user_id: current_user.id).first
   end
-  
+
   def set_card
     @card = Card.where(user_id: current_user.id).first
   end
@@ -179,4 +179,3 @@ class ProductsController < ApplicationController
     )
   end
 end
-
