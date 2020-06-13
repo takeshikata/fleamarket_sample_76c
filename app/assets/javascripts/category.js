@@ -2,13 +2,13 @@ $(function(){
   console.log("非同期");
   // カテゴリーセレクトボックスのオプションを作成
   function appendOption(category){
-    var html = `<option value="${category.id}" data-category="${category.id}">${category.name}</option>`;
+    var html = '<option value="${category.id}" data-category="${category.id}">${category.name}</option>';
     return html;
   }
   // 子カテゴリーの表示作成
   function appendChidrenBox(insertHTML){
     var childSelectHtml = '';
-    childSelectHtml = `<div class='listing-select-wrapper__added' id= 'children_wrapper'>
+    childSelectHtml = '<div class='listing-select-wrapper__added' id= 'children_wrapper'>
                         <div class='listing-select-wrapper__box'>
                           <select class="listing-select-wrapper__box--select" id="child_category" name="">
                             <option value="---" data-category="---">---</option>
@@ -16,13 +16,13 @@ $(function(){
                           <select>
                           <i class='fas fa-chevron-down listing-select-wrapper__box--arrow-down'></i>
                         </div>
-                      </div>`;
+                      </div>';
     $('.listing-product-detail__category').append(childSelectHtml);
   }
   // 孫カテゴリーの表示作成
   function appendGrandchidrenBox(insertHTML){
     var grandchildSelectHtml = '';
-    grandchildSelectHtml = `<div class='listing-select-wrapper__added' id= 'grandchildren_wrapper'>
+    grandchildSelectHtml = '<div class='listing-select-wrapper__added' id= 'grandchildren_wrapper'>
                               <div class='listing-select-wrapper__box'>
                                 <select class="listing-select-wrapper__box--select" id="grandchild_category" name="product[category_id]">
                                   <option value="---" data-category="---">---</option>
@@ -30,7 +30,7 @@ $(function(){
                                 </select>
                                 <i class='fas fa-chevron-down listing-select-wrapper__box--arrow-down'></i>
                               </div>
-                            </div>`;
+                            </div>';
     $('.listing-product-detail__category').append(grandchildSelectHtml);
   }
   // 親カテゴリー選択後のイベント
@@ -100,19 +100,3 @@ $(function(){
     }
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
