@@ -51,8 +51,8 @@ class ProductsController < ApplicationController
 
   def update
     if
-      @product = Product.update(product_params)
-      # binding.pry
+      product = Product.find(params[:id])
+      product.update(edit_product_params)
       redirect_to root_path
     else
       render 'edit'
@@ -115,5 +115,20 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def edit_product_params
+    params.require(:product).permit(
+      :name,
+      :introduction,
+      :price,
+      :category_id,
+      :brand_id,
+      :shipping_region_id,
+      :shipping_payer_id,
+      :preparation_term_id,
+      :product_condition_id,
+      images_attributes: [:image]
+    )
   end
 end
