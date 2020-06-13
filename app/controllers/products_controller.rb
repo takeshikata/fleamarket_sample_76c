@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_category, only: [:new, :create, :update, :edit]
   before_action :set_parent, except: [:delete]
-  before_action :set_product, only: [:edit, :update]
+  before_action :set_product, only: [:edit, :show, :update]
 
   def index
     @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
@@ -68,6 +68,8 @@ class ProductsController < ApplicationController
     @images = @product.images
     @image = @images.first
     @children = @product.category
+    @comment = Comment.new
+    @comments = @product.comments.includes(:user)
   end
 
   def destroy

@@ -1,30 +1,32 @@
-.main
-  .side
-    %nav.mypage-nav
-      %ul.mypage-nav-list
+.user-details
+  %section.user-profile
+    .user-icon
+      = link_to user_path do
+        = image_tag "https://static.mercdn.net/images/member_photo_noimage_thumb.png", size: "200x200"
+        %p ユーザー名
+    .user-evaluation
+      %ul
         %li
+          %i 1
         %li
+          %i 2
         %li
+          %i 3
+    .product-details
+      %ul.product-tabs
         %li
+          = link_to "取引中", "#"
         %li
-        %li
-      .mypage-nav-head
-        メルペイ
-      %ul.mypage-nav-list
-        %li
-        %li
-        %li
-      .mypage-nav-head
-        設定
-      %ul.mypage-nav-list
-        %li
-        %li
-        %li
-  .content
-    %section.mypage-user-icon
-      ユーザーアイコン、ユーザー名
-    %section.mypage-tab-content
-      %ul.mypage-tabs
-        %li
-        %li
+          = link_to "売却済み商品", "#"
       .tab-content
+        %ul.product-list
+          %li
+            = link_to "商品１", "#"
+          %li
+            = link_to "商品２", "#"
+          %li
+            = link_to "商品３", "#"
+          %li
+            = link_to "商品４", "#"
+          %li
+            = link_to "商品５", "#"

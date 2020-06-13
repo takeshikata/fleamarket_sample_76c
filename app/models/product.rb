@@ -8,6 +8,8 @@ class Product < ApplicationRecord
   belongs_to :preparation_term
   belongs_to :shipping_region
   belongs_to :shipping_payer, optional: true
+  has_many :comments
+
 
   def self.search(keyword)
     return Product.all unless keyword
