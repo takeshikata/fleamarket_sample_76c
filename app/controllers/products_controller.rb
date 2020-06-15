@@ -87,8 +87,14 @@ class ProductsController < ApplicationController
 
   def purchase
     # showからのページ遷移アクション
+    @user = User.find(current_user.id)
+
     @images = @product.images
     @image = @images.first
+
+    if @address.blank?
+      redirect_to edit_user_address_path(@user)
+    end
   end
 
   def pay
@@ -100,7 +106,7 @@ class ProductsController < ApplicationController
       redirect_to new_card_path
     else
       Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
-      customer = Payjp::Customer.retrive(@card.payjp_id)
+      customer = Payjp::Customer.retrieve(@card.payjp_id)
       Payjp::Charge.create(
         amount: @product.price,
         customer: customer.id,
