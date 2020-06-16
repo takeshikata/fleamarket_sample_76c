@@ -24,6 +24,17 @@
                 出品者
               %td
                 = @product.user.nickname
+                %br
+                %ul.evaluation
+                  %li
+                    = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 1}} do
+                      = @evaluation_good_count
+                  %li
+                    = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 2}} do
+                      = @evaluation_normal_count
+                  %li
+                    = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 3}} do
+                      = @evaluation_bad_count
             %tr
               %th
                 カテゴリー

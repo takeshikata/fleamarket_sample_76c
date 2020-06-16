@@ -8,7 +8,8 @@ class Product < ApplicationRecord
   belongs_to :preparation_term
   belongs_to :shipping_region
   belongs_to :shipping_payer, optional: true
-  has_many :comments
+  has_many :comments, dependent: :destroy
+  has_many :evaluations, dependent: :destroy
 
 
   def self.search(keyword)
