@@ -1,0 +1,48 @@
+-# = form_with(url: user_address_path, model: [@user, @address], local: true) do |f|
+-#   .profile-address__name
+-#     %h5 
+-#       お名前
+-#       %span
+-#       任意
+-#     = f.text_field :last_name, class: 'profile-address__name__last-name'
+-#     = f.text_field :first_name, class: 'profile-address__name__first-name'
+-#   .profile-address__name-kana
+-#     %h5
+-#       お名前(カナ)
+-#       %span
+-#       任意
+-#     = f.text_field :last_name_kana, class: 'profile-address__name-kana__last-name'
+-#     = f.text_field :first_name_kana, class: 'profile-address__name-kana__first-name'
+-#   .profile-address__zip-code
+-#     %h5
+-#       郵便番号
+-#       %span
+-#       必須
+-#     = f.text_field :zip_code, class: 'profile-address__zip-code__form'
+-#   .profile-address__prefecture
+-#     %h5
+-#       都道府県
+-#       %span
+-#       必須
+-#     = f.select :prefecture, Address.prefectures.keys, {prompt: "選択してください"}, class: 'profile-address__prefecture__select'
+-#   .profile-address__city
+-#     %h5
+-#       市区町村
+-#       %span
+-#       必須
+-#     = f.text_field :city, class: 'profile-address__city__form'
+-#   .profile-address__street-number
+-#     %h5
+-#       番地
+-#       %span
+-#       必須
+-#     = f.text_field :street_number, class: 'profile-address__street-number__form'
+-#   .profile-address__apartment
+-#     %h5
+-#       建物名
+-#       %span.optional-column
+-#       任意
+-#     = f.text_field :apartment, class: 'profile-address__apartment__form'
+-#   .profile-address__submit
+-#     = f.submit "登録する", class: 'profile-address__submit--btn'
+

@@ -26,7 +26,10 @@
         %li
           = link_to "プロフィール", edit_user_profile_path(@user)
         %li
-          = link_to "発送元・お届け先住所", edit_user_address_path(@user)
+          -if @address.blank?
+            = link_to "発送元・お届け先住所", new_user_address_path(@user)
+          -else
+            = link_to "発送元・お届け先住所", edit_user_address_path(@user)
         %li
           = link_to "支払い方法", new_card_path
         %li

@@ -98,7 +98,7 @@ class ProductsController < ApplicationController
     @image = @images.first
 
     if @address.blank?
-      redirect_to edit_user_address_path(@user)
+      redirect_to new_user_address_path(@user)
     end
   end
 
