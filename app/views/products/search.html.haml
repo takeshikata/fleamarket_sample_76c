@@ -1,3 +1,5 @@
-- @products.each do |product|
- = product.name
- = product.price
+- @products.each do |products|
+  - products.images.each do |images|
+    = image_tag images.image.to_s
+    = products.name
+    = products.price
