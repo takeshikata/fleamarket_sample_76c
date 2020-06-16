@@ -75,6 +75,11 @@ class ProductsController < ApplicationController
     @children = @product.category
     @comment = Comment.new
     @comments = @product.comments.includes(:user)
+
+    d_evaluations = Evaluation.select(:user_id, :product_id, :evaluation).distinct
+    @evaluation_good_count = d_evaluations.where(evaluation: :good, product_id: @product.id).where.not(user_id: @product.user_id).count
+    @evaluation_normal_count = d_evaluations.where(evaluation: :normal, product_id: @product.id).where.not(user_id: @product.user_id).count
+    @evaluation_bad_count = d_evaluations.where(evaluation: :bad, product_id: @product.id).where.not(user_id: @product.user_id).count
   end
 
   def destroy
@@ -87,8 +92,11 @@ class ProductsController < ApplicationController
 
   def purchase
     # showからのページ遷移アクション
+    @user = User.find(current_user.id)
+
     @images = @product.images
     @image = @images.first
+
     if @address.blank?
       redirect_to new_user_address_path(@user)
     end
@@ -103,7 +111,7 @@ class ProductsController < ApplicationController
       redirect_to new_card_path
     else
       Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
-      customer = Payjp::Customer.retrive(@card.payjp_id)
+      customer = Payjp::Customer.retrieve(@card.payjp_id)
       Payjp::Charge.create(
         amount: @product.price,
         customer: customer.id,
@@ -127,6 +135,10 @@ class ProductsController < ApplicationController
     #binding.pry
       #選択された子カテゴリーに紐付く孫カテゴリーの配列を取得
     @category_grandchildren = Category.find("#{params[:child_id]}").children
+  end
+
+  def search
+    @products = Product.search(params[:keyword])
   end
 
   private

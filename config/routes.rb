@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     get "log_in", to: "users/sessions#new"
     get 'log_out', to: "users#log_out"
     delete 'log_out', to: 'users/sessions#destroy'
-    # post 'log_out', to: 'users/sessions#destroy', via: Devise.mappings[:user].sign_out_via
   end
 
   resources :products do
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
     end
 
     resources :comments, only: :create
+    post "", to: "evaluations#create"
 
     member do
       get 'purchase'
