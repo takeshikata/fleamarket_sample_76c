@@ -4,6 +4,9 @@ class UsersController < ApplicationController
   def index
     @user = User.find(current_user.id)
     @products = @user.products
+    @address = Address.where(user_id: current_user.id).first
+    # if Address.user_id == @user.id
+    
   end
 
   def show

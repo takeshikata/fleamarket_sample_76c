@@ -89,6 +89,9 @@ class ProductsController < ApplicationController
     # showからのページ遷移アクション
     @images = @product.images
     @image = @images.first
+    if @address.blank?
+      redirect_to new_user_address_path(@user)
+    end
   end
 
   def pay
