@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'products#index'
 
   resources :users, only: [:index, :show, :edit, :update] do
-    resource :profile, only: [:edit, :update]
+    resource :profile, only: [:new, :create, :edit, :update]
     resource :address, only: [:edit, :update, :new, :create]
   end
   devise_scope :user do

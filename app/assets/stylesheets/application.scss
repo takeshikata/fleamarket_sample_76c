@@ -6,3 +6,27 @@
 @import "products/new";
 @import "users/index";
 @import "users/show";
+
+
+// ----------------共通パーツ設定--------------//
+
+* {
+  box-sizing: border-box;
+}
+h1{
+  font-size: 36px;
+}
+h2{
+  font-size: 17px;
+}
+h3{
+  font-size: 14px;
+}
+h4{
+  font-size: 10.5px;
+}
+
+.bold{
+  font-weight: 600px;
+}
+

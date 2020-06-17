@@ -1,0 +1,80 @@
+.mypage-main
+  .mypage-side
+    %nav.mypage-nav
+      %ul.mypage-nav-list
+        %li
+          = link_to "マイページ", users_path
+        %li
+          = link_to "いいね", "#"
+        %li
+          = link_to "出品する", new_product_path
+        %li
+          = link_to "出品した商品-取引中", "#"
+        %li
+          = link_to "出品した商品-売却済み", "#"
+        %li
+          = link_to "購入した商品", "#"
+      .mypage-nav-head
+        メルペイ
+      %ul.mypage-nav-list
+        %li
+          = link_to "ポイント", "#"
+        %li
+      .mypage-nav-head
+        設定
+      %ul.mypage-nav-list
+        %li
+          = link_to "プロフィール", "#"
+        %li
+          = link_to "発送元・お届け先住所", edit_user_address_path(@user)
+        %li
+          = link_to "支払い方法", new_card_path
+        %li
+          = link_to "ログアウト", log_out_path, method: :get
+  .profile
+    %section.profile-content
+      %h2 プロフィール
+    = form_with(model: @profiles, local: true) do |f|
+      %h2
+        商品の情報を入力
+      .product__block__form
+        .product__block__form__name
+          .name-label
+            %h4
+              商品名
+              %span 必須
+            %div
+              = f.text_field :name, placeholder:"40文字まで"
+        .product__block__form__introduction
+          .introduction-label
+            %h4
+              商品の説明
+              %span 必須
+            %div
+              = f.text_area :introduction, placeholder:"商品の説明"
+        .content_product-detail__condition
+          %h4
+            商品の状態
+            %span 必須
+          = f.select :product_condition_id, options_for_select(ProductCondition.conditions), {prompt: "選択して下さい"}, class: "select"
+      .content__product-shipping
+        .content__product-shipping__region
+          %h4
+            配送元の地域
+            %span 必須
+          = f.select  :shipping_region_id, options_for_select(ShippingRegion.regions), {prompt: "選択して下さい"}, class: "select"
+        .content__product-shipping__date
+          %h4
+            発送までの日数
+            %span 必須
+          = f.select :preparation_term_id, options_for_select(PreparationTerm.terms), {prompt: "選択して下さい"}, class: "select"
+      .content__product-price
+        .content__product-price__limitation
+          価格(¥300~9,999,999)
+        .content__product-price__ssold
+          %h4
+            販売価格
+            %span 必須
+          = f.number_field :price, style: "text-align:right"
+      .content__product-submit
+        =f.submit "出品する"
