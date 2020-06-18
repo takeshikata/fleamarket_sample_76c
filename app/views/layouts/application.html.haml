@@ -9,53 +9,44 @@
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     %body
-      .header
+      %nav.header
         .header__top
           .header__top__title
             = link_to products_path do
-              = image_tag "http://furima.tokyo/assets/logo-d3d78326971d78b06e3d6f0ba666d025a8ad681286b4d9e00e7dbe8673bcfd23.svg", size: "100x50"
+              = image_tag "http://furima.tokyo/assets/logo-d3d78326971d78b06e3d6f0ba666d025a8ad681286b4d9e00e7dbe8673bcfd23.svg", size: "126x36"
+          .category-search
+            %ul.snav
+              %li.snav__category-lists__headline
+                = link_to "カテゴリー", "#", class: "navigation-btn"
+                %ul.snav__category-lists__parents
+                  - @parents.roots.each do |parent|
+                    %li.snav__category-lists__parent
+                      = link_to "#", class: "snav__category-list__text" do
+                        = parent.name
+                      %ul.snav__category-lists__children
+                        - parent.children.each do |child|
+                          %li.snav__category-lists__child
+                            = link_to "#", class: "snav__category-list__text" do
+                              = child.name
+                            %ul.snav__category-lists__grandchildren
+                              - child.children.each do |grandchild|
+                                %li.snav__category-lists__grandchild
+                                  = link_to "#", class: "snav__category-list__text" do
+                                    = grandchild.name
+          .brand-search
+            = link_to "ブランドから探す", "#", class: ""
           .header__top__search
             = form_with url: search_products_path, local: true, method: :get, class: "form" do |form|
               = form.text_field :keyword, placeholder: "何かお探しですか？", class: "form-text"
               %button.search
-                %i.fa-search
-                  = image_tag "https://cdn.icon-icons.com/icons2/1369/PNG/512/-search_90025.png", size: "40x40"
-
-        .header__nav
-          .header__nav__left
-            .category-search
-              %ul.snav
-                %li
-                  = link_to "カテゴリー", "#"
-                  %ul
-                    - @parents.roots.each do |parent|
-                      %li
-                        = link_to "#" do
-                          = parent.name
-                        %ul
-                          - parent.children.each do |child|
-                            %li
-                              = link_to "#" do
-                                = child.name
-                              %ul
-                                - child.children.each do |grandchild|
-                                  %li
-                                    = link_to "#" do
-                                      = grandchild.name
-
-            .brand-search
-              = link_to "ブランドから探す", "#", class: ""
-          .header__nav__right
-            - if user_signed_in?
-              .new-register
-                = link_to "マイページ", users_path
-              .login
-                = link_to "ログアウト", destroy_user_session_path, method: :delete
-            - else
-              .new-register
-                = link_to "新規登録", new_user_registration_path, class: ""
-              .login
-                = link_to "ログイン", log_in_path, class: ""
-
-
+          - if user_signed_in?
+            .new-register
+              = link_to "マイページ", users_path, class: "new-register"
+            .login
+              = link_to "ログアウト", destroy_user_session_path, method: :delete, chass: "login"
+          - else
+            .new-register
+              = link_to "新規登録", new_user_registration_path, class: "new-register"
+            .login
+              = link_to "ログイン", log_in_path, class: "login"
     = yield

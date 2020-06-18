@@ -8,7 +8,8 @@ class AddressesController < ApplicationController
 
   def create
     @user = User.find(current_user.id)
-    @address = Address.create(address_params)
+    @address = Address.create!(address_params)
+    # binding.pry
 
     if @address.save
       redirect_to users_path(@user)

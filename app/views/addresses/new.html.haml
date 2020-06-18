@@ -1,86 +1,97 @@
 
 .mypage-main
-  .mypage-side
-    %nav.mypage-nav
-      %ul.mypage-nav-list
-        %li
-          = link_to "マイページ", users_path
-        %li
-          = link_to "いいね", "#"
-        %li
-          = link_to "出品する", new_product_path
-        %li
-          = link_to "出品した商品-取引中", "#"
-        %li
-          = link_to "出品した商品-売却済み", "#"
-        %li
-          = link_to "購入した商品", "#"
-      .mypage-nav-head
-        メルペイ
-      %ul.mypage-nav-list
-        %li
-          = link_to "ポイント", "#"
-        %li
-      .mypage-nav-head
-        設定
-      %ul.mypage-nav-list
-        %li
-          = link_to "プロフィール", "#"     
-        %li
-          = link_to "発送元・お届け先住所", "#"
-        %li
-          = link_to "支払い方法", new_card_path
-        %li
-          = link_to "ログアウト", log_out_path, method: :get
-  .address
-    %section.address-content
-      %h2 発送元・お届け先住所変更
-    .profile-address
-      = form_with(url: user_address_path, method: :post, model: [@user, @address], local: true) do |f|
-        .profile-address__name
-          %h5 
-            お名前
-            %span
-            必須
-          = f.text_field :last_name, class: 'profile-address__name__last-name', placeholder: '山田'
-          = f.text_field :first_name, class: 'profile-address__name__first-name', placeholder: '太郎'
-        .profile-address__name-kana
-          %h5
-            お名前(カナ)
-            %span
-            必須
-          = f.text_field :last_name_kana, class: 'profile-address__name-kana__last-name', placeholder: 'ヤマダ'
-          = f.text_field :first_name_kana, class: 'profile-address__name-kana__first-name', placeholder: 'タロウ'
-        .profile-address__zip-code
-          %h5
-            郵便番号
-            %span
-            必須
-          = f.text_field :zip_code, class: 'profile-address__zip-code__form', placeholder: '1234567'
-        .profile-address__prefecture
-          %h5
-            都道府県
-            %span
-            必須
-          = f.select :prefecture, Address.prefectures.keys, {prompt: "選択してください"}, class: 'profile-address__prefecture__select'
-        .profile-address__city
-          %h5
-            市区町村
-            %span
-            必須
-          = f.text_field :city, class: 'profile-address__city__form', placeholder: '渋谷区'
-        .profile-address__street-number
-          %h5
-            番地
-            %span
-            必須
-          = f.text_field :street_number, class: 'profile-address__street-number__form', placeholder: '神南1-18-2'
-        .profile-address__apartment
-          %h5
-            建物名
-            %span.optional-column
-            任意
-          = f.text_field :apartment, class: 'profile-address__apartment__form'
-        .profile-address__submit
-          = f.submit "登録する", class: 'profile-address__submit--btn'
+  .main-content-wrapper
+    .mypage-side
+      .maypage-sidebar
+        %ul.mypage-sidebar-lists
+          %li.mypage-sider-list
+            = link_to "#", class: "mypage-sideber-list__text" do
+              %h2.bold
+                マイページ
+          %li.mypage-sider-list
+            = link_to "#", class: "mypage-sideber-list__text" do
+              %h2.bold
+                いいね
+          %li.mypage-sider-list
+            = link_to new_product_path, class: "mypage-sideber-list__text" do
+              %h2.bold
+                出品する
+          %li.mypage-sider-list
+            = link_to "#", class: "mypage-sideber-list__text" do
+              %h2.bold
+                購入した商品
+        .mypage-nav-head
+          設定
+        %ul.mypage-nav-list
+          %li
+            = link_to edit_profile_path(@user), class: "mypage-sideber-list__text" do
+              %h2.bold
+                プロフィール
+          %li
+            = link_to new_address_path, class: "mypage-sideber-list__text" do
+              %h2.bold
+                発送元・お届け先住所
+          %li
+            = link_to "#", class: "mypage-sideber-list__text" do
+              %h2.bold
+                お支払い方法
+          %li
+            = link_to "#", class: "mypage-sideber-list__text" do
+              %h2.bold
+                ログアウト
+    .mypage-mainbox
+      %section.mainbox-header
+        %h2.mainbox-header__text 発送元・お届け先住所変更
+        = form_with(model: @address, local: true, class: "address-form",) do |f|
+          .profile-address__name
+            = f.label "お名前", class: "profile-form__label"
+            %h4.require
+              必須
+            %br/
+            = f.text_field :last_name, class: "input-form-regular", placeholder: '山田'
+            = f.text_field :first_name, class: "input-form-regular", placeholder: '太郎'
+          .profile-address__name-kana
+            = f.label "お名前(カナ)", class: "profile-form__label"
+            %h4.require
+              必須
+            %br/
+            = f.text_field :last_name_kana, class: "input-form-regular", placeholder: 'ヤマダ'
+            = f.text_field :first_name_kana, class: "input-form-regular", placeholder: 'タロウ'
+          .profile-address__zip-code
+            = f.label "郵便番号", class: "profile-form__label"
+            %h4.require
+              必須
+            %br/
+            = f.text_field :zip_code, class: "input-form-regular", placeholder: '1234567'
+          .profile-address__prefecture
+            = f.label "都道府県", class: "profile-form__label"
+            %h4.require
+              必須
+            %br/
+            = f.select :prefecture, Address.prefectures.keys, {prompt: "選択してください"}, class: 'profile-address__prefecture__select', class: "input-form-regular"
+          .profile-address__city
+            = f.label "市区町村", class: "profile-form__label"
+            %h4.require
+              必須
+            %br/
+            = f.text_field :city, class: "input-form-regular", placeholder: '渋谷区'
+          .profile-address__street-number
+            = f.label "番地", class: "profile-form__label"
+            %h4.require
+              必須
+            %br/
+            = f.text_field :street_number, class: "input-form-regular", placeholder: '神南1-18-2'
+          .profile-address__apartment
+            = f.label "建物名", class: "profile-form__label"
+            %h4.any
+              任意
+            %br/
+            = f.text_field :apartment, class: "input-form-regular", placeholder: 'アパート名・マンション名'
+            = f.label "電話番号", class: "profile-form__label"
+            %h4.any
+              任意
+            %br/
+            = f.text_field :telephone, class: "input-form-regular", placeholder: '電話番号'
+          .profile-address__submit
+            = f.submit "登録する", class: "submit__btn"
 

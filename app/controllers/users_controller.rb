@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_parent
 
   def index
+    @address = Address.where(user_id: current_user.id).first
     @user = User.find(current_user.id)
     @products = @user.products
     @address = Address.where(user_id: current_user.id).first
