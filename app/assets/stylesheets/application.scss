@@ -1,3 +1,4 @@
+@import "reset";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "nav";
@@ -6,13 +7,17 @@
 @import "products/new";
 @import "users/index";
 @import "users/show";
+@import "cards";
 @import "profiles/edit";
+
 
 
 // ----------------共通パーツ設定--------------//
 
 * {
   box-sizing: border-box;
+  margin: 0;
+
 }
 h1{
   font-size: 36px;
@@ -25,11 +30,15 @@ h2{
 h3{
   font-size: 14px;
   margin: 0;
+
 }
 h4{
   font-size: 10.5px;
   margin: 0;
+
+
 }
+
 
 .bold{
   font-weight: 550;
