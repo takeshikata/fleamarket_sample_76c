@@ -24,7 +24,8 @@
         設定
       %ul.mypage-nav-list
         %li
-          = link_to "プロフィール", edit_user_profile_path(@user)
+          = link_to "プロフィール", edit_profile_path(@user)
+          -# edit_user_profile_path(@profile)
         %li
           -if @address.blank?
             = link_to "発送元・お届け先住所", new_user_address_path(@user)

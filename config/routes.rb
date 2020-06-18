@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   root 'products#index'
 
-  resources :users, only: [:index, :show, :edit, :update] do
-    resource :profile, only: [:new, :create, :edit, :update]
-    resource :address, only: [:edit, :update, :new, :create]
+  resources :profiles, only: [:edit, :update]
+  resources :address, only: [:edit, :update, :new, :create]
+  resources :users, only: [:index, :show, :edit, :update]
   end
   devise_scope :user do
     get "log_in", to: "users/sessions#new"

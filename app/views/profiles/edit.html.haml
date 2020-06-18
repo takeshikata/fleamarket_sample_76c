@@ -1,36 +1,78 @@
 .mypage-main
-  .mypage-side
-    %nav.mypage-nav
-      %ul.mypage-nav-list
-        %li
-          = link_to "マイページ", users_path
-        %li
-          = link_to "いいね", "#"
-        %li
-          = link_to "出品する", new_product_path
-        %li
-          = link_to "出品した商品-取引中", "#"
-        %li
-          = link_to "出品した商品-売却済み", "#"
-        %li
-          = link_to "購入した商品", "#"
-      .mypage-nav-head
-        メルペイ
-      %ul.mypage-nav-list
-        %li
-          = link_to "ポイント", "#"
-        %li
-      .mypage-nav-head
-        設定
-      %ul.mypage-nav-list
-        %li
-          = link_to "プロフィール", "#"
-        %li
-          = link_to "発送元・お届け先住所", edit_user_address_path(@user)
-        %li
-          = link_to "支払い方法", new_card_path
-        %li
-          = link_to "ログアウト", log_out_path, method: :get
-  .profile
-    %section.profile-content
-      %h2 プロフィール
+  .main-content-wrapper
+    .mypage-side
+      .maypage-sidebar
+        %ul.mypage-sidebar-lists
+          %li.mypage-sider-list
+            = link_to "#", class: "mypage-sideber-list__text" do
+              %h2.bold
+                マイページ
+          %li.mypage-sider-list
+            = link_to "#", class: "mypage-sideber-list__text" do
+              %h2.bold
+                いいね
+          %li.mypage-sider-list
+            = link_to new_product_path, class: "mypage-sideber-list__text" do
+              %h2.bold
+                出品する
+          %li.mypage-sider-list
+            = link_to "#", class: "mypage-sideber-list__text" do
+              %h2.bold
+                購入した商品
+        .mypage-nav-head
+          設定
+        %ul.mypage-nav-list
+          %li
+            = link_to edit_profile_path(@user), class: "mypage-sideber-list__text" do
+              %h2.bold
+                プロフィール
+          %li
+            = link_to edit_user_address_path(@profile), class: "mypage-sideber-list__text" do
+              %h2.bold
+                発送元・お届け先住所
+          %li
+            = link_to "#", class: "mypage-sideber-list__text" do
+              %h2.bold
+                お支払い方法
+          %li
+            = link_to "#", class: "mypage-sideber-list__text" do
+              %h2.bold
+                ログアウト
+    .profile
+      .profile-form
+        %section.profile-header
+          %h2 プロフィール
+        = form_with(model: @profile, local: true) do |f|
+          .profile-form__introduction
+            = f.label "自己紹介", class: "profile-form__label"
+            %h4.any
+              任意
+            %br/
+            = f.text_area :introduction, class: "input-form-large"
+          .profile-form__name
+            = f.label "お名前(全角)", class: "profile-form__label"
+            %h4.require
+              必須
+            %br/
+            = f.text_field :first_name, class: "input-form-regular"
+            = f.text_field :last_name, class: "input-form-regular"
+          .profile-form__name-kana
+            = f.label "お名前カナ(全角)", class: "profile-form__label"
+            %h4.require
+              必須
+            %br/
+            = f.text_field :first_name_kana, class: "input-form-regular"
+            = f.text_field :last_name_kana, class: "input-form-regular"
+          .profile-form__birthdate
+            = f.label "生年月日", class: "profile-form__label"
+            %h4.require
+              必須
+            %br/
+            .birth-form
+              = f.date_select :birth_date, prompt:"--", use_month_numbers: true,start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1)
+          .submit
+            =f.submit "更新する", class: "submit__btn"
+  .footer
+    .footer__logo
+      %h3.white.footer__logo__text
+        © FURIMA

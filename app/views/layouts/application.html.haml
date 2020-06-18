@@ -16,22 +16,22 @@
               = image_tag "http://furima.tokyo/assets/logo-d3d78326971d78b06e3d6f0ba666d025a8ad681286b4d9e00e7dbe8673bcfd23.svg", size: "126x36"
           .category-search
             %ul.snav
-              %li
+              %li.snav__category-lists__headline
                 = link_to "カテゴリー", "#", class: "navigation-btn"
-                %ul
+                %ul.snav__category-lists__parents
                   - @parents.roots.each do |parent|
-                    %li
-                      = link_to "#" do
+                    %li.snav__category-lists__parent
+                      = link_to "#", class: "snav__category-list__text" do
                         = parent.name
-                      %ul
+                      %ul.snav__category-lists__children
                         - parent.children.each do |child|
-                          %li
-                            = link_to "#" do
+                          %li.snav__category-lists__child
+                            = link_to "#", class: "snav__category-list__text" do
                               = child.name
-                            %ul
+                            %ul.snav__category-lists__grandchildren
                               - child.children.each do |grandchild|
-                                %li
-                                  = link_to "#" do
+                                %li.snav__category-lists__grandchild
+                                  = link_to "#", class: "snav__category-list__text" do
                                     = grandchild.name
           .brand-search
             = link_to "ブランドから探す", "#", class: ""
