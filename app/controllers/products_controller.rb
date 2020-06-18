@@ -69,17 +69,25 @@ class ProductsController < ApplicationController
   end
 
   def show
+    Product.find(params[:id])
     @product = Product.find(params[:id])
+    products = Product.where(user_id: @product.user_id)
     @images = @product.images
     @image = @images.first
     @children = @product.category
     @comment = Comment.new
     @comments = @product.comments.includes(:user)
 
-    d_evaluations = Evaluation.select(:user_id, :product_id, :evaluation).distinct
-    @evaluation_good_count = d_evaluations.where(evaluation: :good, product_id: @product.id).where.not(user_id: @product.user_id).count
-    @evaluation_normal_count = d_evaluations.where(evaluation: :normal, product_id: @product.id).where.not(user_id: @product.user_id).count
-    @evaluation_bad_count = d_evaluations.where(evaluation: :bad, product_id: @product.id).where.not(user_id: @product.user_id).count
+    if @product
+      d_evaluations = Evaluation.select(:user_id, :product_id, :evaluation).distinct
+
+      @evaluation_good_sum, @evaluation_normal_sum, @evaluation_bad_sum = 0, 0, 0
+      products.each do |product|
+        @evaluation_good_sum += d_evaluations.where(evaluation: :good, product_id: product.id).where.not(user_id: product.user_id).count
+        @evaluation_normal_sum += d_evaluations.where(evaluation: :normal, product_id: product.id).where.not(user_id: product.user_id).count
+        @evaluation_bad_sum += d_evaluations.where(evaluation: :bad, product_id: product.id).where.not(user_id: product.user_id).count
+      end
+    end
   end
 
   def destroy

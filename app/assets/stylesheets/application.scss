@@ -8,6 +8,8 @@
 @import "users/index";
 @import "users/show";
 @import "cards";
+@import "profiles/edit";
+
 
 
 // ----------------共通パーツ設定--------------//
@@ -22,9 +24,8 @@ h1{
   margin: 0;
 }
 h2{
-  font-size: 17px;
+  font-size: 16px;
   margin: 0;
-
 }
 h3{
   font-size: 14px;
@@ -35,10 +36,13 @@ h4{
   font-size: 10.5px;
   margin: 0;
 
+
 }
+
 
 .bold{
-  font-weight: 600px;
-  margin: 0;
+  font-weight: 550;
 }
-
+.white{
+  color: #ffffff;
+}
