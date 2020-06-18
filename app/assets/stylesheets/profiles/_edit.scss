@@ -4,7 +4,7 @@
   margin-top: 60px;
   padding: 20px;
   background: #ffffff;
-  border: 20px solid #ffffff;
+  border: 40px solid #ffffff;
   display: flex;
   justify-content: center;
   overflow-y: auto;
@@ -17,8 +17,13 @@
     }
   }
 }
-.profile-header{
+.mainbox-header{
   margin: 30px 0 8px;
+  width: 368px;
+
+  &__text{
+    margin-bottom: 20px;
+  }
 }
 .profile-form{
   
@@ -59,7 +64,11 @@
   border: 1px solid;
 }
 .input-form-small{
-  width: 368px;
+  height: 48px;
+  margin: 8px 0 20px;
+  border-radius: 17px;
+  border: 1px solid;
+  width: 111px;
 }
 .birth-form{
   width: 368px;

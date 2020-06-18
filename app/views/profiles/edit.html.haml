@@ -27,9 +27,14 @@
               %h2.bold
                 プロフィール
           %li
-            = link_to edit_address_path(@profile), class: "mypage-sideber-list__text" do
-              %h2.bold
-                発送元・お届け先住所
+            -if @address == nil 
+              = link_to new_address_path, class: "mypage-sideber-list__text" do
+                %h2.bold
+                  発送元・お届け先住所
+            -else
+              = link_to edit_address_path(@user), class: "mypage-sideber-list__text" do
+                %h2.bold
+                  発送元・お届け先住所
           %li
             = link_to "#", class: "mypage-sideber-list__text" do
               %h2.bold
@@ -39,9 +44,8 @@
               %h2.bold
                 ログアウト
     .mypage-mainbox
-      .profile-form
-        %section.profile-header
-          %h2 プロフィール
+      %section.mainbox-header
+        %h2.mainbox-header__text プロフィール
         = form_with(model: @profile, local: true) do |f|
           .profile-form__introduction
             = f.label "自己紹介", class: "profile-form__label"
