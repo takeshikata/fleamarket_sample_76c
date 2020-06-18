@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
   def new
     @user = User.find(current_user.id)
     @profile = Profile.new
+    @address = Address.where(user_id: current_user.id).first
   end
 
   def create
@@ -14,6 +15,7 @@ class ProfilesController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @profile = Profile.find(current_user.id)
+    @address = Address.where(user_id: current_user.id).first
     # binding.pry
     # profile = Profile.where(user_id: current_user.id).first
   end
