@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :profiles, only: [:edit, :update]
   resources :address, only: [:edit, :update, :new, :create]
   resources :users, only: [:index, :show, :edit, :update]
-  end
+  
   devise_scope :user do
     get "log_in", to: "users/sessions#new"
     get 'log_out', to: "users#log_out"
