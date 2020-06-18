@@ -22,11 +22,11 @@
         配送先
         = link_to "変更する", "#", class: 'btn'
       .content__address.user-box__address
-        .content__address.user-box__address--zipcode
-          = @address.zip_code.gsub(/(\d{3})(\d{4})/, '\1-\2')
-        .content__address.user-box__address--detail
-          #{@address.prefecture} #{@address.city} #{@address.street_number} #{@address.apartment}
-        .content__address.user-box__address--name
-          #{@address.last_name} #{@address.first_name}
+        -# .content__address.user-box__address--zipcode
+        -#   = @address.zip_code.to_s.gsub(/(\d{3})(\d{4})/, '\1-\2')
+        -# .content__address.user-box__address--detail
+        -#   #{@address.prefecture} #{@address.city} #{@address.street_number} #{@address.apartment}
+        -# .content__address.user-box__address--name
+        -#   #{@address.last_name} #{@address.first_name}
   .content__decided
     = link_to "クレジットカードで支払う", pay_product_path(params[:id]), class: 'content__decided--btn btn'

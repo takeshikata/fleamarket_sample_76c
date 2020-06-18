@@ -1,169 +1,269 @@
 .mypage-main{
-  width: 100%;
-  height: 100vh;
-  margin: 60px auto 0;
-  background: whitesmoke;
-  .mypage-side{
-    float: left;
-    width: 300px;
-    background: whitesmoke;
-    .mypage-nav{
-      ul.mypage-nav-list{
-        list-style: none;
-        li{
-          width: 100%;
-          height: 50px;
-          line-height: 50px;
-          padding-left: 10px;
-          margin-bottom: 5px;
-          background: white;
-          a{
-            display: block;
-          }
-        }
+  height: 100%;
+  padding-top: 80px;
+  background-color: #ffffff;
+  padding-bottom: 100px;
+}
+.main-content-wrapper{
+  width: 1084px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.mypage-side{
+    width: 200px;
+    height: 519px;
+    margin-top: 60px;
+}
+.maypage-sidebar{
+  background-color: #ffffff;
+}
+.mypage-nav{
+  ul.mypage-sidebar-lists{
+    list-style: none;
+    
+    .mypage-sider-list{
+      width: 100%;
+      height: 48px;
+      line-height: 48px;
+      padding-left: 10px;
+      margin: 0;
+      background: white;
+      
+      &__text{
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
       }
     }
   }
-  .mypage-content{
-    float: right;
-    width: 700px;
-    .mypage-user-icon{
-      position: relative;
-      height: 200px;
-      background: lightblue;
+}
+.mypage-nav-head{
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin: 30px 0 20px 0;
+}
+.mypage-content{
+  float: right;
+  width: 700px;
+}
+.mypage-user-icon{
+  position: relative;
+  height: 200px;
+  background: lightblue;
+  text-align: center;
+
+  a{
+    position: absolute;
+    display: block;
+    top: 20%;
+    left: 0;
+    right: 0;
+  }
+}
+.mypage-tab-content{
+  ul.mypage-tabs{
+    display: flex;
+    list-style: none;
+    margin: 0;
+
+    li{
+      height: 70px;
+      line-height: 70px;
+      width: 50%;
       text-align: center;
+      background: gray;
+
       a{
-        position: absolute;
         display: block;
-        top: 20%;
-        left: 0;
-        right: 0;
-      }
-    }
-    .mypage-tab-content{
-      ul.mypage-tabs{
-        display: flex;
-        list-style: none;
-        margin: 0;
-        li{
-          height: 70px;
-          line-height: 70px;
-          width: 50%;
-          text-align: center;
-          background: gray;
-          a{
-            display: block;
-            // height: 80px;
-            // padding: 10px;
-          }
-        }
-      }
-      .tab-content{
-        ul.tab-content-list{
-          list-style: none;
-          margin: 0;
-          li{
-            height: 70px;
-            line-height: 70px;
-            text-align: center;
-            margin-bottom: 5px;
-            background: white;
-            a{
-              display: block;
-            }
-          }
-        }
-      }
-    }
-    .mypage-tab-container{
-      margin: 30px 0 0;
-      h3.mypage-tab-head{
-        padding-left: 10px;
-      }
-      ul.mypage-tabs{
-        display: flex;
-        margin: 0;
-        list-style: none;
-        li{
-          height: 70px;
-          line-height: 70px;
-          width: 50%;
-          text-align: center;
-          background: gray;
-          a{
-            display: block;
-          }
-        }
-      }
-      .tab-content{
-        ul.product-list{
-          list-style: none;
-          margin: 0;
-          li{
-            height: 70px;
-            line-height: 70px;
-            text-align: center;
-            margin-bottom: 5px;
-            background: white;
-            a{
-              display: block;
-            }
-          }
-        }
+        // height: 80px;
+        // padding: 10px;
       }
     }
   }
-  .logout-content{
-    float: right;
-    width: 700px;
-    height: 300px;
-    margin-top: 16px;
-    background: white;
-    .form{
-      position: relative;
-      height: 300px;
-      .logout-button{
-        position: absolute;
+}
+.tab-content{
+
+  ul.tab-content-list{
+    list-style: none;
+    margin: 0;
+
+    li{
+      height: 70px;
+      line-height: 70px;
+      text-align: center;
+      margin-bottom: 5px;
+      background: white;
+
+      a{
         display: block;
-        width: 300px;
+      }
+    }
+  }
+}
+.mypage-tab-container{
+  margin: 30px 0 0;
+
+  h3.mypage-tab-head{
+    padding-left: 10px;
+  }
+
+  ul.mypage-tabs{
+    display: flex;
+    margin: 0;
+    list-style: none;
+
+    li{
+      height: 70px;
+      line-height: 70px;
+      width: 50%;
+      text-align: center;
+      background: gray;
+      
+      a{
+        display: block;
+      }
+    }
+  }
+  .tab-content{
+
+    ul.product-list{
+      list-style: none;
+      margin: 0;
+
+      li{
         height: 70px;
         line-height: 70px;
         text-align: center;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        color: white;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        background: red;
+        margin-bottom: 5px;
+        background: white;
+
+        a{
+          display: block;
+        }
       }
     }
   }
-  .profile{
-    float: right;
-    width: 700px;
-    height: 500px;
-    margin-top: 16px;
-    background: white;
-    section.profile-content{
-      h2{
-        text-align: center;
-      }
+}
+.logout-content{
+  float: right;
+  width: 700px;
+  height: 300px;
+  margin-top: 16px;
+  background: white;
+
+  .form{
+    position: relative;
+    height: 300px;
+
+    .logout-button{
+      position: absolute;
+      display: block;
+      width: 300px;
+      height: 70px;
+      line-height: 70px;
+      text-align: center;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: red;
     }
   }
-  .address{
-    float: right;
-    width: 700px;
-    height: 500px;
-    margin-top: 16px;
-    background: white;
-    section.address-content{
-      h2{
-        text-align: center;
-      }
+}
+.require{
+  display: inline;
+  width: 32px;
+  height: 15px;
+  padding: 2.5px 5.5px;
+  background-color: #68C7CC;
+  color: #ffffff;
+  border-radius: 7px;
+}
+.any{
+  display: inline;
+  width: 32px;
+  height: 15px;
+  padding: 2.5px 5.5px;
+  background-color: #CCCCCC;
+  color: #ffffff;
+  border-radius: 7px;
+}
+
+
+.address{
+  float: right;
+  width: 700px;
+  height: 500px;
+  margin-top: 16px;
+  background: white;
+
+  section.address-content{
+
+    h2{
+      text-align: center;
     }
+  }
+}
+
+.footer{
+  background-color: #272727;
+  padding-top: 40px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 222px;
+  
+  &__logo{
+    background-image: url(logo-white.png);
+    background-repeat: none;
+    background-size: 189px 55px;
+    width: 189px;
+    height: 55px;
+    margin: auto;
+    position: relative;
+    
+    &__text{
+      position: absolute;
+      bottom: -20px;
+      left: 80px;
+    }
+  }
+}
+.post-btn{  
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  &__wrapper{
+    width: 160px;
+    height: 160px;
+    background-color: #68C7CC;
+    border: none;
+    text-align: center;
+    position: relative;
+    border-radius: 900px;
+  }
+
+  &__text{
+    height: 60px;
+    font-size: 22px;
+    color: #ffffff;
+    padding-top: 20px;
+  }
+  
+  &__icon{
+    height: 0px;
+    background-color: inherit;
+    font-size: 80px;
+    color: #ffffff;
+    position: absolute;
+    left: 45px;
+    top: 27px;
   }
 }

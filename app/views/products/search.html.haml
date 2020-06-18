@@ -1,3 +1,17 @@
-- @products.each do |product|
- = product.name
- = product.price
+.items
+  .item-title
+  .boxs
+    - @products.each do |products|
+      - products.images.each do |images|
+        .box
+          = link_to product_path(products) do
+            .image
+              = image_tag images.image.to_s, size: "100x100"
+            .price
+              = products.price
+            .text
+              = products.name
+            -if products.purchaser_id.present?
+              .items-box_photo__sold
+                .items-box_photo__sold__inner
+                  SOLD

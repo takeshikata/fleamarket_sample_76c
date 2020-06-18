@@ -1,17 +1,33 @@
 .user-details
   %section.user-profile
     .user-icon
-      = link_to user_path do
+      = link_to "#" do
         = image_tag "https://static.mercdn.net/images/member_photo_noimage_thumb.png", size: "200x200"
         %p ユーザー名
-    .user-evaluation
-      %ul
-        %li
-          %i 1
-        %li
-          %i 2
-        %li
-          %i 3
+    - if user_signed_in? && @product && current_user.id == @product.user_id
+      .user-evaluation
+        %ul
+          %li
+            %i
+              = @evaluation_good_sum
+          %li
+            %i
+              = @evaluation_normal_sum
+          %li
+            %i
+              = @evaluation_bad_sum
+    - else
+      .user-evaluation
+        %ul
+          %li
+            %i
+              0
+          %li
+            %i
+              0
+          %li
+            %i
+              0
     .product-details
       %ul.product-tabs
         %li
