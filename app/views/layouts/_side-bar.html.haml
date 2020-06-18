@@ -1,5 +1,3 @@
-.mypage-main
-  .main-content-wrapper
     .mypage-side
       .maypage-sidebar
         %ul.mypage-sidebar-lists
@@ -43,38 +41,3 @@
             = link_to "#", class: "mypage-sideber-list__text" do
               %h2.bold
                 ログアウト
-    .mypage-content
-      %section.mypage-user-icon
-        = link_to user_path(@user) do
-          = image_tag "https://static.mercdn.net/images/member_photo_noimage_thumb.png", size: "50x50"
-          %p ユーザー名
-      %section.mypage-tab-content
-        %ul.mypage-tabs
-          %li
-            = link_to "お知らせ", "#"
-          %li
-            = link_to "やることリスト", "#"
-        .tab-content
-          %ul.tab-content-list
-            %li
-              = link_to "やること１", "#"
-            %li
-              = link_to "やること２", "#"
-            %li
-              = link_to "やること３", "#"
-            %li
-              = link_to "やること４", "#"
-      %section.mypage-tab-container
-        %h3.mypage-tab-head
-          購入した商品
-        %ul.mypage-tabs
-          %li
-            = link_to "取引中", "#"
-          %li
-            = link_to "売却済み商品", "#"
-        .tab-content
-          %ul.product-list
-            %li
-              = link_to "商品１", "#"
-            %li
-              = link_to "商品２", "#"
