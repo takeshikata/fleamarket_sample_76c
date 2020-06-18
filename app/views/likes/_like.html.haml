@@ -1,0 +1,24 @@
+- if user_signed_in?
+  - unless @product.like_user(current_user.id).blank?
+    = link_to product_like_path(product_id: @product.id ,id: @product.likes[0].id), method: :delete, remote: true do
+      .vertical_like
+        %i  
+        %span good
+        = @product.likes_count
+  - else
+    = link_to product_likes_path(@product.id), method: :post, remote: true do
+      .vertical_like
+        %i
+        %span good
+        = @product.likes_count
+- else
+  - if post.likes_count > 0
+    .vertical_like
+      %i
+      %span good
+      = product.likes_count
+  - else
+    .vertical_like
+      %i 
+      %span good
+      = product.likes_count

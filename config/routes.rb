@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'likes/create'
+  get 'likes/destroy'
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
 
   root 'products#index'
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
       get 'search'
     end
 
+    resources :likes, only: [:create, :destroy]
     resources :comments, only: :create
     post "", to: "evaluations#create"
 
