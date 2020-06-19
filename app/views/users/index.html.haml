@@ -27,7 +27,7 @@
               %h2.bold
                 プロフィール
           %li
-            -if @address == nil 
+            -if @address == nil
               = link_to new_address_path, class: "mypage-sideber-list__text" do
                 %h2.bold
                   発送元・お届け先住所
@@ -46,35 +46,44 @@
     .mypage-content
       %section.mypage-user-icon
         = link_to user_path(@user) do
+          .user-nickname
+            = @user.nickname
           = image_tag "https://static.mercdn.net/images/member_photo_noimage_thumb.png", size: "50x50"
-          %p ユーザー名
+
       %section.mypage-tab-content
-        %ul.mypage-tabs
-          %li
-            = link_to "お知らせ", "#"
-          %li
-            = link_to "やることリスト", "#"
-        .tab-content
-          %ul.tab-content-list
-            %li
-              = link_to "やること１", "#"
-            %li
-              = link_to "やること２", "#"
-            %li
-              = link_to "やること３", "#"
-            %li
-              = link_to "やること４", "#"
-      %section.mypage-tab-container
-        %h3.mypage-tab-head
-          購入した商品
-        %ul.mypage-tabs
-          %li
-            = link_to "取引中", "#"
-          %li
-            = link_to "売却済み商品", "#"
-        .tab-content
-          %ul.product-list
-            %li
-              = link_to "商品１", "#"
-            %li
-              = link_to "商品２", "#"
+        .tabs
+          .tabs-box
+            %input#tab-1{checked: "checked", name: "tab-radio", type: "radio"}/
+            %label.tab-label{for: "tab-1"} 出品中
+            %input#tab-2{name: "tab-radio", type: "radio"}/
+            %label.tab-label{for: "tab-2"} 売却済み
+            .tab-content.tab-1-content
+              - @products.each do |sell|
+                = link_to product_path(sell), class: "sell-box" do
+                  - sell.images.each do |images|
+                    = image_tag images.image.to_s
+            .tab-content.tab-2-content
+              - @products.each do |selled|
+                = link_to product_path(selled), class: "sell-box" do
+                  - selled.images.each do |images|
+                    -# = image_tag images.image.to_s
+        -# %ul.mypage-tabs
+        -#   %li.purchaser-blank
+        -#     = link_to "出品中", "#"
+        -#   %li.purchaser-exist
+        -#     = link_to "売却済み", "#"
+        -# .tab-contents
+        -#   .tab-contents-list
+        -#     .tab-content
+        -#       - @products.each do |products|
+        -#         - products.images.each do |images|
+        -#           = link_to product_path(products) do
+        -#             = image_tag images.image.to_s
+
+
+
+
+.footer
+  .footer__logo
+    %h3.white.footer__logo__text
+      © FURIMA
