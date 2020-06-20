@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   require "payjp"
   before_action :set_category, only: [:new, :create, :update, :edit]
-
   before_action :set_parent,   except: [:delete]
   before_action :set_product,  only: [:edit, :show, :update, :purchase, :pay]
   before_action :set_address,  only: [:purchase, :pay]
@@ -9,9 +8,10 @@ class ProductsController < ApplicationController
 
 
   def index
-    @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
+    # @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
     @images = Image.select("id", "image", "product_id")
-    @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
+    # @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
+    @new_product = Product.limit(10).order(" created_at DESC ")
   end
 
   def new
@@ -23,7 +23,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.create!(product_params)
-    # binding.pry
     # @image = Image.create(image_params)
     if @product.save
       redirect_to root_path
@@ -36,8 +35,6 @@ class ProductsController < ApplicationController
     grandchild_category = @product.category
     child_category = grandchild_category.parent
     parent_category = grandchild_category.root
-    # binding.pry
-
     @category_parent_array = []
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
@@ -76,7 +73,7 @@ class ProductsController < ApplicationController
     @image = @images.first
     @children = @product.category
     @comment = Comment.new
-    @comments = @product.comments.includes(:user)
+    @comments = @product.comments.includes(:user).order(" created_at DESC ")
 
     if @product
       d_evaluations = Evaluation.select(:user_id, :product_id, :evaluation).distinct
@@ -101,7 +98,6 @@ class ProductsController < ApplicationController
   def purchase
     # showからのページ遷移アクション
     @user = User.find(current_user.id)
-
     @images = @product.images
     @image = @images.first
 
