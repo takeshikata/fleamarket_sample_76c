@@ -1,0 +1,81 @@
+.content-bg-gray{
+  background-color: #EFEFEF;
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+.shadowed-rounded-rectangle{
+  width: 700px;
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.1);
+  margin: 100px auto 0;
+  background-color: #ffffff;
+  border-radius: 60px;
+  padding: 30px;
+}
+.mainbox-product-header{
+  margin: 30px 0 8px;
+  width: 434px;
+
+  &__text{
+    margin-bottom: 20px;
+  }
+}
+.product-new-form{
+  width: 434px;
+  margin: auto;
+}
+.input-form-xlarge{
+  width: 434px;
+  height: 216px;
+  margin: 8px 0 20px;
+  border-radius: 25px;
+  padding: 15px;
+}
+.input-form-xregular{
+  width: 434px;
+  height: 48px;
+  margin: 8px 0 20px;
+  border-radius: 17px;
+  border: 1px solid;
+}
+.input-form-middle{
+  width: 285px;
+  height: 48px;
+  margin: 8px 0 20px;
+  border-radius: 17px;
+  border: 1px solid;
+  margin-left: 20px;
+}
+.xsubmit {
+  border: 1px solid #68C7CC;
+  border-radius: 25px;
+  background-color: #68C7CC;
+  display: flex;
+  align-items: center;
+  width: 434px;
+  &__btn{
+    height: 50px;
+    width: 434px;
+    color: #fff;
+    font-size: 15px;
+    margin: auto;;
+    background-color: #68C7CC;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+  }
+}
+.listing-select-wrapper__box--select{
+width: 434px;
+height: 48px;
+margin: 8px 0 20px;
+border-radius: 17px;
+border: 1px solid;
+}
+.content__product-price__sold{
+  position: relative;
+  &__yen{
+    position: absolute;
+    top: 46px;
+    left: 5px;
+  }
+}

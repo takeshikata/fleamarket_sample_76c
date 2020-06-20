@@ -7,6 +7,8 @@
 @import "users/index";
 @import "users/show";
 @import "profiles/edit";
+@import "users/user-info-regular";
+@import "users/side-bar";
 
 
 // ----------------共通パーツ設定--------------//
@@ -36,4 +38,8 @@ h4{
 }
 .white{
   color: #ffffff;
+}
+.grey{
+  color: #888888;
+  margin: 15px 0 20px 0;
 }

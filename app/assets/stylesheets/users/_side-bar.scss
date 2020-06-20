@@ -1,0 +1,34 @@
+.mypage-side{
+  width: 200px;
+  height: 519px;
+  margin-top: 60px;
+}
+.maypage-sidebar{
+  background-color: #ffffff;
+}
+.mypage-nav{
+  ul.mypage-sidebar-lists{
+    list-style: none;
+    
+    .mypage-sider-list{
+      width: 100%;
+      height: 48px;
+      line-height: 48px;
+      padding-left: 10px;
+      margin: 0;
+      background: white;
+      
+      &__text{
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+.mypage-nav-head{
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin: 30px 0 20px 0;
+}

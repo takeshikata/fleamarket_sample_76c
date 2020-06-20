@@ -24,6 +24,7 @@ class ProfilesController < ApplicationController
     @user = User.find(params[:id])
     profile = Profile.find(current_user.id)
     profile.update(profile_params)
+    # binding.pry
     redirect_to user_path
   end
 
@@ -34,12 +35,13 @@ class ProfilesController < ApplicationController
   private
   def profile_params
     params.require(:profile).permit(
-    :first_name,
-    :last_name,
-    :first_name_kana,
-    :last_name_kana,
-    :birth_date,
-    :introduction
+      :first_name,
+      :last_name,
+      :first_name_kana,
+      :last_name_kana,
+      :birth_date,
+      :introduction,
+      :image
     )
   end
 
