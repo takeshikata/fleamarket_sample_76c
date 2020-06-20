@@ -27,7 +27,7 @@
               %h2.bold
                 プロフィール
           %li
-            -if @address == nil 
+            -if @address == nil
               = link_to new_address_path, class: "mypage-sideber-list__text" do
                 %h2.bold
                   発送元・お届け先住所
