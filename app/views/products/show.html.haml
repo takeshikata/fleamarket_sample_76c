@@ -1,40 +1,38 @@
 .wrapper
-  .header
   .main
-    .content
-      .content__product
-        %h3
-          = @product.name
-      .content__box
-        .content__box__image
-          .content__box__image--main
-            = image_tag @image.image.to_s, size: "300x300"
-          .content__box__image__subs
+    .product-show
+      .product-show__item-name
+        = @product.name
+      .product-show__box
+        .product-show__box__images-show
+          .product-show__box__images-show__main
+            = image_tag @image.image.to_s, size: "250x300", class: "main-image"
+          .product-show__box__images-show__subs
             - @images.each.with_index(1) do |image, index|
-              .content__box__image__subs--sub
-                = image_tag image.image.to_s, size: "60x60"
+              .product-show__box__images-show__subs--sub
+                = image_tag image.image.to_s, size: "40x50", class: "sub-image"
                 -if @product.purchaser_id.present?
                   .items-box_photo__sold-show
                     .items-box_photo__sold__inner
                       SOLD
-        %table.content__box__detail
+        %table.product-show__box__table-info
           %tbody
             %tr
-              %th
+              %th.th-side__top
                 出品者
-              %td
+              %td.td-side__top
                 = @product.user.nickname
                 %br
                 %ul.evaluation
                   %li
                     = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 1}} do
-                      = @evaluation_good_count
+                      = @evaluation_good_sum
                   %li
                     = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 2}} do
-                      = @evaluation_normal_count
+                      = @evaluation_normal_sum
                   %li
                     = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 3}} do
-                      = @evaluation_bad_count
+                      = @evaluation_bad_sum
             %tr
               %th
                 カテゴリー
@@ -60,49 +58,58 @@
               %td
                 出品者 #条件分岐？
             %tr
-              -# %th        #テーブルないのでコメントアウトします
-              -#   配送の方法
-              -# %td
-              -#   普通郵便
-            %tr
               %th
                 配送元の地域
               %td
                 = @product.shipping_region.region
             %tr
-              %th
+              %th.th-side__bottom
                 発送の目安
-              %td
+              %td.td-side__bottom
                 = @product.preparation_term.term
-      .content__price
-        .content__price__tax-included
-          ¥ #{@product.price}
-          %span (税込)
-        .content__price__postage
-          %span 送料込み
-      .content__perchase
-        -unless user_signed_in? && @product.user_id == current_user.id
-          = link_to "購入画面に進む", purchase_product_path(params[:id]), class: "content__perchase--btn"
-      .content__owner-comment
+      .product-show__price
+        .product-show__price__tax-included
+          ¥ #{@product.price.to_s(:delimited, delimiter: ',')}
+          %span.price-tax (税込)
+          %span.product-show__price__tax-included--postage
+            送料込み
+      .product-show__purchase-item
+        -# -unless user_signed_in? && @product.user_id == current_user.id
+        -if user_signed_in? && @product.user_id != current_user.id && @product.purchaser_id.blank?
+          = link_to "購入画面に進む", purchase_product_path(params[:id]), class: "product-show__purchase-item--btn"
+        -elsif user_signed_in? && @product.user_id == current_user.id && @product.purchaser_id.blank?
+          -# - if user_signed_in? && current_user.id == @product.user_id
+          .product-poster-btn
+            = link_to '編集', "/products/#{@product.id}/edit", method: :get, class: "product-edit-btn"
+            = link_to '削除', "/products/#{@product.id}", method: :delete, class: "product-delete-btn"
+        -elsif @product.purchaser_id.blank? 
+          = link_to "新規会員登録へ進む", new_user_registration_path, class: "product-show__purchase-item--btn"
+        -elsif @product.purchaser_id.present?
+          = link_to "売り切れです", root_path, class: "product-show__purchase-item--btn"
+        -else 
+          = link_to "トップへ戻る", root_path, class: "product-show__purchase-item--btn"
+      -# .product-show__owner-comment
       -# .content__edit
       -#   = link_to "商品の編集", "#", class: "content__edit--btn"
 
-      - if user_signed_in? && current_user.id == @product.user_id
-        = link_to '編集', "/products/#{@product.id}/edit", method: :get
-        = link_to '削除', "/products/#{@product.id}", method: :delete
+      -# - if user_signed_in? && current_user.id == @product.user_id
+      -#   .product-poster-btn
+      -#     = link_to '編集', "/products/#{@product.id}/edit", method: :get, class: "product-edit-btn"
+      -#     = link_to '削除', "/products/#{@product.id}", method: :delete, class: "product-delete-btn"
 
       .comment-container
         - if current_user
-          = form_with model: [@product, @comment], local: true, id: "new_comment" do |form|
-            = form.text_area :text, placeholder: "コメントする", rows: "2", class: "textbox"
-            = form.submit "SEND", class: "form__submit"
+          = form_with model: [@product, @comment], local: true, id: "new_comment", class: "comment-form" do |form|
+            = form.text_area :text, placeholder: "コメントする", rows: "2", class: "textbox comment-form__field"
+            = form.submit "コメントする", class: "form__submit comment-form__submit"
         - else
-          %strong※※※ コメントの投稿には新規登録/ログインが必要です ※※※
-
-        %h4 < コメント一覧 >
+          %strong.no-login-user
+            ※※※ コメントの投稿には新規登録/ログインが必要です ※※※
+        %h4.comment-lists < コメント一覧 >
         - if @comments
-          - @comments.each do |comment|
-            %strong
-              %p
-                = link_to "#{comment.user.nickname} さん：", "/users/#{comment.user_id}"
-                = comment.text
+          .comments-display
+            - @comments.each do |comment|
+              %strong
+                %p.comments-display__detail
+                  = link_to "#{comment.user.nickname} さん：", "/users/#{comment.user_id}"
+                  = comment.text
