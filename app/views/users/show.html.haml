@@ -1,48 +1,86 @@
-.user-details
-  %section.user-profile
-    .user-icon
-      = link_to "#" do
-        = image_tag "https://static.mercdn.net/images/member_photo_noimage_thumb.png", size: "200x200"
-        %p ユーザー名
-    - if user_signed_in? && @product && current_user.id == @product.user_id
-      .user-evaluation
-        %ul
-          %li
-            %i
-              = @evaluation_good_sum
-          %li
-            %i
-              = @evaluation_normal_sum
-          %li
-            %i
-              = @evaluation_bad_sum
-    - else
-      .user-evaluation
-        %ul
-          %li
-            %i
-              0
-          %li
-            %i
-              0
-          %li
-            %i
-              0
-    .product-details
-      %ul.product-tabs
-        %li
-          = link_to "取引中", "#"
-        %li
-          = link_to "売却済み商品", "#"
-      .tab-content
-        %ul.product-list
-          %li
-            = link_to "商品１", "#"
-          %li
-            = link_to "商品２", "#"
-          %li
-            = link_to "商品３", "#"
-          %li
-            = link_to "商品４", "#"
-          %li
-            = link_to "商品５", "#"
+.contents-wrapper
+  .user-details
+    %section.user-profile
+      .user-icon
+        = link_to "#" do
+          -# = image_tag @image.to_s, size: "180x180"
+          - if @profile.image.present?
+            = image_tag @profile.image.to_s, size: "500×500", class: "user_img"
+          -else
+            = image_tag "member_photo_noimage_thumb.png",size: "180x180", class: "user_img"
+          .product-user-name
+          = @product.user.nickname
+      - if user_signed_in? && @product && current_user.id == @product.user_id
+        .user-evaluation
+          .user-evaluation__box
+            %ul
+              %li
+                = icon('fas', 'grin',  class: "good")
+                %i
+                  = @evaluation_good_sum
+                
+              %li
+                = icon('fas', 'meh',  class: "normal")
+                %i
+                  = @evaluation_normal_sum
+                
+              %li
+                = icon('fas', 'frown',  class: "bad")
+                %i
+                  = @evaluation_bad_sum         
+      - else
+        .user-evaluation
+          .user-evaluation__box
+            %ul
+              %li
+                = icon('fas', 'grin',  class: "good")
+                %i
+                  0
+                
+              %li
+                = icon('fas', 'meh',  class: "normal")
+                %i
+                  0
+                
+              %li
+                = icon('fas', 'frown',  class: "bad")
+                %i
+                  0
+      .text-box
+        = @profile.introduction
+      .tabs
+        .tabs-box
+          %input#tab-1{:checked => "checked", :name => "tab-radio", :type => "radio"}/
+          %label.tab-label{:for => "tab-1"}出品中
+          %input#tab-2{:name => "tab-radio", :type => "radio"}/
+          %label.tab-label{:for => "tab-2"}売却済み
+          .tab-content.tab-1-content
+            - @product_sell.each do |sell|
+              .image
+                = link_to product_path(sell), class: "sell-box" do
+                  - sell.images.limit(1).each do |images|
+                    =image_tag images.image.to_s, size:"100x100", class: "sell-box_img"
+          .tab-content.tab-2-content
+            - @product_selled.each do |selled|
+              .image
+                = link_to product_path(selled), class: "sell-box" do
+                  .image
+                    - selled.images.limit(1).each do |images|
+                      =image_tag images.image.to_s, size:"100x100", class: "sell-box_img"
+                  -if selled.purchaser_id.present?
+                    .items-box_photo__sold
+                      .items-box_photo__sold__inner
+                        SOLD
+.footer
+  .footer__logo
+    %h3.white.footer__logo__text
+      © FURIMA
+
+ 
+.post-btn
+  .post-btn__wrapper
+    .post-btn__text
+      出品
+    .post-btn__icon
+    = link_to new_product_path do
+      = icon('fas', 'plus')
