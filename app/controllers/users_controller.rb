@@ -11,8 +11,16 @@ class UsersController < ApplicationController
   end
 
   def show
+
     @product = Product.find_by(user_id: params[:id])
-    products = Product.where(user_id: params[:id])
+    @products = Product.where(user_id: params[:id])
+    @product_sell = Product.where(user_id: params[:id], purchaser_id: nil)
+    @product_selled = Product.where(user_id: params[:id]).where.not(purchaser_id: nil)
+    # binding.pry
+    @profile = Profile.find(params[:id])
+    # @image = @profile.user_img
+   
+
 
     if @product
       d_evaluations = Evaluation.select(:user_id, :product_id, :evaluation).distinct
@@ -24,6 +32,7 @@ class UsersController < ApplicationController
         @evaluation_bad_sum += d_evaluations.where(evaluation: :bad, product_id: product.id).where.not(user_id: product.user_id).count
       end
     end
+  
   end
 
   def destroy
