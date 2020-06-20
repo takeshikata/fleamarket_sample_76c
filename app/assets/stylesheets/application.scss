@@ -4,8 +4,10 @@
 @import "products/show";
 @import "products/index";
 @import "products/new";
+@import "products/purchase";
 @import "users/index";
 @import "users/show";
+@import "categories/index";
 
 
 // ----------------共通パーツ設定--------------//
@@ -15,15 +17,19 @@
 }
 h1{
   font-size: 36px;
+  margin: 0;
 }
 h2{
   font-size: 17px;
+  margin: 0;
 }
 h3{
   font-size: 14px;
+  margin: 0;
 }
 h4{
   font-size: 10.5px;
+  margin: 0;
 }
 
 .bold{
