@@ -12,8 +12,8 @@
               .product-show__box__images-show__subs--sub
                 = image_tag image.image.to_s, size: "40x50", class: "sub-image"
                 -if @product.purchaser_id.present?
-                  .items-box_photo__sold-show
-                    .items-box_photo__sold__inner
+                  .items-box_photo__sold-products-show
+                    .items-box_photo__sold-products-show__inner
                       SOLD
         %table.product-show__box__table-info
           %tbody
