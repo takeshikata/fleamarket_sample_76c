@@ -11,6 +11,8 @@
 @import "categories/index";
 @import "cards";
 @import "profiles/edit";
+@import "users/user-info-regular";
+@import "users/side-bar";
 
 
 
@@ -49,4 +51,8 @@ h4{
 }
 .white{
   color: #ffffff;
+}
+.grey{
+  color: #888888;
+  margin: 15px 0 20px 0;
 }

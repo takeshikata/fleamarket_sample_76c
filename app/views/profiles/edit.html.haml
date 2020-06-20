@@ -4,7 +4,7 @@
       .maypage-sidebar
         %ul.mypage-sidebar-lists
           %li.mypage-sider-list
-            = link_to "#", class: "mypage-sideber-list__text" do
+            = link_to users_path, class: "mypage-sideber-list__text" do
               %h2.bold
                 マイページ
           %li.mypage-sider-list
@@ -43,39 +43,55 @@
             = link_to "#", class: "mypage-sideber-list__text" do
               %h2.bold
                 ログアウト
-    .mypage-mainbox
-      %section.mainbox-header
-        %h2.mainbox-header__text プロフィール
-        = form_with(model: @profile, local: true) do |f|
-          .profile-form__introduction
-            = f.label "自己紹介", class: "profile-form__label"
-            %h4.any
-              任意
-            %br/
-            = f.text_area :introduction, class: "input-form-large"
-          .profile-form__name
-            = f.label "お名前(全角)", class: "profile-form__label"
-            %h4.require
-              必須
-            %br/
-            = f.text_field :first_name, class: "input-form-regular"
-            = f.text_field :last_name, class: "input-form-regular"
-          .profile-form__name-kana
-            = f.label "お名前カナ(全角)", class: "profile-form__label"
-            %h4.require
-              必須
-            %br/
-            = f.text_field :first_name_kana, class: "input-form-regular"
-            = f.text_field :last_name_kana, class: "input-form-regular"
-          .profile-form__birthdate
-            = f.label "生年月日", class: "profile-form__label"
-            %h4.require
-              必須
-            %br/
-            .birth-form
-              = f.date_select :birth_date, prompt:"--", use_month_numbers: true,start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1)
-          .submit
-            =f.submit "更新する", class: "submit__btn"
+    .mypage-rightcontent
+      .mypage-userinfo-regular
+        %ul.mypage-userinfo-regular__lists
+          %li.mypage-userinfo-regular__lists__name
+            = @user.nickname + "さん"
+          %li.mypage-userinfo-regular__lists__img
+            - if @profile.image.present?
+              = image_tag @profile.image.to_s, height: '70px', width: '70px', class: 'mypage-userinfo-regular__lists__img__data'
+            -else
+              = image_tag 'member_photo_noimage_thumb.png', height: '70px', width: '70px', class: 'mypage-userinfo-regular__lists__img__data'
+      .mypage-mainbox
+        %section.mainbox-header
+          %h2.mainbox-header__text プロフィール
+          = form_with(model: @profile, local: true) do |f|
+            .profile-form__user_img
+              = f.label "プロフィール写真", class: "profile-form__label"
+              %h4.any
+                任意
+              %br/
+              = f.file_field :image
+            .profile-form__introduction
+              = f.label "自己紹介", class: "profile-form__label"
+              %h4.any
+                任意
+              %br/
+              = f.text_area :introduction, class: "input-form-large"
+            .profile-form__name
+              = f.label "お名前(全角)", class: "profile-form__label"
+              %h4.require
+                必須
+              %br/
+              = f.text_field :first_name, class: "input-form-regular"
+              = f.text_field :last_name, class: "input-form-regular"
+            .profile-form__name-kana
+              = f.label "お名前カナ(全角)", class: "profile-form__label"
+              %h4.require
+                必須
+              %br/
+              = f.text_field :first_name_kana, class: "input-form-regular"
+              = f.text_field :last_name_kana, class: "input-form-regular"
+            .profile-form__birthdate
+              = f.label "生年月日", class: "profile-form__label"
+              %h4.require
+                必須
+              %br/
+              .birth-form
+                = f.date_select :birth_date, prompt:"--", use_month_numbers: true,start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1)
+            .submit
+              =f.submit "更新する", class: "submit__btn"
 .footer
   .footer__logo
     %h3.white.footer__logo__text
