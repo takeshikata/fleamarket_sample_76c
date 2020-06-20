@@ -11,6 +11,9 @@ class Product < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :evaluations, dependent: :destroy
 
+  validates :name,
+            :introduction,
+            :price, presence: true
 
   def self.search(keyword)
     return Product.all unless keyword
