@@ -8,13 +8,12 @@
         .item-top__link
           = link_to "もっと見る>", "#", class: "item-top__link--btn"
       .item-box
-
     .content__products
       .item-top
         .item-top__title
           新着商品
         .item-top__link
-          = link_to "もっと見る>", "#", class: "item-top__link--btn"
+          = link_to "もっと見る>", "categories", class: "item-top__link--btn"
       .item-box
         - @new_product.each do |product|
           .item-box__product
