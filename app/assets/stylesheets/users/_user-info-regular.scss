@@ -5,9 +5,9 @@
   box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.1);
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
-  background-image: url(user-bg.jpg);
+  background-image: url(user_bg.jpg);
   background-size: 600px 150px;
-
+  
   &__lists{
     display: flex;
     height: inherit;
@@ -41,6 +41,17 @@
   box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.1);
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
-  background-image: url(user-bg.jpg);
+  background-image: url(user_bg.jpg);
   background-size: 700px 150px;
+}
+.mypage-userinfo-regular-profile-edit{
+width: 600px;
+height: 103px;
+margin-top: 60px;
+margin-left: 3px;
+box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.1);
+border-top-left-radius: 40px;
+border-top-right-radius: 40px;
+background-image: url(user_bg.jpg);
+background-size: 600px 150px;
 }
