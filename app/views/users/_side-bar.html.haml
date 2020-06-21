@@ -34,10 +34,10 @@
             %h2.bold
               発送元・お届け先住所
       %li
-        = link_to "#", class: "mypage-sideber-list__text" do
+        = link_to card_path, class: "mypage-sideber-list__text" do
           %h2.bold
             お支払い方法
       %li
-        = link_to "#", class: "mypage-sideber-list__text" do
+        = link_to  destroy_user_session_path, class: "mypage-sideber-list__text" do
           %h2.bold
             ログアウト
