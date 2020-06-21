@@ -6,39 +6,45 @@
         %h2.mainbox-header__text
           商品の情報を入力
         .product__block__form
-          .product__block__form__upload
-            = f.label "出品画像", class: "profile-form__label"
-            %h4.require
-              必須
-            %p 最大10枚までアップロードできます
-            %br/
-            .drop__box
-              .prev-content
-              .label-content
-                %label{for: "product_image", class: "label-box"}
-              .hidden-content
-                = f.fields_for :images do |i|
-                  .hidden-field
-                    = i.file_field :image, name: 'product[images_attributes][1][image]', class: 'hidden-field--image1'
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][2][image]', class: 'hidden-field--image2'
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][3][image]', class: 'hidden-field--image3' 
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][4][image]', class: 'hidden-field--image4' 
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][5][image]', class: 'hidden-field--image5' 
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][6][image]', class: 'hidden-field--image6'
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][7][image]', class: 'hidden-field--image7'
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][8][image]', class: 'hidden-field--image8' 
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][9][image]', class: 'hidden-field--image9'
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][10][image]', class: 'hidden-field--image10'
-                    %icon.fas.fa-camera
+          .sell__block__form__upload
+          %h3.sell__block__form__upload__head
+            出品画像
+            %span.require 必須
+          %p 最大10枚までアップロードできます
+          
+          .post__drop__box__container
+            .prev-content
+
+              //JSで挿入したhtmlと同じ形　each文でのプレビュー表示
+              - @product.images.each do |image|
+                .preview-box{ id: "" }
+                  .upper-box
+                    = image_tag image.image.url, width: "60", height: "60", alt: "preview"
+                  .lower-box
+                    .update-box
+                      -# %label.edit-btn 編集
+                    .delete-box
+                      .delete-btns
+                        %span.delete-text 削除
+            .label-content
+
+              //プレビューの数に合わせてforオプションを指定
+              = f.label :"images_attributes_#{@product.images.length}_image", class: "label-box", id: "label-box--#{@product.images.length}" do
+                %pre.label-box__text-visible クリックしてファイルをアップロード
+            .hidden-contents
+              = f.fields_for :images do |i|
+
+                //プレビューが出ている分のfile_fieldとdelete用のチェックボックスを設置
+                = i.file_field :image, class: "hidden-field"
+                = i.check_box:_destroy, class: "hidden-checkbox"
+
+                //10個のfile_fieldを準備するに当たって、足りない分を表示
+              - @product.images.length.upto(9) do |i|
+                %input{name: "product[images_attributes][#{i}][image]", id: "product_images_attributes_#{i}_image", class:"hidden-field", type:"file"}
+
+              
+
+
           .product__block__form__name
             = f.label "商品名", class: "profile-form__label"
             %h4.require

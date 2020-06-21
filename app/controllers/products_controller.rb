@@ -52,12 +52,15 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if
-      product = Product.find(params[:id])
-      product.update(edit_product_params)
-      redirect_to root_path
+    if @product
+      @product.update(product_params)
+      redirect_to action: 'show'
+      unless @product.images
+        @product.destroy
+        redirect_to action: ‘new’
+      end
     else
-      render 'edit'
+      redirect_to action: ‘new’
     end
   end
 
@@ -157,7 +160,7 @@ class ProductsController < ApplicationController
       :shipping_payer_id,
       :preparation_term_id,
       :product_condition_id,
-      images_attributes: [:image]
+      images_attributes: [:image, :_destroy, :id]
     ).merge(user_id: current_user.id)
   end
 
