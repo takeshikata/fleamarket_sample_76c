@@ -82,124 +82,153 @@
   // }
 }
 
-.tabs {
-  width: 600px;
-  height: 470px;
-  background: #FFFFFF;
-  margin:0 auto;
-  .tabs-box {
-    height: 70px;
-    line-height: 70px;
-    text-align: center;
-    margin-bottom: 20px;
-    .tab-label {
-      display: inline-block;
-      width: 70px;
-      height: 50px;
-      line-height: 23px;
-      border-radius: 50px;
-      // padding: 3px 6px;
-      font-size: 11px;
-      font-weight:bold;
-      color: white;
-      background: black;
-      margin-bottom: 20px;
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-    input[name = "tab-radio"] {
-      display: none;
-    }
-  }
-  #tab-1:checked ~ .tab-1-content, #tab-2:checked ~ .tab-2-content {
-    display: inline-flex;
-  }
-  .tab-content {
-    display: none;
-    flex-wrap: wrap;
-    overflow-y: scroll;
-    // margin: 0 auto;
-    width:600px;
-    height:370px;
 
-    a.sell-box {
-      display: block;
-      width: 600px;
-      img {
-        display: inline-block;
-        width:100px;
-        height:100px;
-        border-radius: 20px;
-        margin: 10px 10px 30px 10px;
-      }
-    }
+// .tabs {
+//   width: 600px;
+//   height: 470px;
+//   background: #FFFFFF;
+//   margin:0 auto;
+//   .tabs-box {
+//     height: 70px;
+//     line-height: 70px;
+//     text-align: center;
+//     margin-bottom: 20px;
+//     .tab-label {
+//       display: inline-block;
+//       width: 70px;
+//       height: 50px;
+//       line-height: 50px;
+//       border-radius: 50px;
+//       // padding: 3px 6px;
+//       font-size: 11px;
+//       font-weight:bold;
+//       color: white;
+//       background: black;
+//       margin-bottom: 20px;
+//       &:hover {
+//         opacity: 0.7;
+//       }
+//     }
+//     input[name = "tab-radio"] {
+//       display: none;
+//     }
+//   }
+//   #tab-1:checked ~ .tab-1-content, #tab-2:checked ~ .tab-2-content {
+//     display: inline-flex;
+//   }
+//   .tab-content {
+//     display: none;
+//     flex-wrap: wrap;
+//     overflow-y: scroll;
+//     // margin: 0 auto;
+//     width:600px;
+//     height:370px;
 
-  }
-  input[name = "tab-radio"]:checked + .tab-label {
-    background-color: #000000;
-    color:#ffffff;
-  }
-}
 
-.tab-1-content.tab-2-content {
-  display: flex;
-  overflow-y: scroll;
-  a.sell-box {
-    height: 400px;
-    img {
-      display: block;
-      width:100px;
-      height:100px;
-      border-radius: 20px;
-      margin: 10px 10px 30px 10px;
-    }
-  }
-}
-.mypage-tab-container{
-  margin: 30px 0 0;
+//     a.sell-box {
+//       display: block;
+//       width: 600px;
+//       img {
+//         display: inline-block;
+//         width:100px;
+//         height:100px;
+//         border-radius: 20px;
+//         margin: 10px 10px 30px 10px;
+//       }
+//     }
 
-  h3.mypage-tab-head{
-    padding-left: 10px;
-  }
+//   }
+//   input[name = "tab-radio"]:checked + .tab-label {
+//     background-color: #000000;
+//     color:#ffffff;
+//   }
+// }
 
-  ul.mypage-tabs{
-    display: flex;
-    margin: 0;
-    list-style: none;
+// .tab-1-content.tab-2-content {
+//   display: flex;
+//   flex-wrap: wrap;
+//   overflow-y: scroll;
+//   // padding-top:52px;
+//   a.sell-box {
+//     height: 400px;
+//     img {
+//       display: block;
+//       width:100px;
+//       height:100px;
+//       border-radius: 20px;
+//       margin: 10px 10px 30px 10px;
+//     }
+//   }
+// }
+// // .tab-contents{
+// //   .tab-contents-list{
+// //     padding: 0 50px;
+// //     margin: 0;
+// //     .tab-content{
+// //       display: flex;
+// //       flex-wrap: wrap;
+// //       height: 100px;
+// //       line-height: 100px;
+// //       text-align: center;
+// //       margin-bottom: 20px;
+// //       background: white;
+// //       a{
+// //         img{
+// //           display: block;
+// //           border-radius: 20px;
+// //           width: 100px;
+// //           height: 100px;
+// //           margin: 10px 10px 30px 10px;
+// //         }
+// //       }
+// //     }
+// //   }
+// // }
+// .mypage-tab-container{
+//   margin: 30px 0 0;
 
-    li{
-      height: 70px;
-      line-height: 70px;
-      width: 50%;
-      text-align: center;
-      background: gray;
 
-      a{
-        display: block;
-      }
-    }
-  }
-  .tab-content{
+//   h3.mypage-tab-head{
+//     padding-left: 10px;
+//   }
 
-    ul.product-list{
-      list-style: none;
-      margin: 0;
+//   ul.mypage-tabs{
+//     display: flex;
+//     margin: 0;
+//     list-style: none;
 
-      li{
-        height: 70px;
-        line-height: 70px;
-        text-align: center;
-        margin-bottom: 5px;
-        background: white;
+//     li{
+//       height: 70px;
+//       line-height: 70px;
+//       width: 50%;
+//       text-align: center;
+//       background: gray;
 
-        a{
-          display: block;
-        }
-      }
-    }
-  }
-}
+//       a{
+//         display: block;
+//       }
+//     }
+//   }
+//   .tab-content{
+
+//     ul.product-list{
+//       list-style: none;
+//       margin: 0;
+
+//       li{
+//         height: 70px;
+//         line-height: 70px;
+//         text-align: center;
+//         margin-bottom: 5px;
+//         background: white;
+
+//         a{
+//           display: block;
+//         }
+//       }
+//     }
+//   }
+// }
 .logout-content{
   float: right;
   width: 700px;

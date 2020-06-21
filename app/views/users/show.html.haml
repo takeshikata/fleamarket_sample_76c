@@ -2,8 +2,7 @@
   .user-details
     %section.user-profile
       .user-icon
-        = link_to "#" do
-          -# = image_tag @image.to_s, size: "180x180"
+        = link_to user_path(params[:id]) do
           - if @profile.image.present?
             = image_tag @profile.image.to_s, size: "500×500", class: "user_img"
           -else
@@ -53,20 +52,20 @@
           %input#tab-1{:checked => "checked", :name => "tab-radio", :type => "radio"}/
           %label.tab-label{:for => "tab-1"}出品中
           %input#tab-2{:name => "tab-radio", :type => "radio"}/
-          %label.tab-label{:for => "tab-2"}売却済み
+          %label.tab-label{:for => "tab-2"}売却済
           .tab-content.tab-1-content
             - @product_sell.each do |sell|
-              .image
+              .image_box
                 = link_to product_path(sell), class: "sell-box" do
                   - sell.images.limit(1).each do |images|
-                    =image_tag images.image.to_s, size:"100x100", class: "sell-box_img"
+                    =image_tag images.image.to_s, size:"110x110", class: "sell-box_img"
           .tab-content.tab-2-content
             - @product_selled.each do |selled|
               .image
                 = link_to product_path(selled), class: "sell-box" do
                   .image
                     - selled.images.limit(1).each do |images|
-                      =image_tag images.image.to_s, size:"100x100", class: "sell-box_img"
+                      =image_tag images.image.to_s, size:"110x110", class: "sell-box_img"
                   -if selled.purchaser_id.present?
                     .items-box_photo__sold
                       .items-box_photo__sold__inner

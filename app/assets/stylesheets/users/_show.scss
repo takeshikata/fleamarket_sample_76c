@@ -11,11 +11,11 @@
   background: #ffffff;
   border-radius: 50px 50px 50px 50px;
   
-  .user-profile{
+  .user-profile{    
     .user-icon{
       position: relative;
       border-radius: 50px 50px 0 0 ;
-      background-image:url(user_bg.jpg);
+      background-image:url(user-bg.jpg);
       height: 323px;
       text-align: center;
       display: relative;
@@ -80,17 +80,21 @@
     .tabs {
       width: 600px;
       height:468px;
-      background-color: #ffffff;
+      // background-color: #ffffff;
       margin:0 auto;
       .tabs-box {
         text-align: center;
         height:52px;
         .tab-label {
           display:inline-block;
-          height: 27px;
-          width: 56px;
-          border-radius: 10px 10px 10px 10px;
-          padding:3px 6px;
+
+          // border-radius: 10px 10px 10px 10px;
+          width: 70px;
+          height: 50px;
+          line-height: 50px;
+          border-radius: 50px;
+          // padding:3px 6px;
+
           font-size: 11px;
           font-weight: bold;
           &:hover {
@@ -113,6 +117,11 @@
         .tab-1-content .tab-2-content {
           display: flex;
           flex-wrap: wrap;
+
+          .iamge_box {
+            width:100px;
+            height:100px;
+          }
 
         }
       }
@@ -144,13 +153,10 @@
 .sell_box{
   width: 100px;
 
-  &__img{
-    border-radius: 10px 10px 10px 10px;
-  }
-}
-.tabs .tab-content a.sell-box img{
-  width: 85px;
-  height: 103px;
+.sell-box_img {
+  border-radius: 10px 10px 10px 10px;
+  margin-right:10px;
+
 }
 
 
@@ -160,14 +166,14 @@
   width: 0;
   height: 0;
   border-radius: 10px;
-  border-top: 50px solid #ea352d ;
-  border-right: 50px solid transparent;
-  border-bottom: 50px solid transparent;
-  border-left: 50px solid #ea352d ;
+  border-top: 55px solid #ea352d ;
+  border-right: 55px solid transparent;
+  border-bottom: 55px solid transparent;
+  border-left: 55px solid #ea352d ;
   z-index:100;
   position: relative;
-  top:-120px;
-  left:10px;
+  top:-117px;
+  left:0px;
   &__inner{
     transform: rotate(-45deg);
     font-size: 20px;
