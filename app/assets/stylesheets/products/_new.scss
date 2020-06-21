@@ -79,3 +79,91 @@ border: 1px solid;
     left: 5px;
   }
 }
+
+
+.new-wrapper{
+  padding: 40px 0;
+  &__main{
+    width: 720px;
+    padding:20px;
+    margin: 0 auto;
+    font-size: 14px;
+    margin-bottom: 2px;
+    background-color: white;
+    .flexbox{
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      width: 660px;
+      .new-wrapper__main__preview{
+        margin: 16px 0;
+        display: flex;
+        flex-wrap: wrap;
+        &__image{
+          position: relative;
+          &__img{
+            width: 131px;
+            margin-right: 1px;
+            height: 160px;
+            object-fit: cover;
+          }
+          &__delete-btn{
+            text-shadow: 0 0 2px white;
+            cursor: pointer;
+            position: absolute;
+            top: 0px;
+          }
+        }
+        .js-file{
+          display: none;
+        }
+      }
+    }
+    .spacing{
+      padding-top: 20px;
+    }
+
+    .any{
+      padding: 3px;
+      color: white;
+      font-size: 12px;
+      border-radius: 4px;
+      background-color: #ddd;
+    }
+    &__title{
+      font-weight: bold;
+      padding: 0 12px;
+      padding-bottom: 16px;
+    }
+    &__subtitle{
+      color: #999;
+      padding: 0 12px;
+      font-weight: bold;
+      padding-bottom: 20px;
+    }
+    &__text{
+      padding: 0 12px;
+    }
+    &__image-field{
+      width: 660px;
+      height: 160px;
+      margin: 16px auto;
+      background-color: #eee;
+      border: 1px dashed #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      text-align: center;
+      position: relative;
+      .fa-camera{
+        position: absolute;
+        top: 40px;
+        font-size: 20px;
+      }
+      &__text{
+        padding-top: 20px;
+      }
+    }
+  }
+}

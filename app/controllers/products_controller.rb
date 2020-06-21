@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
 
   def index
     # @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
-    @images = Image.select("id", "image", "product_id")
+    images = Image.select("id", "image", "product_id")
     # @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
     @new_product = Product.limit(10).order(" created_at DESC ")
   end
@@ -52,12 +52,15 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if
-      product = Product.find(params[:id])
-      product.update(edit_product_params)
-      redirect_to root_path
+    if @product
+      @product.update(product_params)
+      redirect_to action: 'show'
+      unless @product.images
+        @product.destroy
+        redirect_to action: ‘new’
+      end
     else
-      render 'edit'
+      redirect_to action: ‘new’
     end
   end
 
@@ -143,6 +146,7 @@ class ProductsController < ApplicationController
 
   def search
     @products = Product.search(params[:keyword])
+    
   end
 
   private
@@ -157,7 +161,7 @@ class ProductsController < ApplicationController
       :shipping_payer_id,
       :preparation_term_id,
       :product_condition_id,
-      images_attributes: [:image]
+      images_attributes: [:image, :_destroy, :id]
     ).merge(user_id: current_user.id)
   end
 

@@ -1,99 +1,100 @@
 
 .content-bg-gray
   .shadowed-rounded-rectangle
-    = form_with(model: @product, local: true, class: "product-new-form") do |f|
+    = form_with(model: @product, local: true) do |f|
+      - if @product.errors.any?
+        .product-form__errors
+          %h2= "#{@product.errors.full_messages.count}件のエラーが発生しました。"
+          %ul
+            - @product.errors.full_messages.each do |message|
+              %li= message
       %section.mainbox-product-header
-        %h2.mainbox-product-header__text
+        %h2.mainbox-header__text
           商品の情報を入力
         .product__block__form
-          .product__block__form__upload
-            = f.label "出品画像", class: "profile-form__label"
-            %h4.require
-              必須
-            %p 最大10枚までアップロードできます
-            %br/
-            .drop__box
-              .prev-content
-              .label-content
-                %label{for: "product_image", class: "label-box"}
-              .hidden-content
-                = f.fields_for :images do |i|
-                  .hidden-field
-                    = i.file_field :image, name: 'product[images_attributes][1][image]', class: 'hidden-field--image1'
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][2][image]', class: 'hidden-field--image2'
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][3][image]', class: 'hidden-field--image3' 
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][4][image]', class: 'hidden-field--image4' 
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][5][image]', class: 'hidden-field--image5' 
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][6][image]', class: 'hidden-field--image6'
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][7][image]', class: 'hidden-field--image7'
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][8][image]', class: 'hidden-field--image8' 
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][9][image]', class: 'hidden-field--image9'
-                    %icon.fas.fa-camera
-                    = i.file_field :image, name: 'product[images_attributes][10][image]', class: 'hidden-field--image10'
-                    %icon.fas.fa-camera
+        .new-wrapper
+          %span.label_title 
+            出品画像
+            %span 必須
+            %p.upload_limit 最大10枚までアップロードできます
+          .flexbox
+            .new-wrapper__main__preview
+            %label
+              .new-wrapper__main__image-field
+                %i{class: "fas fa-camera"}
+                .new-wrapper__main__image-field__text
+                  ドラッグアンドドロップ
+                  %br
+                  またはクリックしてファイルをアップロード
+                  %br
+                  .new_page_main__image
+                  %br
+                    .file__box
+                      #image-box
+                        #previews
+                          - if @product.persisted?
+                            - @product.images.each_with_index do |image, i|
+                              = image_tag product.image.url, data: { index: i }, width: '100', height: '100'
+                        = f.fields_for :images do |image|
+                          .js-file_group{"data-index" => image.index}
+                            = image.file_field :image, class: 'js-file'
+                            %br
+                            %span.js-remove 削除
+                          - if @product.persisted?
+                            = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
+                        - if @product.persisted?
+                          .js-file_group{"data-index" => @product.images.count}
+                            = file_field_tag :image, name: "product[images_attributes][#{@product.images.count}][image]", class: 'js-file'
+                            .js-remove 削除
+          
+
           .product__block__form__name
-            = f.label "商品名", class: "profile-form__label"
-            %h4.require
-              必須
-              %br/
-            = f.text_field :name, placeholder:"40文字まで", class: "input-form-xregular"
-          .product__block__form__introduction
-            = f.label "商品の説明", class: "profile-form__label"
-            %h4.require
-              必須
-              %br/
-            = f.text_area :introduction, placeholder:"商品の説明", class: "input-form-xlarge"
-          .content__product-detail
-            .content_product-detail__category
-            .listing-form-box
-              .listing-product-detail__category
-                %h3.grey 商品の詳細
-                = f.label 'カテゴリー', class: 'listing-default__label', class: "profile-form__label"
-                %h4.require
-                  必須
-                  %br/
-                .listing-select-wrapper
-                  .listing-select-wrapper__box
-                    = f.collection_select :root_category_id, @category_parent_array, :id, :name, {prompt: "---"}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'}
-          .content_product-detail__condition
-            = f.label "商品の状態", class: "profile-form__label"
-            %h4.require
-              必須
-              %br/
-            = f.select :product_condition_id, options_for_select(ProductCondition.conditions), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
-        .content__product-shipping
-          .content__product-shipping__region
-            %h3.grey 配送について
-            = f.label "発送元の地域", class: "profile-form__label"
-            %h4.require
-              必須
-              %br/
-            = f.select  :shipping_region_id, options_for_select(ShippingRegion.regions), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
-          .content__product-shipping__date
-            = f.label "発送までの日数", class: "profile-form__label"
-            %h4.require
-              必須
-              %br/
-            = f.select :preparation_term_id, options_for_select(PreparationTerm.terms), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
-        .content__product-price
-          .content__product-price__limitation
-            %h3.grey 価格(¥300~9,999,999)
-          .content__product-price__sold
-            = f.label "販売価格", class: "profile-form__label"
-            %h4.require
-              必須
-              %br/
-            = f.number_field :price, style: "text-align:right", class: "input-form-middle"
-            .content__product-price__sold__yen
-              %h3 ¥
-        .xsubmit
-          =f.submit "更新する", class: "xsubmit__btn"
-= render partial: 'layouts/footer'
+            .name-label
+              %h4
+                商品名
+                %span 必須
+              %div
+                = f.text_field :name, placeholder:"40文字まで", class: "form__group__name"
+        .product__block__form__introduction
+          .introduction-label
+            %h4
+              商品の説明
+              %span 必須
+            %div
+              = f.text_area :introduction, placeholder:"商品の説明"
+      .content__product-detail
+        .content_product-detail__category
+        .listing-form-box
+          .listing-product-detail__category
+            = f.label 'カテゴリー', class: 'listing-default__label'
+            %span.listing-default--require 必須
+            .listing-select-wrapper
+              .listing-select-wrapper__box
+                = f.collection_select :root_category_id, @category_parent_array, :id, :name, {prompt: "---"}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'}
+                %i.fas.fa-chevron-down.listing-select-wrapper__box--arrow-down
+        .content_product-detail__condition
+          %h4
+            商品の状態
+            %span 必須
+          = f.select :product_condition_id, options_for_select(ProductCondition.conditions), {prompt: "選択して下さい"}, class: "select"
+      .content__product-shipping
+        .content__product-shipping__region
+          %h4
+            配送元の地域
+            %span 必須
+          = f.select  :shipping_region_id, options_for_select(ShippingRegion.regions), {prompt: "選択して下さい"}, class: "select"
+        .content__product-shipping__date
+          %h4
+            発送までの日数
+            %span 必須
+          = f.select :preparation_term_id, options_for_select(PreparationTerm.terms), {prompt: "選択して下さい"}, class: "select"
+      .content__product-price
+        .content__product-price__limitation
+          価格(¥300~9,999,999)
+        .content__product-price__ssold
+          %h4
+            販売価格
+            %span 必須
+          = f.number_field :price, style: "text-align:right"
+      .content__product-submit
+        =f.submit "出品する",class: "btn-default__btn"
