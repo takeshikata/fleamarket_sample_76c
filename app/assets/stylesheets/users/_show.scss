@@ -87,6 +87,8 @@
         height:52px;
         .tab-label {
           display:inline-block;
+          height: 27px;
+          width: 56px;
           border-radius: 10px 10px 10px 10px;
           padding:3px 6px;
           font-size: 11px;
@@ -104,33 +106,54 @@
       }
       .tab-content {
         display: none;
-        flex-wrap: wrap;
         margin: 0 auto;
-        margin-top: 50px;
+        margin-top: 25px;
         width:600px;
         height:398px;       
         .tab-1-content .tab-2-content {
           display: flex;
           flex-wrap: wrap;
+
         }
       }
       input[name="tab-radio"]:checked + .tab-label{
         background-color: #000000;
         color:#ffffff
       }
-
+      
     }
   }
+}
+
+.user-show-image{
+  width: 544px;
+  margin: 0 28px 0 28px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.tabs .tab-content a.sell-box{
+  width: 85px;
+  height: 103px;
+  margin-right: 23px;
 }
 
 .user_img{
   width: 180px;
   height: 180px;
 }
+.sell_box{
+  width: 100px;
 
-.sell-box_img {
-  border-radius: 10px 10px 10px 10px;
+  &__img{
+    border-radius: 10px 10px 10px 10px;
+  }
 }
+.tabs .tab-content a.sell-box img{
+  width: 85px;
+  height: 103px;
+}
+
+
 
 // 画像のSOLD表記
 .items-box_photo__sold{
