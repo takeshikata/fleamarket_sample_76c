@@ -13,7 +13,8 @@ class Product < ApplicationRecord
 
   validates :name,
             :introduction,
-            :price, presence: true
+            :price, 
+            :images,presence: true
 
   def self.search(keyword)
     return Product.all unless keyword

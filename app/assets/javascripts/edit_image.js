@@ -1,5 +1,4 @@
 $(function(){
-
   //プレビューのhtmlを定義
   function buildHTML(count) {
     var html = `<div class="preview-box" id="preview-box__${count}">
@@ -14,7 +13,6 @@ $(function(){
                 </div>`
     return html;
   }
-
   // 投稿編集時
   //iproducts/:id/editページへリンクした際のアクション
   if (window.location.href.match(/\/products\/[1-9]?[0-9]\/edit/)){
@@ -33,11 +31,9 @@ $(function(){
       $('.label-content').hide();
     }
   }
-
   // プレビューの追加
   $(document).on('change', '.hidden-field', function() {
     console.log("画像追加")
-
     var id = $(this).attr('id').replace(/[^0-9]/g, '');
     console.log("id=");
     console.log(id);
@@ -71,12 +67,10 @@ $(function(){
         console.log("画像が10個のとき");
         $('.label-content').hide();
       }
-
       //プレビュー削除したフィールドにdestroy用のチェックボックスがあった場合、チェックを外す
       if ($(`#product_images_attributes_${id}__destroy`)){
         $(`#product_images_attributes_${id}__destroy`).prop('checked',false);
       }
-
       //ラベルのidとforの値を変更
       if(count <= 10){
         console.log("画像が10個以下とき");
@@ -86,20 +80,16 @@ $(function(){
       }
     }
   });
-
   // 画像の削除
   $(document).on('click', '.delete-box', function() {
     var count = $('.preview-box').length;
     console.log("count=");
     console.log(count);
-
     var id = $(this).attr('id').replace(/[^0-9]/g, '');
     console.log("id=");
     console.log(id);
     $(`#preview-box__${id}`).remove();
-
     //新規登録時と編集時の場合分け
-
     //新規投稿時
     //削除用チェックボックスの有無で判定
     if ($(`#product_images_attributes_${id}__destroy`).length == 0) {
@@ -113,7 +103,7 @@ $(function(){
       console.log(count);
       //10個めが消されたらラベルを表示
       if (count == 9) {
-        console.log("画像が9つのとき");
+        console.log("画像が9個のとき");
         console.log("id=");
         console.log(id);
         $('.label-content').show();
@@ -123,18 +113,16 @@ $(function(){
         console.log("id=");
         console.log(id);
         $('.label-box').attr({id: `label-box--${id}`,for: `product_images_attributes_${id}_image`});
-
       }
     } else {
       console.log("hidden-checkboxが0以外のとき");
       //投稿編集時
       $(`#product_images_attributes_${id}__destroy`).prop('checked',true);
       //10個めが消されたらラベルを表示
-      if (count == 9 || id < 10) {
-        console.log("画像が9つのとき");
+      if (count == 9) {
+        console.log("画像が9個のとき");
         $('.label-content').show();
       }
-
       //ラベルのidとforの値を変更
       //削除したプレビューのidによって、ラベルのidを変更する
       if(id < 10){
@@ -144,3 +132,9 @@ $(function(){
     }
   });
 });
+
+
+
+
+
+
