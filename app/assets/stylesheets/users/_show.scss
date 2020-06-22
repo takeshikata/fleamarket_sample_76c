@@ -6,7 +6,6 @@
 .user-details{
   box-shadow: 10px 10px 10px rgba(0,0,0,0.4); 
   width: 700px;
-  height: 1490px;
   margin: 80px auto 0;
   background: #ffffff;
   border-radius: 50px 50px 50px 50px;
@@ -106,7 +105,8 @@
         }
       }
       #tab-1:checked ~ .tab-1-content, #tab-2:checked ~ .tab-2-content {
-        display: inline-flex;        
+        display: inline-flex;
+        flex-wrap: wrap;
       }
       .tab-content {
         display: none;
@@ -133,6 +133,11 @@
     }
   }
 }
+.image_box{
+  width: 103px;
+  height: 103px;
+  margin: 0 10px 0 5px;
+}
 
 .user-show-image{
   width: 544px;
@@ -152,7 +157,7 @@
 }
 .sell_box{
   width: 100px;
-
+}
 .sell-box_img {
   border-radius: 10px 10px 10px 10px;
   margin-right:10px;
