@@ -122,6 +122,24 @@ border: 1px solid;
     .spacing{
       padding-top: 20px;
     }
+  }
+}
+
+//var append_input
+.input{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  .upload-label{
+    width: 100%;
+    height: 200px;
+    // width: 80px;
+    // height: 80px;
+    background-color: lightgray;
+    .input-area{
+      display: none;
+    }
+    .image_upload{
 
     .any{
       padding: 3px;
@@ -167,3 +185,10 @@ border: 1px solid;
     }
   }
 }
+}
+
+// ul{
+//   list-style: none;
+//   display: flex;
+//   flex-wrap: wrap;
+// }
