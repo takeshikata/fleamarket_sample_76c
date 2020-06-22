@@ -21,7 +21,8 @@
               %th.th-side__top
                 出品者
               %td.td-side__top
-                = @product.user.nickname
+                = link_to user_path(@product.user.id) do
+                  = @product.user.nickname
                 %br
                 %ul.evaluation
                   %li

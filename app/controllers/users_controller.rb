@@ -8,8 +8,9 @@ class UsersController < ApplicationController
     @products = @user.products
     @address = Address.where(user_id: current_user.id).first
     @profile = Profile.find(@user.id)
-    @product_sell = Product.where(user_id: params[:id], purchaser_id: nil)
-    @product_selled = Product.where(user_id: params[:id]).where.not(purchaser_id: nil)
+    @product_sell = Product.where(user_id: current_user.id, purchaser_id: nil)
+    @product_selled = Product.where(user_id: current_user.id).where.not(purchaser_id: nil)
+  #   binding.pry
   end
   
   def show
