@@ -54,13 +54,14 @@ class ProductsController < ApplicationController
   def update
     if @product
       @product.update(product_params)
-      redirect_to action: 'show'
-      unless @product.images
+      if @product.images.blank?
         @product.destroy
-        redirect_to action: ‘new’
+        redirect_to action: 'new'
+      else
+        redirect_to action: 'show'
       end
     else
-      redirect_to action: ‘new’
+      redirect_to action: 'new'
     end
   end
 
@@ -146,7 +147,7 @@ class ProductsController < ApplicationController
 
   def search
     @products = Product.search(params[:keyword])
-    
+
   end
 
   private

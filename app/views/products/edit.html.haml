@@ -11,7 +11,7 @@
             出品画像
             %span.require 必須
           %p 最大10枚までアップロードできます
-          
+
           .post__drop__box__container
             .prev-content
 
@@ -42,7 +42,7 @@
               - @product.images.length.upto(9) do |i|
                 %input{name: "product[images_attributes][#{i}][image]", id: "product_images_attributes_#{i}_image", class:"hidden-field", type:"file"}
 
-              
+
 
 
           .product__block__form__name
