@@ -160,6 +160,26 @@ border: 1px solid;
     .image_upload{
 
     }
+    &__image-field{
+      width: 434px;
+      height: 160px;
+      margin: 16px auto;
+      background-color: #eee;
+      border: 1px dashed #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      text-align: center;
+      position: relative;
+      .fa-camera{
+        position: absolute;
+        top: 40px;
+        font-size: 20px;
+      }
+      &__text{
+        padding-top: 20px;
+      }
     }
   }
 }

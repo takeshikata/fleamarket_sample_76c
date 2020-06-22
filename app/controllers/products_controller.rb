@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
 
   def index
     # @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
-    @images = Image.select("id", "image", "product_id")
+    images = Image.select("id", "image", "product_id")
     # @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
     @new_product = Product.limit(10).order(" created_at DESC ")
   end
@@ -54,13 +54,14 @@ class ProductsController < ApplicationController
   def update
     if @product
       @product.update(product_params)
-      redirect_to action: 'show'
-      unless @product.images
+      if @product.images.blank?
         @product.destroy
-        redirect_to action: ‘new’
+        redirect_to action: 'new'
+      else
+        redirect_to action: 'show'
       end
     else
-      redirect_to action: ‘new’
+      redirect_to action: 'new'
     end
   end
 
@@ -146,6 +147,7 @@ class ProductsController < ApplicationController
 
   def search
     @products = Product.search(params[:keyword])
+
   end
 
   private

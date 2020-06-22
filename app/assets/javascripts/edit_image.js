@@ -38,7 +38,7 @@ $(function(){
     console.log("id=");
     console.log(id);
     //labelボックスのidとforを更新
-    $('.label-box').attr({id: `label-box--${id}`,for: `item_images_attributes_${id}_image`});
+    $('.label-box').attr({id: `label-box--${id}`,for: `product_images_attributes_${id}_image`});
     //選択したfileのオブジェクトを取得
     var file = this.files[0];
     var reader = new FileReader();

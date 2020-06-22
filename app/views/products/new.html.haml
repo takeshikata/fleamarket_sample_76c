@@ -1,7 +1,7 @@
 
 .content-bg-gray
   .shadowed-rounded-rectangle
-    = form_with(model: @product, local: true) do |f|
+    = form_with(model: @product, local: true, class: "product-new-form") do |f|
       - if @product.errors.any?
         .product-form__errors
           %h2= "#{@product.errors.full_messages.count}件のエラーが発生しました。"
@@ -13,9 +13,9 @@
           商品の情報を入力
         .product__block__form
         .new-wrapper
-          %span.label_title 
+          %span.label_title.profile-form__label
             出品画像
-            %span 必須
+            %span.require 必須
             %p.upload_limit 最大10枚までアップロードできます
           .post-new__field__uploader
             = f.fields_for :post_images do |image|
@@ -29,55 +29,61 @@
                         %p クリックしてファイルをアップロード
                     .input-area.display-none
                       = image.file_field :image, class: "hidden image_upload"
-          
-
           .product__block__form__name
-            .name-label
-              %h4
-                商品名
-                %span 必須
-              %div
-                = f.text_field :name, placeholder:"40文字まで", class: "form__group__name"
+            = f.label "商品名", class: "profile-form__label"
+            %h4.require
+              必須
+            %br/
+            = f.text_field :name, placeholder:"40文字まで", class: "form__group__name", class: "input-form-xregular"
         .product__block__form__introduction
-          .introduction-label
-            %h4
-              商品の説明
-              %span 必須
-            %div
-              = f.text_area :introduction, placeholder:"商品の説明"
+          = f.label "商品の説明", class: "profile-form__label"
+          %h4.require
+            必須
+          %br/
+          = f.text_area :introduction, placeholder:"商品の説明", class: "input-form-xlarge"
       .content__product-detail
         .content_product-detail__category
         .listing-form-box
           .listing-product-detail__category
-            = f.label 'カテゴリー', class: 'listing-default__label'
-            %span.listing-default--require 必須
+            %h3.grey 商品の詳細
+            = f.label "カテゴリー", class: "profile-form__label"
+            %h4.require
+              必須
+            %br/
             .listing-select-wrapper
               .listing-select-wrapper__box
                 = f.collection_select :root_category_id, @category_parent_array, :id, :name, {prompt: "---"}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'}
-                %i.fas.fa-chevron-down.listing-select-wrapper__box--arrow-down
         .content_product-detail__condition
-          %h4
-            商品の状態
-            %span 必須
-          = f.select :product_condition_id, options_for_select(ProductCondition.conditions), {prompt: "選択して下さい"}, class: "select"
+          = f.label "商品の状態", class: "profile-form__label"
+          %h4.require
+            必須
+          %br/
+          = f.select :product_condition_id, options_for_select(ProductCondition.conditions), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
       .content__product-shipping
         .content__product-shipping__region
-          %h4
-            配送元の地域
-            %span 必須
-          = f.select  :shipping_region_id, options_for_select(ShippingRegion.regions), {prompt: "選択して下さい"}, class: "select"
+          %h3.grey 配送について
+          = f.label "発送元の地域", class: "profile-form__label"
+          %h4.require
+            必須
+          %br/
+          = f.select  :shipping_region_id, options_for_select(ShippingRegion.regions), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
         .content__product-shipping__date
-          %h4
-            発送までの日数
-            %span 必須
-          = f.select :preparation_term_id, options_for_select(PreparationTerm.terms), {prompt: "選択して下さい"}, class: "select"
+          = f.label "発送までの日数", class: "profile-form__label", class: "input-form-xregular"
+          %h4.require
+            必須
+          %br/
+          = f.select :preparation_term_id, options_for_select(PreparationTerm.terms), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
       .content__product-price
         .content__product-price__limitation
-          価格(¥300~9,999,999)
-        .content__product-price__ssold
-          %h4
-            販売価格
-            %span 必須
-          = f.number_field :price, style: "text-align:right"
+          %h3.grey 価格(¥300~9,999,999)
+        .content__product-price__sold
+          = f.label "販売価格", class: "profile-form__label"
+          %h4.require
+            必須
+          %br/
+          = f.number_field :price, style: "text-align:right", class: "input-form-middle"
+          .content__product-price__sold__yen
+            %h3 ¥
       .content__product-submit
         =f.submit "出品する",class: "btn-default__btn"
+=render partial: 'layouts/footer'
