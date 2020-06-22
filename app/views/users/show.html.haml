@@ -12,36 +12,36 @@
       - if user_signed_in? && @product && current_user.id == @product.user_id
         .user-evaluation
           .user-evaluation__box
-            %ul
-              %li
+            %ul.evaluation
+              %li.evaluation
                 = icon('fas', 'grin',  class: "good")
                 %i
                   = @evaluation_good_sum
                 
-              %li
+              %li.evaluation
                 = icon('fas', 'meh',  class: "normal")
                 %i
                   = @evaluation_normal_sum
                 
-              %li
+              %li.evaluation
                 = icon('fas', 'frown',  class: "bad")
                 %i
                   = @evaluation_bad_sum         
       - else
         .user-evaluation
           .user-evaluation__box
-            %ul
-              %li
+            %ul.evaluation
+              %li.evaluation
                 = icon('fas', 'grin',  class: "good")
                 %i
                   0
                 
-              %li
+              %li.evaluation
                 = icon('fas', 'meh',  class: "normal")
                 %i
                   0
                 
-              %li
+              %li.evaluation
                 = icon('fas', 'frown',  class: "bad")
                 %i
                   0
