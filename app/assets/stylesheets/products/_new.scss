@@ -157,6 +157,7 @@ border: 1px solid;
     background-color: lightgray;
     .input-area{
       display: none;
+    }
     .image_upload{
 
     }
@@ -184,7 +185,7 @@ border: 1px solid;
   }
 }
 
-ul{
+#previews{
   list-style: none;
   display: flex;
   flex-wrap: wrap;
