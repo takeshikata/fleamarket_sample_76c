@@ -36,13 +36,13 @@ $(function(){
 
   // プレビューの追加
   $(document).on('change', '.hidden-field', function() {
-    console.log("preview追加")
+    console.log("画像追加")
 
     var id = $(this).attr('id').replace(/[^0-9]/g, '');
     console.log("id=");
     console.log(id);
     //labelボックスのidとforを更新
-    $('.label-box').attr({id: `label-box--${id}`,for: `item_images_attributes_${id}_image`});
+    $('.label-box').attr({id: `label-box--${id}`,for: `product_images_attributes_${id}_image`});
     //選択したfileのオブジェクトを取得
     var file = this.files[0];
     var reader = new FileReader();
@@ -54,7 +54,7 @@ $(function(){
       var image = this.result;
       //プレビューが元々なかった場合はhtmlを追加
       if ($(`#preview-box__${id}`).length == 0) {
-        console.log("プレビューが空のとき");
+        console.log("画像が空のとき");
         console.log("id=");
         console.log(id);
         var count = $('.preview-box').length;
@@ -68,7 +68,7 @@ $(function(){
       var count = $('.preview-box').length;
       //プレビューが10個あったらラベルを隠す
       if (count == 10) {
-        console.log("プレビューが10つのとき");
+        console.log("画像が10個のとき");
         $('.label-content').hide();
       }
 
@@ -79,7 +79,7 @@ $(function(){
 
       //ラベルのidとforの値を変更
       if(count <= 10){
-        console.log("プレビューが10つ以下とき");
+        console.log("画像が10個以下とき");
         console.log("count=");
         console.log(count);
         $('.label-box').attr({id: `label-box--${count}`,for: `product_images_attributes_${count}_image`});
@@ -109,9 +109,11 @@ $(function(){
       //フォームの中身を削除
       $(`#product_images_attributes_${id}_image`).val("");
       var count = $('.preview-box').length;
-      //5個めが消されたらラベルを表示
-      if (count == 10) {
-        console.log("画像が10つのとき");
+      console.log("count=");
+      console.log(count);
+      //10個めが消されたらラベルを表示
+      if (count == 9) {
+        console.log("画像が9つのとき");
         console.log("id=");
         console.log(id);
         $('.label-content').show();
@@ -128,8 +130,8 @@ $(function(){
       //投稿編集時
       $(`#product_images_attributes_${id}__destroy`).prop('checked',true);
       //10個めが消されたらラベルを表示
-      if (count == 10) {
-        console.log("画像が10つのとき");
+      if (count == 9 || id < 10) {
+        console.log("画像が9つのとき");
         $('.label-content').show();
       }
 
