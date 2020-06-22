@@ -17,9 +17,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    @parents = Category.all.order("id ASC").limit(1)
-    @user = User.new
-    # @profile = User.profile
     super
   end
 
