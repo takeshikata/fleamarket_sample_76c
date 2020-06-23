@@ -1,0 +1,25 @@
+.wrapper
+  .evaluations-new
+    .evaluations-new__contents
+      .evaluations-new__contents__exhibitor
+        #{@user.nickname} さんを評価しよう
+      = form_with(url: product_evaluations_path, method: :post, model: @evaluation, local: true) do |f|
+        .evaluations-new__contents__box
+          .evaluations-new__contents__box__radio-btn-good
+            .evaluations-new__contents__box__radio-btn-good--icon
+              = f.label "良い", for:"evaluation__good", class: 'good-icon' do
+                %i.fa.fa-grin
+            = f.radio_button :evaluation, 1, class: 'radio-btn'
+          .evaluations-new__contents__box__radio-btn-normal
+            .evaluations-new__contents__box__radio-btn-noemal--icon
+              = f.label "normal", for:"evaluation__normal", class: 'normal-icon' do
+                %i.fa.fa-meh
+            = f.radio_button :evaluation, 2, class: 'radio-btn'
+          .evaluations-new__contents__box__radio-btn-bad
+            .evaluations-new__contents__box__radio-btn-bad--icon
+              = f.label "bad", for:"evaluation__bad", class: 'bad-icon' do
+                %i.fa.fa-frown
+            = f.radio_button :evaluation, 3, class: 'radio-btn'
+        .evaluations-new__contents__submit
+          = f.submit "評価する", class: "evaluations-new__contents__submit--btn"
+= render partial: 'layouts/footer'

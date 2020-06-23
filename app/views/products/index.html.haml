@@ -9,6 +9,7 @@
           = link_to "もっと見る>", "#", class: "item-top__link--btn"
       .item-box
     .content__products
+<<<<<<< Updated upstream
       .item-top
         .item-top__title
           新着商品
@@ -28,6 +29,29 @@
                 .items-box_photo__sold-index
                   .items-box_photo__sold-index__inner
                     SOLD
+=======
+      -@category_parents.each do |parent|
+        .categories-index__wrapper
+          .item-top
+            .categories-index__title
+              = parent.name
+            .item-top__link
+              = link_to "もっと見る>", "#", class: "item-top__link--btn"
+          .categories-index__images
+            -@category_products.each do |product|
+              = link_to product_path(product) do
+                -# カテゴリーの子要素のidと同じproductだけを羅列する
+                -if parent.id == product.category.root_id
+                  -product.images.limit(1).each do |images|
+                    .categories-index__images__category-item-box
+                      = image_tag images.image.to_s, size: "200x200", class: 'categories-index__images__category-item-box--image'
+                      .categories-index__images__category-item-box--price
+                        ¥ #{product.price.to_s(:delimited, delimiter: ',')}
+                      -if product.purchaser_id.present?
+                        .items-box_photo__sold-category-index
+                          .items-box_photo__sold-category-index__inner
+                            SOLD
+>>>>>>> Stashed changes
 = render partial: 'layouts/footer'
 = render partial: 'layouts/post-btn'
 

@@ -8,10 +8,15 @@ class ProductsController < ApplicationController
 
 
   def index
+<<<<<<< Updated upstream
     # @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
     images = Image.select("id", "image", "product_id")
     # @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
     @new_product = Product.limit(10).order(" created_at DESC ")
+=======
+    @category_parents = Category.where(ancestry: nil).order("id ASC").limit(5)
+    @category_products = Product.all
+>>>>>>> Stashed changes
   end
 
   def new
@@ -22,12 +27,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create!(product_params)
+    @product = Product.create(product_params)
     # @image = Image.create(image_params)
     if @product.save
       redirect_to root_path
     else
-      render :new
+      render :new and return
     end
   end
 
@@ -78,7 +83,7 @@ class ProductsController < ApplicationController
     @children = @product.category
     @comment = Comment.new
     @comments = @product.comments.includes(:user).order(" created_at DESC ")
-
+    @evaluation = Evaluation.where(product_id: @product.id)
     if @product
       d_evaluations = Evaluation.select(:user_id, :product_id, :evaluation).distinct
 
@@ -109,14 +114,19 @@ class ProductsController < ApplicationController
     @images = @product.images
     @image = @images.first
 
-    if @address.blank?
+    if current_user.id == @product.user_id
+      redirect_to root_path
+    elsif @address.blank?
       redirect_to new_address_path(@user)
+      # 売り切れの時に直打ち遷移しないようにする
+    elsif @product.purchaser_id.present?
+      redirect_to root_path
     end
   end
 
   def pay
     # 既に購入されていないか？ されていたらroot_path
-    if @product.purchaser_id.present?
+    if @product.purchaser_id.present? && @product.user_id == current_user.id
       redirect_to root_path
     elsif @card.blank?
       # カード情報がなければ、カード登録画面に遷移

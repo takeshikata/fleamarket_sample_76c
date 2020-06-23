@@ -7,14 +7,14 @@
         .product-show__box__images-show
           .product-show__box__images-show__main
             = image_tag @image.image.to_s, size: "250x300", class: "main-image"
+            -if @product.purchaser_id.present?
+              .items-box_photo__sold-products-show
+                .items-box_photo__sold-products-show__inner
+                  SOLD
           .product-show__box__images-show__subs
             - @images.each.with_index(1) do |image, index|
               .product-show__box__images-show__subs--sub
                 = image_tag image.image.to_s, size: "40x50", class: "sub-image"
-                -if @product.purchaser_id.present?
-                  .items-box_photo__sold-products-show
-                    .items-box_photo__sold-products-show__inner
-                      SOLD
         %table.product-show__box__table-info
           %tbody
             %tr
@@ -116,6 +116,8 @@
             = link_to '削除', "/products/#{@product.id}", method: :delete, class: "product-delete-btn"
         -elsif @product.purchaser_id.blank? 
           = link_to "新規会員登録へ進む", new_user_registration_path, class: "product-show__purchase-item--btn"
+        -elsif @product.purchaser_id == current_user.id && @evaluation.blank?
+          = link_to "出品者を評価する", new_product_evaluation_path(@product), class: "product-show__purchase-item--btn"
         -elsif @product.purchaser_id.present?
           = link_to "売り切れです", root_path, class: "product-show__purchase-item--btn"
         -else 
