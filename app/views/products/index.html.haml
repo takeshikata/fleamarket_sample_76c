@@ -39,16 +39,27 @@
               = parent.name
             .item-top__link
               = link_to "もっと見る>", "#", class: "item-top__link--btn"
-          .categories-index__images
+          .item-box
             -@category_products.each do |product|
-              = link_to product_path(product) do
-                -# カテゴリーの子要素のidと同じproductだけを羅列する
-                -if parent.id == product.category.root_id
-                  -product.images.limit(1).each do |images|
-                    .categories-index__images__category-item-box
-                      = image_tag images.image.to_s, size: "200x200", class: 'categories-index__images__category-item-box--image'
-                      .categories-index__images__category-item-box--price
-                        ¥ #{product.price.to_s(:delimited, delimiter: ',')}
+              .item-box__product
+                = link_to product_path(product), class: "item-box__product--btn" do
+                  -if parent.id == product.category.root_id
+                    -product.images.limit(1).each do |images|
+                      .image
+                        = image_tag images.image.to_s, size: "200x200", class: "image__tag"
+                      .like_prodct__index
+                        .vertical_like
+                          - unless product.like_user(current_user.id).blank?
+                            %i.fa.fa-star{:class => "fa-spin", :style => "color: red;"}
+                            %span いいね!
+                            = product.likes.count
+                          - else
+                            %i.fa.fa-star{:class => "fa-spin", :style => "color: grey;"}
+                            %span いいね!
+                            = product.likes.count
+                      .price
+                        .price__box
+                          ¥ #{product.price.to_s(:delimited, delimiter: ',')}
                       -if product.purchaser_id.present?
                         .items-box_photo__sold-category-index
                           .items-box_photo__sold-category-index__inner
