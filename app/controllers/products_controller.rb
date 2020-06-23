@@ -12,6 +12,10 @@ class ProductsController < ApplicationController
     images = Image.select("id", "image", "product_id")
     # @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
     @new_product = Product.limit(10).order(" created_at DESC ")
+
+    @category_parents = Category.where(ancestry: nil).order("id ASC").limit(5)
+    @category_products = Product.all
+
   end
 
   def new
