@@ -1,13 +1,13 @@
 
 .content-bg-gray
+  - if @product.errors.any?
+    .product-form__errors
+      %div.product-form__errors__count= "#{@product.errors.full_messages.count}件のエラーが発生しました"
+      %ul
+        - @product.errors.full_messages.each do |message|
+          %li.error-message= message
   .shadowed-rounded-rectangle
     = form_with(model: @product, local: true, class: "product-new-form") do |f|
-      - if @product.errors.any?
-        .product-form__errors
-          %h2= "#{@product.errors.full_messages.count}件のエラーが発生しました。"
-          %ul
-            - @product.errors.full_messages.each do |message|
-              %li= message
       %section.mainbox-product-header
         %h2.mainbox-header__text
           商品の情報を入力
