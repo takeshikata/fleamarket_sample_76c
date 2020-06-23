@@ -1,0 +1,98 @@
+.wrapper-category {
+  width: 100%;
+  padding: 80px 0 80px 0;
+}
+
+.categoies__contents__top {
+  height: 100px;
+  font-size: 24px;
+  line-height: 100px;
+  justify-content: space-between;
+  text-align: center;
+
+  }
+
+.categories__item-box {
+  padding-top:100px;
+  display: flex;
+  flex-wrap: wrap;
+  &__product {
+    margin: 0 auto;
+    height: 200px;
+    width: 200px;
+    .category_btn {
+      position: relative;
+      .categories__item-box__image {
+        object-fit: cover;
+        &__price {
+          border-radius: 25px;
+          display: block;
+          margin: 5px;
+        }
+      }
+      .categories__item-box__price {
+        position: absolute;
+        bottom: -192px;
+        right: -186px;
+        color: #fff;
+        font-size: 14px;
+        .categories__item-box__price__box {
+          height: 28px;
+          width: 100px;
+          border-radius: 15px;
+          background-color: rgba(0, 0, 0, 0.7);
+          text-align: center;
+          line-height: 28px;          
+        }
+      }  
+    }   
+  }
+}
+
+// 画像のSOLD表記
+.items-box_photo__sold-index {
+  width: 0;
+  height: 0;
+  border-top: 60px solid #ea352d ;
+  border-right: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+  border-left: 60px solid #ea352d ;
+  z-index:100;
+  position: relative;
+  bottom: 205px;
+  left: 5px;
+  border-radius: 25px 0 0 0;
+  &__inner{
+    transform: rotate(-45deg);
+    font-size: 28px;
+    margin:-35px 0px 0px -55px;
+    color: #fff;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+}
+
+.items-box_photo__sold-products-show {
+  width: 0;
+  height: 0;
+  border-top: 60px solid #ea352d ;
+  border-right: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+  border-left: 60px solid #ea352d ;
+  z-index:100;
+  position: relative;
+  bottom: 361px;
+  right: 9px;
+  border-top-left-radius: 25px;
+  &__inner{
+    transform: rotate(-45deg);
+    font-size: 28px;
+    margin:-35px 0px 0px -55px;
+    color: #fff;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+}
+
+
+

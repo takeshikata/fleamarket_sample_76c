@@ -24,16 +24,47 @@
                 = link_to user_path(@product.user.id) do
                   = @product.user.nickname
                 %br
-                %ul.evaluation
-                  %li
-                    = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 1}} do
-                      = @evaluation_good_sum
-                  %li
-                    = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 2}} do
-                      = @evaluation_normal_sum
-                  %li
-                    = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 3}} do
-                      = @evaluation_bad_sum
+                - if user_signed_in? && @product && current_user.id == @product.user_id
+                  %ul.evaluation
+                    %li.evaluation
+                      = icon('fas', 'grin',  class: "good")
+                      %i
+                        = @evaluation_good_sum.count
+
+                    %li.evaluation
+                      = icon('fas', 'meh',  class: "normal")
+                      %i
+                      = @evaluation_normal_sum.count
+
+                    %li.evaluation
+                      = icon('fas', 'frown',  class: "bad")
+                      %i
+                        = @evaluation_bad_sum.count
+                - else
+                  %ul.evaluation
+                    %li.evaluation
+                      = icon('fas', 'grin',  class: "good")
+                      %i
+                        0
+                    %li.evaluation
+                      = icon('fas', 'meh',  class: "normal")
+                      %i
+                        0
+
+                    %li.evaluation
+                      = icon('fas', 'frown',  class: "bad")
+                      %i
+                        0
+                -# %ul.evaluation
+                -#   %li
+                -#     = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 1}} do
+                -#       = @evaluation_good_sum
+                -#   %li
+                -#     = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 2}} do
+                -#       = @evaluation_normal_sum
+                -#   %li
+                -#     = button_to "/products/#{@product.id}", {method: :post, class: "eva", params: {evaluation: 3}} do
+                -#       = @evaluation_bad_sum
             %tr
               %th
                 カテゴリー
@@ -57,7 +88,7 @@
               %th
                 配送料の負担
               %td
-                出品者 #条件分岐？
+                出品者 
             %tr
               %th
                 配送元の地域

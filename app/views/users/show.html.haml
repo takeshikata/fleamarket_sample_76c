@@ -16,17 +16,17 @@
               %li.evaluation
                 = icon('fas', 'grin',  class: "good")
                 %i
-                  = @evaluation_good_sum
+                  = @evaluation_good_sum.count
                 
               %li.evaluation
                 = icon('fas', 'meh',  class: "normal")
                 %i
-                  = @evaluation_normal_sum
+                  = @evaluation_normal_sum.count
                 
               %li.evaluation
                 = icon('fas', 'frown',  class: "bad")
                 %i
-                  = @evaluation_bad_sum         
+                  = @evaluation_bad_sum.count         
       - else
         .user-evaluation
           .user-evaluation__box
