@@ -94,6 +94,10 @@ class ProductsController < ApplicationController
         @evaluation_bad_sum += d_evaluations.where(evaluation: :bad, product_id: product.id).where.not(user_id: product.user_id).count
       end
     end
+
+    @evaluation_good_sum = Evaluation.where(user_id: current_user.id, evaluation: 1)
+    @evaluation_normal_sum = Evaluation.where(user_id: current_user.id, evaluation: 2)
+    @evaluation_bad_sum = Evaluation.where(user_id: current_user.id, evaluation: 3)
   end
 
   def destroy
