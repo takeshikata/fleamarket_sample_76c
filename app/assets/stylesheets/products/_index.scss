@@ -109,3 +109,15 @@
     font-weight: 600;
   }
 }
+
+
+//いいね表記
+.like_prodct__index {
+  position: absolute;
+  width: 100px;
+  bottom: -224px;
+  right: -194px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 11px;
+}

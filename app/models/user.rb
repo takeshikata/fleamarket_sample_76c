@@ -12,4 +12,7 @@ class User < ApplicationRecord
   has_many :products
   has_many :comments
   has_many :evaluations
+
+  has_many :likes, dependent: :destroy
+  has_many :like_products, through: :likes, source: :product
 end

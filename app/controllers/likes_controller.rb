@@ -12,15 +12,12 @@ class LikesController < ApplicationController
     like.destroy
     @likes = Like.where(product_id: params[:product_id])
     @product.reload
-   
   end
 
   private
 
   def set_product
     @product = Product.find(params[:product_id])
-    # 下記を追加した
-    # @id_name = "#like-link-#{@prouct.id}"
   end
 
 end

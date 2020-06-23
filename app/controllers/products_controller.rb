@@ -12,6 +12,12 @@ class ProductsController < ApplicationController
     images = Image.select("id", "image", "product_id")
     # @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
     @new_product = Product.limit(10).order(" created_at DESC ")
+    
+    # # 自分のユーザーがいいねしたLike_idを探す
+    # mylikes = Like.where(user_id: current_user.id)
+    # @likes_product = Product.find(mylikes)
+    # binding.pry
+    
   end
 
   def new
