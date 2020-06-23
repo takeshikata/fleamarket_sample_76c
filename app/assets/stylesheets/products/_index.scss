@@ -63,8 +63,23 @@
     }
   }
 }
-
-
+.puroducts-index {
+  width:700px;
+  margin:0 auto;
+  background-color: white;
+  &__box {
+    width:700px;
+    height:40px;
+    background-color: #EFEFEF;
+  }
+  &__category-title {
+    height: 40px;
+    font-size: 22px;
+    line-height: 40px;
+    font-weight: bold;
+    padding-left:10px;
+  }
+}
 // 画像のSOLD表記
 .items-box_photo__sold-index {
   width: 0;
