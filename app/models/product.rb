@@ -11,13 +11,18 @@ class Product < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :evaluations, dependent: :destroy
 
-  validates :name,
-            :introduction,
-            :price, 
-            :images,presence: true
+  validates :images, presence: { message: "を入力してください"}
+  validates :name,  presence: { message: "を入力してください"}
+  validates :introduction,  presence: { message: "を入力してください"}
+  validates :price,  presence: { message: "を入力してください"}
+
 
   def self.search(keyword)
     return Product.all unless keyword
     Product.where('name LIKE?', "%#{keyword}%")
+  end
+
+  def like_user(user_id)
+    likes.find_by(user_id: user_id)
   end
 end

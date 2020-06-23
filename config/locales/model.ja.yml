@@ -1,0 +1,12 @@
+ja:
+  attributes:
+    product: 
+    name: 商品名
+    introduction: 商品の説明
+    price: 販売価格
+    product_condition_id: 商品の状態
+    images: 出品画像
+    shipping_region: 発送元の地域
+    preparation_term: 発送までの日数
+    product_condition: 商品の状態
+    category: カテゴリー

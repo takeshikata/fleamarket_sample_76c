@@ -65,7 +65,7 @@ $(function () {
     //$liに追加するためのプレビュー画面のHTML。横長でないとバグる
     var preview = $('<div class="image-preview__wapper"><img class="preview"></div><div class="image-preview_btn"><div class="image-preview_btn_delete">削除</div></div>');
     //次の画像を読み込むためのinput。 
-    var append_input = $(`<li class="input"><label class="upload-label"><div class="upload-label__text"><div class="input-area display-none"><input class="hidden image_upload" type="file"></div></div></label></li>`)
+    var append_input = $(`<li class="input"><label class="upload-label"><div class="upload-label__text"><i class="fa fa-camera fa-4x"></i><div class="input-area display-none"><input class="hidden image_upload" type="file"></div></div></label></li>`)
     $ul = $('#previews')
     $li = $(this).parents('li');
     $label = $(this).parents('.upload-label');
@@ -96,11 +96,11 @@ $(function () {
       $li.addClass('image-preview'); // inputのクラスからプレビュー用のクラスに変更した
       $lis = $ul.find('.image-preview'); // クラス変更が完了したところで、プレビューの数を数える。 
 
-      // 画像が4枚以内なら文字とインプットを追加
+      // 画像が9枚以内なら文字とインプットを追加
       if ($lis.length < 10) {
         $ul.append(append_input)
         $('#previews li:last-child').css({
-          'width': `calc(100% - (80px * ${$lis.length}))`
+          'width': `80px`
           // 'width': `calc(80px * ${$lis.length})`
         })
       }
@@ -122,7 +122,7 @@ $(function () {
 
   //削除ボタンをクリックしたとき、処理が動く。
   $(document).on('click', '.image-preview_btn_delete', function () {
-    var append_input = $(`<li class="input"><label class="upload-label"><div class="upload-label__text"><div class="input-area display-none"><input class="hidden image_upload" type="file"></div></div></label></li>`)
+    var append_input = $(`<li class="input"><label class="upload-label"><div class="upload-label__text"><i class="fa fa-camera fa-4x"></i><div class="input-area display-none"><input class="hidden image_upload" type="file"></div></div></label></li>`)
     $ul = $('#previews')
     $lis = $ul.find('.image-preview');
     $li = $(this).parents('.image-preview');
@@ -137,7 +137,7 @@ $(function () {
     }
 
     $('#previews li:last-child').css({
-      'width': `calc(100% - (80px * ${$lis.length}))`
+      'width': `80px`
       // 'width': `calc(80px * ${$lis.length})`
     })
 

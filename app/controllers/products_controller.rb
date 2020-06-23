@@ -22,12 +22,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create!(product_params)
+    @product = Product.create(product_params)
     # @image = Image.create(image_params)
     if @product.save
       redirect_to root_path
     else
-      render :new
+      render :new and return
     end
   end
 
