@@ -5,10 +5,11 @@ class Address < ApplicationRecord
             :last_name,
             :first_name_kana,
             :last_name_kana,
+            :zip_code,
             :prefecture,
             :city,
             :street_number,
-            presence: true
+            presence: { message: "を入力してください"}
 
   validates :zip_code, format: {with: /\A[0-9]{7}\z/}
 

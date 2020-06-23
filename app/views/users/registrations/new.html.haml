@@ -1,43 +1,64 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }) do |f|
-  = render "devise/shared/error_messages", resource: resource
+.wrapper
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }) do |f|
+    .error-messages-users
+      = render "devise/shared/error_messages", resource: resource
+    .users-registration
+      .users-registration__form
+        .users-registration__form--title
+          新規会員登録
+        .field
+          = f.label "ニックネーム"
+          %h4.require
+            必須
+          %br/
+          = f.text_field :nickname, autofocus: true, class: 'form-field'
+        .field
+          = f.label :email
+          %h4.require
+            必須
+          %br/
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-field'
+        .field
+          = f.label :password
+          - if @minimum_password_length
+            %em
+              (#{@minimum_password_length} characters minimum)
+            %h4.require
+              必須
+          %br/
+          = f.password_field :password, autocomplete: "new-password", class: 'form-field'
+        .field
+          = f.label :password_confirmation
+          %h4.require
+            必須
+          %br/
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-field'
 
-  .field
-    = f.label "ニックネーム"
-    %br/
-    = f.text_field :nickname, autofocus: true
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
+        = f.fields_for :profile do |f|
+          .field
+            = f.label "お名前(全角)"
+            %h4.require
+              必須
+            %br/
+            = f.text_field :first_name, class: 'form-field-half'
+            = f.text_field :last_name, class: 'form-field-half'
+          .field
+            = f.label "お名前カナ(全角)"
+            %h4.require
+              必須
+            %br/
+            = f.text_field :first_name_kana, class: 'form-field-half'
+            = f.text_field :last_name_kana, class: 'form-field-half'
+          .field
+            = f.label "生年月日"
+            %h4.require
+              必須
+            %br
+            = f.date_select :birth_date, prompt:"--",  use_month_numbers: true,start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1)
 
 
-  = f.fields_for :profile do |f|
-    .field
-      = f.label "お名前(全角)"
-      %br/
-      = f.text_field :first_name
-      = f.text_field :last_name
-    .field
-      = f.label "お名前カナ(全角)"
-      %br/
-      = f.text_field :first_name_kana
-      = f.text_field :last_name_kana
-    .field
-      = f.date_select :birth_date, prompt:"--",  use_month_numbers: true,start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1)
+        .submit
+          = f.submit "Sign up", class: 'submit__btn'
+        .user-links-btn
+          = render "devise/shared/links"
 
-
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
