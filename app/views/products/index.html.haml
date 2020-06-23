@@ -8,6 +8,29 @@
         .item-top__link
           = link_to "もっと見る>", "#", class: "item-top__link--btn"
       .item-box
+        - current_user.like_products.each do |product|
+          .item-box__product
+            = link_to product_path(product), class: "item-box__product--btn" do
+              .image
+                - product.images.limit(1).each do |images|
+                  = image_tag images.image.to_s, size: "200x200", class: "image__tag"  
+              .like_prodct__index
+                .vertical_like
+                  - unless product.like_user(current_user.id).blank?
+                    %i.fa.fa-star{:class => "fa-spin", :style => "color: red;"}
+                    %span いいね!
+                    = product.likes.count
+                  - else
+                    %i.fa.fa-star{:class => "fa-spin", :style => "color: grey;"}
+                    %span いいね!
+                    = product.likes.count
+              .price
+                .price__box
+                  ¥ #{product.price.to_s(:delimited, delimiter: ',')}
+              -if product.purchaser_id.present?
+                .items-box_photo__sold-index
+                  .items-box_photo__sold-index__inner
+                    SOLD
     .content__products
       -@category_parents.each do |parent|
         .categories-index__wrapper
@@ -32,4 +55,3 @@
                             SOLD
 = render partial: 'layouts/footer'
 = render partial: 'layouts/post-btn'
-

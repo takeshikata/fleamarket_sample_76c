@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
     @new_product = Product.limit(10).order(" created_at DESC ")
     @category_parents = Category.where(ancestry: nil).order("id ASC").limit(5)
     @category_products = Product.all
+
   end
 
   def new

@@ -37,4 +37,10 @@ Rails.application.routes.draw do
 
   resources :cards, only: [:new, :create, :show, :destroy]
 
+  resources :users, only: [:index, :show] do
+    collection do
+      get :likes
+    end
+  end
+
 end
