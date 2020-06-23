@@ -1,8 +1,7 @@
 class Evaluation < ApplicationRecord
-  enum evaluation: { good: 1,
-                     normal: 2,
-                     bad: 3 }
-
   belongs_to :user
   belongs_to :product
+
+  # 同じ商品に対して一意性
+  validates :product_id, uniqueness: true
 end

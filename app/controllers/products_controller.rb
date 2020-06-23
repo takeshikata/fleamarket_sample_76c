@@ -8,16 +8,11 @@ class ProductsController < ApplicationController
 
 
   def index
-    # @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
     images = Image.select("id", "image", "product_id")
-    # @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
     @new_product = Product.limit(10).order(" created_at DESC ")
-    
-    # # 自分のユーザーがいいねしたLike_idを探す
-    # mylikes = Like.where(user_id: current_user.id)
-    # @likes_product = Product.find(mylikes)
-    # binding.pry
-    
+    @category_parents = Category.where(ancestry: nil).order("id ASC").limit(5)
+    @category_products = Product.all
+
   end
 
   def new
@@ -84,7 +79,7 @@ class ProductsController < ApplicationController
     @children = @product.category
     @comment = Comment.new
     @comments = @product.comments.includes(:user).order(" created_at DESC ")
-
+    @evaluation = Evaluation.where(product_id: @product.id)
     if @product
       d_evaluations = Evaluation.select(:user_id, :product_id, :evaluation).distinct
 
@@ -95,6 +90,10 @@ class ProductsController < ApplicationController
         @evaluation_bad_sum += d_evaluations.where(evaluation: :bad, product_id: product.id).where.not(user_id: product.user_id).count
       end
     end
+
+    @evaluation_good_sum = Evaluation.where(user_id: current_user.id, evaluation: 1)
+    @evaluation_normal_sum = Evaluation.where(user_id: current_user.id, evaluation: 2)
+    @evaluation_bad_sum = Evaluation.where(user_id: current_user.id, evaluation: 3)
   end
 
   def destroy
@@ -111,14 +110,19 @@ class ProductsController < ApplicationController
     @images = @product.images
     @image = @images.first
 
-    if @address.blank?
+    if current_user.id == @product.user_id
+      redirect_to root_path
+    elsif @address.blank?
       redirect_to new_address_path(@user)
+      # 売り切れの時に直打ち遷移しないようにする
+    elsif @product.purchaser_id.present?
+      redirect_to root_path
     end
   end
 
   def pay
     # 既に購入されていないか？ されていたらroot_path
-    if @product.purchaser_id.present?
+    if @product.purchaser_id.present? && @product.user_id == current_user.id
       redirect_to root_path
     elsif @card.blank?
       # カード情報がなければ、カード登録画面に遷移
