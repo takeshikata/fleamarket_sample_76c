@@ -8,10 +8,15 @@ class ProductsController < ApplicationController
 
 
   def index
+<<<<<<< Updated upstream
     # @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
     images = Image.select("id", "image", "product_id")
     # @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
     @new_product = Product.limit(10).order(" created_at DESC ")
+=======
+    @category_parents = Category.where(ancestry: nil).order("id ASC").limit(5)
+    @category_products = Product.all
+>>>>>>> Stashed changes
   end
 
   def new
