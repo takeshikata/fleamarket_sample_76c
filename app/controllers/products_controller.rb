@@ -83,7 +83,7 @@ class ProductsController < ApplicationController
     @children = @product.category
     @comment = Comment.new
     @comments = @product.comments.includes(:user).order(" created_at DESC ")
-
+    @evaluation = Evaluation.where(product_id: @product.id)
     if @product
       d_evaluations = Evaluation.select(:user_id, :product_id, :evaluation).distinct
 
@@ -110,14 +110,19 @@ class ProductsController < ApplicationController
     @images = @product.images
     @image = @images.first
 
-    if @address.blank?
+    if current_user.id == @product.user_id
+      redirect_to root_path
+    elsif @address.blank?
       redirect_to new_address_path(@user)
+      # 売り切れの時に直打ち遷移しないようにする
+    elsif @product.purchaser_id.present?
+      redirect_to root_path
     end
   end
 
   def pay
     # 既に購入されていないか？ されていたらroot_path
-    if @product.purchaser_id.present?
+    if @product.purchaser_id.present? && @product.user_id == current_user.id
       redirect_to root_path
     elsif @card.blank?
       # カード情報がなければ、カード登録画面に遷移

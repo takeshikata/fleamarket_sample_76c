@@ -1,22 +1,29 @@
 class EvaluationsController < ApplicationController
   before_action :set_parent
 
-  def create
-    # binding.pry
+  def new
     @product = Product.find(params[:product_id])
-
-    if params[:evaluation].to_i == 1
-      @evaluation = Evaluation.new(user_id: current_user.id, product_id: @product.id, evaluation: :good)
-    elsif params[:evaluation].to_i == 2
-      @evaluation = Evaluation.new(user_id: current_user.id, product_id: @product.id, evaluation: :normal)
-    elsif params[:evaluation].to_i == 3
-      @evaluation = Evaluation.new(user_id: current_user.id, product_id: @product.id, evaluation: :bad)
-    end
-    @evaluation.save
-    redirect_to product_path(params[:product_id])
+    @evaluation = Evaluation.new
+    @user = User.find_by(id: @product.user_id) 
   end
+
+
+  def create
+    @product = Product.find(params[:product_id])
+    @evaluation = Evaluation.create(evaluation_params)
+
+    if @evaluation.save
+      redirect_to product_path(@product)
+    end
+  end
+
 
   def set_parent
     @parents = Category.all.order("id ASC").limit(1)
+  end
+
+  private
+  def evaluation_params
+    params.require(:evaluation).permit(:evaluation).merge(user_id: current_user.id, product_id: params[:product_id])
   end
 end

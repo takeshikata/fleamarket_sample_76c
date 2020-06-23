@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       get 'get_category_grandchildren', defaults: { format: 'json' }
       get 'search'
     end
-
+    resources :evaluations, only: [:new, :create]
     resources :likes, only: [:create, :destroy]
     resources :comments, only: :create
     post "", to: "evaluations#create"
@@ -32,7 +32,6 @@ Rails.application.routes.draw do
     end
 
   end
-
   resources :categories, only: [:index]
   resources :cards, only: [:new, :create, :show, :destroy]
 
