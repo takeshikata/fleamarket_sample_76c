@@ -1,0 +1,23 @@
+.wrapper
+  .content-categories
+    .categories-index
+      -@category_parents.each do |parent|
+        .categories-index__title
+          = parent.name
+        -parent.children.each do |child|
+          .categories-index__item-children
+            = child.name
+          .categories-index__images
+            -@category_products.each do |product|
+              = link_to product_path(product) do
+                -# カテゴリーの子要素のidと同じproductだけを羅列する
+                -if child.id == product.category.parent_id
+                  -product.images.limit(1).each do |images|
+                    .categories-index__images__category-item-box
+                      = image_tag images.image.to_s, size: "200x200", class: 'categories-index__images__category-item-box--image'
+                      .categories-index__images__category-item-box--price
+                        ¥ #{product.price.to_s(:delimited, delimiter: ',')}
+                      -if product.purchaser_id.present?
+                        .items-box_photo__sold-category-index
+                          .items-box_photo__sold-category-index__inner
+                            SOLD

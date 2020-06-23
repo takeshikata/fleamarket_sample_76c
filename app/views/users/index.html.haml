@@ -1,60 +1,20 @@
 .mypage-main
   .main-content-wrapper
-    .mypage-side
-      .maypage-sidebar
-        %ul.mypage-sidebar-lists
-          %li.mypage-sider-list
-            = link_to users_path, class: "mypage-sideber-list__text" do
-              %h2.bold
-                マイページ
-          %li.mypage-sider-list
-            = link_to "#", class: "mypage-sideber-list__text" do
-              %h2.bold
-                いいね
-          %li.mypage-sider-list
-            = link_to new_product_path, class: "mypage-sideber-list__text" do
-              %h2.bold
-                出品する
-          %li.mypage-sider-list
-            = link_to "#", class: "mypage-sideber-list__text" do
-              %h2.bold
-                購入した商品
-        .mypage-nav-head
-          設定
-        %ul.mypage-nav-list
-          %li
-            = link_to edit_profile_path(@user), class: "mypage-sideber-list__text" do
-              %h2.bold
-                プロフィール
-          %li
-            -if @address == nil
-              = link_to new_address_path, class: "mypage-sideber-list__text" do
-                %h2.bold
-                  発送元・お届け先住所
-            -else
-              = link_to edit_address_path(@user), class: "mypage-sideber-list__text" do
-                %h2.bold
-                  発送元・お届け先住所
-          %li
-            = link_to "#", class: "mypage-sideber-list__text" do
-              %h2.bold
-                お支払い方法
-          %li
-            = link_to "#", class: "mypage-sideber-list__text" do
-              %h2.bold
-                ログアウト
+    =render partial: 'users/side-bar'
     .mypage-content
       .user-details
-        %section.user-profile-index
-          .mypage-userinfo-regular-index
+        %section.user-profile
+          .mypage-userinfo-regular-user-index
             %ul.mypage-userinfo-regular__lists
-              %li.mypage-userinfo-regular__lists__name
-                = @user.nickname + "さん"
-              %li.mypage-userinfo-regular__lists__img
-                - if @profile.image.present?
-                  = image_tag @profile.image.to_s, height: '70px', width: '70px', class: 'mypage-userinfo-regular__lists__img__data'
-                -else
-                  = image_tag 'member_photo_noimage_thumb.png', height: '70px', width: '70px', class: 'mypage-userinfo-regular__lists__img__data'
+              %li.mypage-userinfo-regular__lists__name-index-show
+                = link_to user_path(@user), class: "mypage-userinfo-regular__lists__link" do
+                  = @user.nickname + "さん"
+              %li.mypage-userinfo-regular__lists__img-show-index
+                = link_to user_path(@user), class: "mypage-userinfo-regular__lists__link" do
+                  - if @profile.image.present?
+                    = image_tag @profile.image.to_s, height: '70px', width: '70px', class: 'mypage-userinfo-regular__lists__img__data'
+                  -else
+                    = image_tag 'member_photo_noimage_thumb.png', height: '70px', width: '70px', class: 'mypage-userinfo-regular__lists__img__data'
           - if user_signed_in? && @product && current_user.id == @product.user_id
             .user-evaluation
               .user-evaluation__box
@@ -101,26 +61,20 @@
               %label.tab-label{:for => "tab-2"}売却済み
               .tab-content.tab-1-content
                 - @product_sell.each do |sell|
-                  .image
+                  .image_box
                     = link_to product_path(sell), class: "sell-box" do
                       - sell.images.limit(1).each do |images|
-                        =image_tag images.image.to_s, size:"120x120"
+                        =image_tag images.image.to_s, size:"110x110"
               .tab-content.tab-2-content
                 - @product_selled.each do |selled|
-                  .image
+                  .image_box
                     = link_to product_path(selled), class: "sell-box" do
                       .image
                         - selled.images.limit(1).each do |images|
-                          =image_tag images.image.to_s, size:"120x120"
-                      .price
-                        = selled.price
-                      .text
-                        = selled.name
-                      -if selled.purchaser_id.present?
-                        .items-box_photo__sold
-                          .items-box_photo__sold__inner
-                            SOLD
-.footer
-  .footer__logo
-    %h3.white.footer__logo__text
-      © FURIMA
+                          =image_tag images.image.to_s, size:"110x110"
+                        -if selled.purchaser_id.present?
+                          .items-box_photo__sold
+                            .items-box_photo__sold__inner
+                              SOLD
+= render partial: 'layouts/footer'
+= render partial: 'layouts/post-btn'

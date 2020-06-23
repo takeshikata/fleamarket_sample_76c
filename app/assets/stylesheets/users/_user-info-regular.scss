@@ -1,11 +1,11 @@
 .mypage-userinfo-regular{
   width: 600px;
   height: 103px;
-  margin-top: 60px;
+  margin: 60px 0 0 3px;
   box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.1);
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
-  background-image: url(user_bg.jpg);
+  background-image: url(user-bg.jpg);
   background-size: 600px 150px;
   
   &__lists{
@@ -16,10 +16,8 @@
 
     &__name{
       width: 130px;
-<<<<<<< Updated upstream
       font-size: 20px;
       font-weight: bold;
-=======
       position: absolute;
       left: 155px;
       text-align: right;
@@ -39,15 +37,19 @@
     }
 
     &__img-show-index{
->>>>>>> Stashed changes
       position: absolute;
-      left: 156px;
-      text-align: right;
+      right: 236px;
+      top: 14px;
+
+      &__data{
+        border-radius: 60px;
+      }
     }
 
     &__img{
       position: absolute;
-      right: 236px;
+      right: 185px;
+      top: 14px;
 
       &__data{
         border-radius: 60px;
@@ -74,6 +76,16 @@ margin-left: 3px;
 box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.1);
 border-top-left-radius: 40px;
 border-top-right-radius: 40px;
-background-image: url(user_bg.jpg);
+background-image: url(user-bg.jpg);
+background-size: 600px 150px;
+}
+.mypage-userinfo-regular-user-index{
+width: 700px;
+height: 103px;
+margin-top: 60px;
+box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+border-top-left-radius: 40px;
+border-top-right-radius: 40px;
+background-image: url(user-bg.jpg);
 background-size: 600px 150px;
 }

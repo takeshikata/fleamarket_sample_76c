@@ -17,7 +17,7 @@
           .category-search
             %ul.snav
               %li.snav__category-lists__headline
-                = link_to "カテゴリー", "#", class: "navigation-btn"
+                = link_to "カテゴリー", "categories", class: "navigation-btn"
                 %ul.snav__category-lists__parents
                   - @parents.roots.each do |parent|
                     %li.snav__category-lists__parent

@@ -1,0 +1,37 @@
+.post__drop__box__container {
+  .prev-content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    .preview-box {
+      margin: 0 5px;
+    }
+  }
+  .label-content {
+    .label-box {
+      .label-box__text-visible {
+        width: 435px;
+        height: 150px;
+        line-height: 150px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 17px;
+        cursor: pointer;
+        background: whitesmoke;
+      }
+    }
+  }
+  .hidden-contents {
+    display: none;
+    .hidden-field {
+    }
+    .hidden-checkbox {
+      display: none;
+    }
+  }
+}
+.upper-box img{
+  width: 60px;
+  height: 60px;
+}
+

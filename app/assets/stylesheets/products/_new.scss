@@ -79,3 +79,136 @@ border: 1px solid;
     left: 5px;
   }
 }
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝これより下が追加したcss＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+.previews{
+  height: 147px;
+  width: 147px;
+  background-size: contain;
+  padding: 0 5px;
+  .image-preview{
+    
+  }
+}
+
+.image-preview_btn{
+  text-align: center;
+  padding: 8px;
+  border-top: 1px solid #cccccc;
+  cursor: pointer;
+  &:hover{
+    transition: 0.5s;
+    background-color: #cccccc;
+  }
+}
+
+.upload-label{
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.upload-label__text{
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  z-index: 0;
+  width: 100%;
+  transform: translate(0, -50%);
+}
+
+.post-new__field__uploader{
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+  width: 100%;
+  #previews{
+
+  }
+}
+// ================jsのscss=================
+// var preview
+.image-preview__wapper{
+  display: flex;
+  flex-wrap: wrap;
+  .preview{
+    width: 80px;
+    height: 80px;
+  }
+  .image-preview_btn{
+    .image-preview_btn_delete{
+
+    }
+  }
+}
+
+//var append_input
+.input{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  .upload-label{
+    width: 100%;
+    height: 121px;
+    // width: 80px;
+    // height: 80px;
+    background-color: rgb(245, 245, 245);
+    .input-area{
+      display: none;
+    }
+    .image_upload{
+
+    }
+    &__image-field{
+      width: 434px;
+      height: 160px;
+      margin: 16px auto;
+      background-color: #eee;
+      border: 1px dashed #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      text-align: center;
+      position: relative;
+      .fa-camera{
+        position: absolute;
+        top: 40px;
+        font-size: 20px;
+      }
+      &__text{
+        padding-top: 20px;
+      }
+    }
+  }
+}
+#previews{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  .image-preview{
+    
+  }
+}
+
+//========エラ〜メッセージ＝＝＝＝＝＝＝
+.product-form__errors{
+  color: #ff0211;
+  text-align:  left; 
+  width: 400px;
+  margin-top: 100px;
+  margin: 50px auto 0;
+  background-color: pink;
+  border: solid;
+  border-color: #ff0211;
+  &__count{
+    font-weight: 900; 
+    padding: 5px;
+    text-align: center;
+  }
+  .error-message{
+    padding-left: 82px;
+    padding-bottom: 5px;
+  }
+}

@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
   def index
 <<<<<<< Updated upstream
     # @product_cat1 = Product.where(category_id: 3).limit(10).order(" created_at DESC ")
-    @images = Image.select("id", "image", "product_id")
+    images = Image.select("id", "image", "product_id")
     # @product_cat2 = Product.where(category_id: 19).limit(10).order(" created_at DESC ")
     @new_product = Product.limit(10).order(" created_at DESC ")
 =======
@@ -27,12 +27,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create!(product_params)
+    @product = Product.create(product_params)
     # @image = Image.create(image_params)
     if @product.save
       redirect_to root_path
     else
-      render :new
+      render :new and return
     end
   end
 
@@ -57,12 +57,16 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if
-      product = Product.find(params[:id])
-      product.update(edit_product_params)
-      redirect_to root_path
+    if @product
+      @product.update(product_params)
+      if @product.images.blank?
+        @product.destroy
+        redirect_to action: 'new'
+      else
+        redirect_to action: 'show'
+      end
     else
-      render 'edit'
+      redirect_to action: 'new'
     end
   end
 
@@ -148,6 +152,7 @@ class ProductsController < ApplicationController
 
   def search
     @products = Product.search(params[:keyword])
+
   end
 
   private
@@ -162,7 +167,7 @@ class ProductsController < ApplicationController
       :shipping_payer_id,
       :preparation_term_id,
       :product_condition_id,
-      images_attributes: [:image]
+      images_attributes: [:image, :_destroy, :id]
     ).merge(user_id: current_user.id)
   end
 

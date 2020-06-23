@@ -1,17 +1,35 @@
-.items
-  .item-title
-  .boxs
-    - @products.each do |products|
-      - products.images.each do |images|
-        .box
-          = link_to product_path(products) do
-            .image
-              = image_tag images.image.to_s, size: "100x100"
-            .price
-              = products.price
-            .text
-              = products.name
-            -if products.purchaser_id.present?
-              .items-box_photo__sold
-                .items-box_photo__sold__inner
-                  SOLD
+-# .items
+-#   .item-title
+-#   .boxs
+-#     - @products.each do |products|
+-#       - products.images.each do |images|
+-#         .box
+-#           = link_to product_path(products) do
+-#             .image
+-#               = image_tag images.image.to_s, size: "100x100"
+-#             .price
+-#               = products.price
+-#             .text
+-#               = products.name
+-#             -if products.purchaser_id.present?
+-#               .items-box_photo__sold
+-#                 .items-box_photo__sold__inner
+-#                   SOLD
+
+.wrapper
+  .products-search
+    .products-search__boxs
+      - @products.each do |products|
+        - products.images.each do |images|
+          .products-search__boxs__item
+            = link_to product_path(products) do
+              .products-search__boxs__item--image
+                = image_tag images.image.to_s, size: "200x200", class: "products-search__boxs__item--image--modify"
+              .products-search__boxs__item--price
+                ¥ #{products.price.to_s(:delimited, delimiter: ',')}
+              .products-search__boxs__item--name
+                = products.name
+              -if products.purchaser_id.present?
+                .items-box_photo__sold-products-search
+                  .items-box_photo__sold-products-search__inner
+                    SOLD

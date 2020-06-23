@@ -8,14 +8,13 @@
         .item-top__link
           = link_to "もっと見る>", "#", class: "item-top__link--btn"
       .item-box
-
     .content__products
 <<<<<<< Updated upstream
       .item-top
         .item-top__title
           新着商品
         .item-top__link
-          = link_to "もっと見る>", "#", class: "item-top__link--btn"
+          = link_to "もっと見る>", "categories", class: "item-top__link--btn"
       .item-box
         - @new_product.each do |product|
           .item-box__product
@@ -27,8 +26,8 @@
                 .price__box
                   ¥ #{product.price.to_s(:delimited, delimiter: ',')}
               -if product.purchaser_id.present?
-                .items-box_photo__sold
-                  .items-box_photo__sold__inner
+                .items-box_photo__sold-index
+                  .items-box_photo__sold-index__inner
                     SOLD
 =======
       -@category_parents.each do |parent|
