@@ -1,6 +1,11 @@
 class ProductsController < ApplicationController
-  before_action :set_category, only: [:new, :create]
-  before_action :set_parent, except: [:delete]
+  require "payjp"
+  before_action :set_category, only: [:new, :create, :update, :edit]
+  before_action :set_parent,   except: [:delete]
+  before_action :set_product,  only: [:edit, :show, :update, :purchase, :pay]
+  before_action :set_address,  only: [:purchase, :pay]
+  before_action :set_card,     only: [:purchase, :pay]
+
 
   def index
     images = Image.select("id", "image", "product_id")
@@ -8,32 +13,66 @@ class ProductsController < ApplicationController
     @category_products = Product.all
 
   end
-  
+
   def new
     @product = Product.new
     @product.images.new
+    #@images = @product.build_images
+    @category_parent_array = Category.where(ancestry: nil).order(id: "ASC")
   end
-  
+
   def create
-    @product = Product.create!(product_params)
-    # binding.pry
+    @product = Product.create(product_params)
     # @image = Image.create(image_params)
     if @product.save
       redirect_to root_path
     else
-      render :new
+      render :new and return
     end
   end
-  
+
   def edit
+    grandchild_category = @product.category
+    child_category = grandchild_category.parent
+    parent_category = grandchild_category.root
+    @category_parent_array = []
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
+
+    @category_children_array = []
+    Category.where(ancestry: child_category.ancestry).each do |children|
+      @category_children_array << children
+    end
+
+    @category_grandchildren_array = []
+    Category.where(ancestry: grandchild_category.ancestry).each do |grandchildren|
+      @category_grandchildren_array << grandchildren
+    end
   end
-  
+
   def update
+    if @product
+      @product.update(product_params)
+      if @product.images.blank?
+        @product.destroy
+        redirect_to action: 'new'
+      else
+        redirect_to action: 'show'
+      end
+    else
+      redirect_to action: 'new'
+    end
   end
-  
+
+  def destroy
+
+  end
+
   def show
-    
+    Product.find(params[:id])
     @product = Product.find(params[:id])
+    products = Product.where(user_id: @product.user_id)
     @images = @product.images
     @image = @images.first
     @children = @product.category
@@ -105,7 +144,12 @@ class ProductsController < ApplicationController
       #選択された子カテゴリーに紐付く孫カテゴリーの配列を取得
     @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
-  
+
+  def search
+    @products = Product.search(params[:keyword])
+
+  end
+
   private
   def product_params
     params.require(:product).permit(
@@ -118,20 +162,44 @@ class ProductsController < ApplicationController
       :shipping_payer_id,
       :preparation_term_id,
       :product_condition_id,
-      images_attributes: [:image]
-      ).merge(user_id: current_user.id)
-    end
-    
-    
-    def set_category
-      @category_parent_array = Category.where(ancestry: nil).limit(13)
-    end
-    
-    def set_parent
-      @parents = Category.all.order("id ASC").limit(10)
-    end
-    
-    
+      images_attributes: [:image, :_destroy, :id]
+    ).merge(user_id: current_user.id)
   end
-  
-  
+
+  def set_category
+    @category_parent_array = Category.where(ancestry: nil).limit(13)
+  end
+
+  def set_parent
+    @parents = Category.all.order(id: "ASC").limit(10)
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+
+  def set_address
+    @address = Address.where(user_id: current_user.id).first
+  end
+
+  def set_card
+    @card = Card.where(user_id: current_user.id).first
+  end
+
+
+  def edit_product_params
+    params.require(:product).permit(
+      :name,
+      :introduction,
+      :price,
+      :category_id,
+      :brand_id,
+      :shipping_region_id,
+      :shipping_payer_id,
+      :preparation_term_id,
+      :product_condition_id,
+      images_attributes: [:image]
+    )
+  end
+end

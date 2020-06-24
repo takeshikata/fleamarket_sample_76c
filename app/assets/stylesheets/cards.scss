@@ -1,0 +1,200 @@
+.content {
+  width: 100%;
+  padding: 80px 0 100px 0;
+  // margin: 0 auto;
+  &__main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+// mypage-side
+.mypage-side{
+  width: 200px;
+  height: 519px;
+  margin-top: 60px;
+}
+.maypage-sidebar{
+background-color: #ffffff;
+}
+.mypage-nav{
+ul.mypage-sidebar-lists{
+  list-style: none;
+  
+  .mypage-sider-list{
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    padding-left: 10px;
+    margin: 0;
+    background: white;
+    
+    &__text{
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+}
+}
+
+// cards#new
+.mypage-mainbox {
+  width: 600px;
+  height: 580px;
+  padding: 20px;
+  background: #ffffff;
+  border: 20px solid #ffffff;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.1);
+  z-index: 1;
+  // height: 660px;
+  // width: 600px;
+  // background-color: #fff;
+  // margin-top: 60px;
+  // // margin: 0 auto;
+  // margin-left: 10px;
+  // padding: 20px 0;
+  &__credit-card {
+    margin: 0 auto;
+    width: 350px;
+    background-color: #fff;
+    .card-title {
+      font-size: 28px;
+      font-weight: bold;
+      height: 30px;
+      width: 350px;
+      color: black;
+      text-align: center;
+      margin: 40px 0;
+    }
+    .card-form {
+      &__number {
+        &--form {
+          .signup-card-list {
+            display: flex;
+          }
+        }
+      }
+      &__security-date {
+        &--select {
+          display: inline-block;
+        }
+      }
+      &__cvc {
+        &--form {
+        }
+      }
+      &__submit {
+        border: 1px solid #68C7CC;
+        border-radius: 25px;
+        background-color: #68C7CC;
+        display: flex;
+        align-items: center;
+        &--btn{
+          height: 50px;
+          width: 350px;
+          color: #fff;
+          font-size: 15px;
+          margin: auto;;
+          background-color: #68C7CC;
+          border-radius: 25px;
+          border: none;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+
+label {
+  font-weight: bold;
+  font-size: 14px;
+}
+// .require {
+//   height: 15px;
+//   width: 30px;
+//   font-size: 10px;
+//   font-weight: bold;
+//   display: inline-block;
+//   background-color: #68C7CC;
+//   color: #FFFFFF;
+//   border-radius: 15px;
+//   text-align: center;
+// }
+.number-field {
+  height: 50px;
+  width: 350px;
+  font-size: 100%;
+  border-radius: 15px;
+  border: 1px solid #68C7CC;
+  display: block;
+  margin: 0 auto;
+}
+
+select {
+  height: 50px;
+  width: 140px;
+  font-size: 100%;
+  border-radius: 15px;
+  border: 1px solid #68C7CC;
+}
+
+
+ul {
+  margin: 0 auto;
+}
+// 共通footer
+// .footer{
+//   width: 100%;
+//   height: 222px;
+//   background-color: #272727;
+//   margin-top: 60px;
+//   padding-top: 40px;
+//   display: flex;
+//   justify-content: center;
+//   &__logo{
+//     background-image: url(logo-white.png);
+//     background-repeat: none;
+//     background-size: 189px 55px;
+//     width: 189px;
+//     height: 55px;
+//     margin: auto;
+//     position: relative;
+//     &__text{
+//       position: absolute;
+//       bottom: -20px;
+//       left: 80px;
+//     }
+//   }
+// }
+// -------------------------------------------
+// cards#show
+
+.card-content {
+  display: flex;
+  height: 250px;
+  width: 350px;
+  align-items: center;
+  justify-content: center;
+  &__detail {
+    font-size: 24px;
+  }
+  &__delete {
+    &--btn {
+    }
+  }
+}
+
+.delete-btn {
+  background-color: #fff;
+  color: #68C7CC;
+  border-radius: 10px;
+  border: 1px solid #68C7CC;
+  font-size: 14px;
+  margin-left: 15px;
+  cursor: pointer;
+}

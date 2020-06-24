@@ -1,0 +1,42 @@
+.purchase-confirmation
+  .purchase-confirmation__content
+    .purchase-confirmation__content__title
+      購入内容の確認
+    .purchase-confirmation__content__item-detail
+      .purchase-confirmation__content__item-detail__info.item-detail__info
+        .item-detail__info__image
+          = image_tag @image.image.to_s, size: '100x100', class: 'item-detail__info__image--tag'
+        .item-detail__info__right
+          .item-detail__info__right--name
+            = @product.name
+          .item-detail__info__right--price
+            %strong ¥ #{@product.price.to_s(:delimited, delimiter: ',')} 円
+            (税込み)
+            %br
+            出品者負担
+    -# .purchase-confirmation__content__card-info
+    -#   .purchase-confirmation__content__card-info--detail
+    -#     カード情報
+    .purchase-confirmation__content__address
+      .purchase-confirmation__content__address__shipping-address.shipping-address
+        .shipping-address__title
+          %strong 配送先
+          = link_to "変更する>", "#", class: 'shipping-address__title--btn'
+        .shipping-address__detail
+          .shipping-address__detail--zipcode
+            = @address.zip_code.to_s.gsub(/(\d{3})(\d{4})/, '\1-\2')
+          .shipping-address__detail--region
+            #{@address.prefecture} #{@address.city} #{@address.street_number} #{@address.apartment}
+          .shipping-address__detail--user-name
+            #{@address.last_name} #{@address.first_name}
+    .purchase-confirmation__content__purchase-item
+      = link_to "クレジットカードで支払う", pay_product_path(params[:id]), class: 'purchase-confirmation__content__purchase-item--btn'
+    .purchase-confirmation__content__back
+      =link_to "前に戻る", product_path(@product), class: 'purchase-confirmation__content__back--btn'
+
+
+  -# = "**** **** **** " + @default_card_information.last4
+  -# %br
+  -# - exp_month = @default_card_information.exp_month.to_s
+  -# - exp_year = @default_card_information.exp_year.to_s.slice(2,3)
+  -# = exp_month + " / " + exp_year

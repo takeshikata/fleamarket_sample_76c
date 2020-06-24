@@ -1,0 +1,46 @@
+.mypage-main
+  .main-content-wrapper
+    =render partial: 'users/side-bar'
+    .mypage-rightcontent
+      =render partial: 'users/user-info-regular'
+      .mypage-mainbox
+        %section.mainbox-header
+          %h2.mainbox-header__text プロフィール
+          = form_with(model: @profile, local: true) do |f|
+            .profile-form__user_img
+              = f.label "プロフィール写真", class: "profile-form__label"
+              %h4.any
+                任意
+              %br/
+              = f.file_field :image
+            .profile-form__introduction
+              = f.label "自己紹介", class: "profile-form__label"
+              %h4.any
+                任意
+              %br/
+              = f.text_area :introduction, class: "input-form-large"
+            .profile-form__name
+              = f.label "お名前(全角)", class: "profile-form__label"
+              %h4.require
+                必須
+              %br/
+              = f.text_field :first_name, class: "input-form-regular"
+              = f.text_field :last_name, class: "input-form-regular"
+            .profile-form__name-kana
+              = f.label "お名前カナ(全角)", class: "profile-form__label"
+              %h4.require
+                必須
+              %br/
+              = f.text_field :first_name_kana, class: "input-form-regular"
+              = f.text_field :last_name_kana, class: "input-form-regular"
+            .profile-form__birthdate
+              = f.label "生年月日", class: "profile-form__label"
+              %h4.require
+                必須
+              %br/
+              .birth-form
+                = f.date_select :birth_date, prompt:"--", use_month_numbers: true,start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1)
+            .submit
+              =f.submit "更新する", class: "submit__btn"
+=render partial: 'layouts/footer'
+=render partial: 'layouts/post-btn'

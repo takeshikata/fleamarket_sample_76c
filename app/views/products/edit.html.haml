@@ -1,73 +1,109 @@
-.content
-  = form_with(model: @product, local: true) do |f|
-    %h2
-      商品の情報を入力
-    .product__block__form
-      .product__block__form__upload
-        %h3
-          出品画像
-          %span 必須
-        %p 最大10枚までアップロードできます
-        .drop__box
-          .prev-content
-          .label-content
-            %label{for: "product_image", class: "label-box"}
-          -# 保留
-          -# .hidden-content
-          -#   = f.fields_for :images do |i|
-          -#     = i.file_field :image, class: "hidden-field"
-          -#     %input{class:"hidden-field", type: "file", name: "item[images_attributes][1][image]", id: "item_images_attributes_1_image"}
-              
-      .product__block__form__name
-        .name-label
-          %h4
-            商品名
-            %span 必須
-          %div
-            = f.text_field :name, placeholder:"40文字まで"
-​
-      .product__block__form__introduction
-        .introduction-label
-          %h4
-            商品の説明
-            %span 必須
-          %div
-            = f.text_area :introduction, placeholder:"商品の説明"
-      .listing-form-box
-        .listing-product-detail__category
-          = f.label 'カテゴリー', class: 'listing-default__label'
-          %span.listing-default--require 必須
-          .listing-select-wrapper
-            .listing-select-wrapper__box
-              = f.select :parent_name, @category_parent_array, {selected:@product.category.root.name}, {id: 'parent_category', name: 'product[root_category_id]'}
-            .category-wrapper-select__box
-              = f.select :child_id, options_for_select(@category_children_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "指定なし", selected: @product.category.parent.id}), {}, {id: 'child_category', name: ''}
-            .category-wrapper-select__box
-              = f.select :category_id, options_for_select(@category_grandchildren_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "指定なし", selected: @product.category.id}), {}, {id: 'grandchild_category', name: 'product[category_id]'}
-​
-        %h4
-          商品の状態
-          %span 必須
-        = f.select :product_condition_id, options_for_select(ProductCondition.conditions), {prompt: "選択して下さい"}, class: "select"
-    .content__product-shipping
-      .content__product-shipping__region
-        %h4
-          配送元の地域
-          %span 必須
-        = f.select  :shipping_region_id, options_for_select(ShippingRegion.regions), {prompt: "選択して下さい"}, class: "select"
-      .content__product-shipping__date
-        %h4
-          発送までの日数
-          %span 必須
-        = f.select :preparation_term_id, options_for_select(PreparationTerm.terms), {prompt: "選択して下さい"}, class: "select"
-    .content__product-price
-      .content__product-price__limitation
-        価格(¥300~9,999,999)
-      .content__product-price__ssold
-        %h4
-          販売価格
-          %span 必須
-        = f.number_field :price, style: "text-align:right"
-​
-      .content__product-submit
-        = f.submit "編集する"
+.content-bg-gray
+  .shadowed-rounded-rectangle
+    = form_with(model: @product, local: true, class: "product-new-form") do |f|
+      %section.mainbox-header
+        %h2.mainbox-header__text
+          商品の情報を入力
+        .product__block__form
+          .sell__block__form__upload
+          %h3.sell__block__form__upload__head
+            出品画像
+            %span.require 必須
+          %p 最大10枚までアップロードできます
+
+          .post__drop__box__container
+            .prev-content
+
+              //JSで挿入したhtmlと同じ形　each文でのプレビュー表示
+              - @product.images.each do |image|
+                .preview-box{ id: "" }
+                  .upper-box
+                    = image_tag image.image.url, width: "60", height: "60", alt: "preview"
+                  .lower-box
+                    .update-box
+                      -# %label.edit-btn 編集
+                    .delete-box
+                      .delete-btns
+                        %span 削除
+            .label-content
+
+              //プレビューの数に合わせてforオプションを指定
+              = f.label :"images_attributes_#{@product.images.length}_image", class: "label-box", id: "label-box--#{@product.images.length}" do
+                %pre.label-box__text-visible クリックしてファイルをアップロード
+            .hidden-contents
+              = f.fields_for :images do |i|
+
+                //プレビューが出ている分のfile_fieldとdelete用のチェックボックスを設置
+                = i.file_field :image, class: "hidden-field"
+                = i.check_box:_destroy, class: "hidden-checkbox"
+
+                //10個のfile_fieldを準備するに当たって、足りない分を表示
+              - @product.images.length.upto(9) do |i|
+                %input{name: "product[images_attributes][#{i}][image]", id: "product_images_attributes_#{i}_image", class:"hidden-field", type:"file"}
+
+
+
+
+          .product__block__form__name
+            = f.label "商品名", class: "profile-form__label"
+            %h4.require
+              必須
+              %br/
+            = f.text_field :name, placeholder:"40文字まで", class: "input-form-xregular"
+          .product__block__form__introduction
+            = f.label "商品の説明", class: "profile-form__label"
+            %h4.require
+              必須
+              %br/
+            = f.text_area :introduction, placeholder:"商品の説明", class: "input-form-xlarge"
+        .content__product-detail
+          .content_product-detail__category
+            .listing-product-detail__category
+              %h3.grey 商品の詳細
+              = f.label "カテゴリー", class: "profile-form__label"
+              %h4.require
+                必須
+                %br/
+            .listing-select-wrapper--edit
+              .listing-select-wrapper--edit__parent
+                = @product.category.parent.parent.name
+                -# = f.select :parent_name, @category_parent_array, {selected:@product.category.root.name}, {id: 'parent_category', name: 'product[root_category_id]'}
+                -# = f.collection_select :category_id, Category.roots, :id, :name ,{prompt: "選択してください", selected:  @product.category.parent.parent_id}, {class: 'listing-select-wrapper__box--select', id: 'parent_category_edit', name: "" }
+              .listing-select-wrapper--edit__child
+                = f.collection_select :category_id, @product.category.parent.parent.children, :id, :name ,{prompt: "選択してください", selected: @product.category.parent_id}, {class: 'listing-select-wrapper--edit__child--select', class: "input-form-xregular", id: 'child_category_edit', name: "" }
+              .listing-select-wrapper--edit__grandchild
+                = f.collection_select :category_id,@product.category.parent.children, :id, :name ,{prompt: "選択してください", selected: @product.category.id}, {class: 'listing-select-wrapper--edit__grandchild--select', class: "input-form-xregular", id: 'grandchild_category_edit', name: "product[category_id]" }
+          .content_product-detail__condition
+            = f.label "商品の状態", class: "profile-form__label"
+            %h4.require
+              必須
+              %br/
+            = f.select :product_condition_id, options_for_select(ProductCondition.conditions), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
+          .content__product-shipping
+            .content__product-shipping__region
+              %h3.grey 配送について
+              = f.label "発送元の地域", class: "profile-form__label"
+              %h4.require
+                必須
+                %br/
+              = f.select  :shipping_region_id, options_for_select(ShippingRegion.regions), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
+            .content__product-shipping__date
+              = f.label "発送までの日数", class: "profile-form__label"
+              %h4.require
+                必須
+                %br/
+              = f.select :preparation_term_id, options_for_select(PreparationTerm.terms), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
+          .content__product-price
+            .content__product-price__limitation
+              %h3.grey 価格(¥300~9,999,999)
+            .content__product-price__sold
+              = f.label "販売価格", class: "profile-form__label"
+              %h4.require
+                必須
+                %br/
+              = f.number_field :price, style: "text-align:right", class: "input-form-middle"
+              .content__product-price__sold__yen
+                %h3 ¥
+          .xsubmit
+            =f.submit "更新する", class: "xsubmit__btn"
+= render partial: 'layouts/footer'

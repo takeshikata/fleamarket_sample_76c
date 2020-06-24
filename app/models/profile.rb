@@ -1,4 +1,5 @@
 class Profile < ApplicationRecord
+  mount_uploader :image, ImageUploader
   belongs_to :user
 
   #validates_associated :user

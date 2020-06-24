@@ -1,0 +1,17 @@
+.wrapper
+  .content-categories
+    .categories-index    
+      -@category_parents.each do |parent|
+        .categories-index__box
+        .categories-index__title 
+          = parent.name 
+        -parent.children.each do |child|
+          .categories-index__item-children
+            = child.name 
+          .categories-index__item-grandchildren
+            -child.children.each do |grandchild|      
+              .categories-index__item-grandchildren__box
+                = link_to grandchild.name , category_path(grandchild), class: "link_color"
+=render partial: 'layouts/footer'
+=render partial: 'layouts/post-btn'
+

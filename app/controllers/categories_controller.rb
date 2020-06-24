@@ -16,7 +16,6 @@ class CategoriesController < ApplicationController
     @category_products = Product.all
     images = Image.select("id", "image", "product_id")
     # binding.pry
-    
 
   end
 

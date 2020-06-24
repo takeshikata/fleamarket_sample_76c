@@ -1,0 +1,38 @@
+.mypage-main
+  .mypage-side
+    %nav.mypage-nav
+      %ul.mypage-nav-list
+        %li
+          = link_to "マイページ", users_path
+        %li
+          = link_to "いいね", "#"
+        %li
+          = link_to "出品する", new_product_path
+        %li
+          = link_to "出品した商品-取引中", "#"
+        %li
+          = link_to "出品した商品-売却済み", "#"
+        %li
+          = link_to "購入した商品", "#"
+      .mypage-nav-head
+        メルペイ
+      %ul.mypage-nav-list
+        %li
+          = link_to "ポイント", "#"
+        %li
+      .mypage-nav-head
+        設定
+      %ul.mypage-nav-list
+        %li
+          = link_to "プロフィール", edit_user_profile_path(@user)
+        %li
+          = link_to "発送元・お届け先住所", edit_user_address_path(@user)
+        %li
+          = link_to "支払い方法", new_card_path
+        %li
+          = link_to "ログアウト", log_out_path, method: :get
+  .logout-content
+    -# = form_with url: log_out_path, class: "form" do |form|
+    .form
+      = link_to "ログアウト", log_out_path, method: :delete, class: "logout-button"
+      -# = form.submit "ログアウト", class: "logout-button"

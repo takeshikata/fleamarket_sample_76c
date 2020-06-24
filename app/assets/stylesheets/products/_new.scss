@@ -1,0 +1,214 @@
+.content-bg-gray{
+  background-color: #EFEFEF;
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+.shadowed-rounded-rectangle{
+  width: 700px;
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.1);
+  margin: 100px auto 0;
+  background-color: #ffffff;
+  border-radius: 60px;
+  padding: 30px;
+}
+.mainbox-product-header{
+  margin: 30px 0 8px;
+  width: 434px;
+
+  &__text{
+    margin-bottom: 20px;
+  }
+}
+.product-new-form{
+  width: 434px;
+  margin: auto;
+}
+.input-form-xlarge{
+  width: 434px;
+  height: 216px;
+  margin: 8px 0 20px;
+  border-radius: 25px;
+  padding: 15px;
+}
+.input-form-xregular{
+  width: 434px;
+  height: 48px;
+  margin: 8px 0 20px;
+  border-radius: 17px;
+  border: 1px solid;
+}
+.input-form-middle{
+  width: 285px;
+  height: 48px;
+  margin: 8px 0 20px;
+  border-radius: 17px;
+  border: 1px solid;
+  margin-left: 20px;
+}
+.xsubmit {
+  border: 1px solid #68C7CC;
+  border-radius: 25px;
+  background-color: #68C7CC;
+  display: flex;
+  align-items: center;
+  width: 434px;
+  &__btn{
+    height: 50px;
+    width: 434px;
+    color: #fff;
+    font-size: 15px;
+    margin: auto;;
+    background-color: #68C7CC;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+  }
+}
+.listing-select-wrapper__box--select{
+width: 434px;
+height: 48px;
+margin: 8px 0 20px;
+border-radius: 17px;
+border: 1px solid;
+}
+.content__product-price__sold{
+  position: relative;
+  &__yen{
+    position: absolute;
+    top: 46px;
+    left: 5px;
+  }
+}
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝これより下が追加したcss＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+.previews{
+  height: 147px;
+  width: 147px;
+  background-size: contain;
+  padding: 0 5px;
+  .image-preview{
+    
+  }
+}
+
+.image-preview_btn{
+  text-align: center;
+  padding: 8px;
+  border-top: 1px solid #cccccc;
+  cursor: pointer;
+  &:hover{
+    transition: 0.5s;
+    background-color: #cccccc;
+  }
+}
+
+.upload-label{
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.upload-label__text{
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  z-index: 0;
+  width: 100%;
+  transform: translate(0, -50%);
+}
+
+.post-new__field__uploader{
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+  width: 100%;
+  #previews{
+
+  }
+}
+// ================jsのscss=================
+// var preview
+.image-preview__wapper{
+  display: flex;
+  flex-wrap: wrap;
+  .preview{
+    width: 80px;
+    height: 80px;
+  }
+  .image-preview_btn{
+    .image-preview_btn_delete{
+
+    }
+  }
+}
+
+//var append_input
+.input{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  .upload-label{
+    width: 100%;
+    height: 121px;
+    // width: 80px;
+    // height: 80px;
+    background-color: rgb(245, 245, 245);
+    .input-area{
+      display: none;
+    }
+    .image_upload{
+
+    }
+    &__image-field{
+      width: 434px;
+      height: 160px;
+      margin: 16px auto;
+      background-color: #eee;
+      border: 1px dashed #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      text-align: center;
+      position: relative;
+      .fa-camera{
+        position: absolute;
+        top: 40px;
+        font-size: 20px;
+      }
+      &__text{
+        padding-top: 20px;
+      }
+    }
+  }
+}
+#previews{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  .image-preview{
+    
+  }
+}
+
+//========エラ〜メッセージ＝＝＝＝＝＝＝
+.product-form__errors{
+  color: #ff0211;
+  text-align:  left; 
+  width: 400px;
+  margin-top: 100px;
+  margin: 50px auto 0;
+  background-color: pink;
+  border: solid;
+  border-color: #ff0211;
+  &__count{
+    font-weight: 900; 
+    padding: 5px;
+    text-align: center;
+  }
+  .error-message{
+    padding-left: 82px;
+    padding-bottom: 5px;
+  }
+}

@@ -3,12 +3,13 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title FleamarketSample76c
+    %script{:src => "https://js.pay.jp/", :type => "text/javascript"}
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
     %body
-      .header
+      %nav.header
         .header__top
           .header__top__title
             = link_to products_path do
@@ -36,44 +37,14 @@
             = form_with url: search_products_path, local: true, method: :get, class: "form" do |form|
               = form.text_field :keyword, placeholder: "何かお探しですか？", class: "form-text"
               %button.search
-                %i.fa-search
-                  = image_tag "https://cdn.icon-icons.com/icons2/1369/PNG/512/-search_90025.png", size: "40x40"
-
-        .header__nav
-          .header__nav__left
-            .category-search
-              %ul.snav
-                %li
-                  = link_to "カテゴリー", "#"
-                  %ul
-                    - @parents.roots.each do |parent|
-                      %li
-                        = link_to "#" do
-                          = parent.name
-                        %ul
-                          - parent.children.each do |child|
-                            %li
-                              = link_to "#" do
-                                = child.name
-                              %ul
-                                - child.children.each do |grandchild|
-                                  %li
-                                    = link_to "#" do
-                                      = grandchild.name
-
-            .brand-search
-              = link_to "ブランドから探す", "#", class: ""
-          .header__nav__right
-            - if user_signed_in?
-              .new-register
-                = link_to "マイページ", "#"
-              .login
-                = link_to "ログアウト", destroy_user_session_path, method: :delete
-            - else
-              .new-register
-                = link_to "新規登録", new_user_registration_path, class: ""
-              .login
-                = link_to "ログイン", new_user_session_path, class: ""
-
-
+          - if user_signed_in?
+            .new-register
+              = link_to "マイページ", users_path, class: "new-register"
+            .login
+              = link_to "ログアウト", destroy_user_session_path, method: :delete, chass: "login"
+          - else
+            .new-register
+              = link_to "新規登録", new_user_registration_path, class: "new-register"
+            .login
+              = link_to "ログイン", log_in_path, class: "login"
     = yield

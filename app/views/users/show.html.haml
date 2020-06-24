@@ -1,0 +1,75 @@
+.contents-wrapper
+  .user-details
+    %section.user-profile
+      .user-icon
+        = link_to user_path(params[:id]) do
+          - if @profile.image.present?
+            = image_tag @profile.image.to_s, size: "500×500", class: "user_img"
+          -else
+            = image_tag "member_photo_noimage_thumb.png",size: "180x180", class: "user_img"
+          .product-user-name
+          = @user.nickname
+      - if user_signed_in? && @product && current_user.id == @product.user_id
+        .user-evaluation
+          .user-evaluation__box
+            %ul.evaluation
+              %li.evaluation
+                = icon('fas', 'grin',  class: "good")
+                %i
+                  = @evaluation_good_sum.count
+                
+              %li.evaluation
+                = icon('fas', 'meh',  class: "normal")
+                %i
+                  = @evaluation_normal_sum.count
+                
+              %li.evaluation
+                = icon('fas', 'frown',  class: "bad")
+                %i
+                  = @evaluation_bad_sum.count         
+
+      - else
+        .user-evaluation
+          .user-evaluation__box
+            %ul.evaluation
+              %li.evaluation
+                = icon('fas', 'grin',  class: "good")
+                %i
+                  0
+                
+              %li.evaluation
+                = icon('fas', 'meh',  class: "normal")
+                %i
+                  0
+                
+              %li.evaluation
+                = icon('fas', 'frown',  class: "bad")
+                %i
+                  0
+      .text-box
+        = @profile.introduction
+      .tabs
+        .tabs-box
+          %input#tab-1{:checked => "checked", :name => "tab-radio", :type => "radio"}/
+          %label.tab-label{:for => "tab-1"}出品中
+          %input#tab-2{:name => "tab-radio", :type => "radio"}/
+          %label.tab-label{:for => "tab-2"}売却済
+          .tab-content.tab-1-content
+            - @product_sell.each do |sell|
+              .image_box
+                = link_to product_path(sell), class: "sell-box" do
+                  - sell.images.limit(1).each do |images|
+                    =image_tag images.image.to_s, size:"110x110", class: "sell-box_img"
+          .tab-content.tab-2-content
+            - @product_selled.each do |selled|
+              .image
+                = link_to product_path(selled), class: "sell-box" do
+                  .image
+                    - selled.images.limit(1).each do |images|
+                      =image_tag images.image.to_s, size:"110x110", class: "sell-box_img"
+                  -if selled.purchaser_id.present?
+                    .items-box_photo__sold
+                      .items-box_photo__sold__inner
+                        SOLD
+=render partial: 'layouts/footer'
+=render partial: 'layouts/post-btn'
