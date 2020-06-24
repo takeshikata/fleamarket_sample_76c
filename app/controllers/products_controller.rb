@@ -19,6 +19,9 @@ class ProductsController < ApplicationController
     @product.images.new
     #@images = @product.build_images
     @category_parent_array = Category.where(ancestry: nil).order(id: "ASC")
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
 
   def create
@@ -49,10 +52,14 @@ class ProductsController < ApplicationController
     Category.where(ancestry: grandchild_category.ancestry).each do |grandchildren|
       @category_grandchildren_array << grandchildren
     end
+
+    unless @product.user_id == current_user.id && @product.purchaser_id.blank?
+      redirect_to root_path
+    end
   end
 
   def update
-    if @product
+    if @product.user_id == current_user.id && @product.purchaser_id.blank?
       @product.update(product_params)
       if @product.images.blank?
         @product.destroy
@@ -88,7 +95,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
-    if @product.user_id == current_user.id
+    if @product.user_id == current_user.id && @product.purchaser_id.blank?
       @product.destroy
       redirect_to root_path
     end
@@ -100,19 +107,17 @@ class ProductsController < ApplicationController
     @images = @product.images
     @image = @images.first
 
-    if current_user.id == @product.user_id
+    if current_user.id == @product.user_id || @product.purchaser_id.present?
       redirect_to root_path
     elsif @address.blank?
       redirect_to new_address_path(@user)
       # 売り切れの時に直打ち遷移しないようにする
-    elsif @product.purchaser_id.present?
-      redirect_to root_path
     end
   end
 
   def pay
     # 既に購入されていないか？ されていたらroot_path
-    if @product.purchaser_id.present? && @product.user_id == current_user.id
+    if @product.purchaser_id.present? || @product.user_id == current_user.id
       redirect_to root_path
     elsif @card.blank?
       # カード情報がなければ、カード登録画面に遷移
