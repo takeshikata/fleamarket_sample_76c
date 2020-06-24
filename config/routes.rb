@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   get 'likes/create'
   get 'likes/destroy'
+  get "users/:id/likes" => "users#likes"
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
 
   root 'products#index'
 
   resources :profiles, only: [:edit, :update]
   resources :addresses, only: [:edit, :update, :new, :create]
-  resources :users, only: [:index, :show, :edit, :update]
+  resources :users, only: [:edit, :update]
   
   devise_scope :user do
     get "log_in", to: "users/sessions#new"
@@ -32,6 +33,8 @@ Rails.application.routes.draw do
     end
 
   end
+
+  resources :likes, only: [:index, :show, :create, :destroy]
 
   resources :categories, only: [:index, :show]
 

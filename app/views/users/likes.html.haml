@@ -1,0 +1,21 @@
+- unless user_signed_in?
+  = render new_user_session_path
+.wrapper-category
+  .categoies__contents__top
+    .categories____contents__top__name
+      お気に入り商品の一覧
+  .categories__item-box
+    - current_user.like_products.each do |product|
+      .categories__item-box__product
+        = link_to product_path(product), class: "category_btn" do
+          .categories__item-box__image
+            - product.images.limit(1).each do |images|
+              = image_tag images.image.to_s, size: "200x200", class: "categories__item-box__image__price"  
+          .categories__item-box__price
+            .categories__item-box__price__box
+              ¥ #{product.price.to_s(:delimited, delimiter: ',')}
+          -if product.purchaser_id.present?
+            .items-box_photo__sold-index
+              .items-box_photo__sold-index__inner
+                SOLD
+      

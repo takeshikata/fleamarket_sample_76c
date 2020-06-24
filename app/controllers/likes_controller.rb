@@ -1,5 +1,8 @@
 class LikesController < ApplicationController
-  before_action :set_product
+  before_action :set_product, only: [:create, :destroy]
+
+  def index
+  end
   
   def create
     @like = Like.create(user_id: current_user.id, product_id: params[:product_id])
@@ -12,6 +15,7 @@ class LikesController < ApplicationController
     like.destroy
     @likes = Like.where(product_id: params[:product_id])
     @product.reload
+   
   end
 
   private

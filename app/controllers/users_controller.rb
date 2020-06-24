@@ -54,6 +54,10 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
   end
 
+  def likes
+    @user = User.find_by(id: params[:id])
+    @likes = Like.where(user_id: current_user.id)
+  end
 
 
   def set_parent
