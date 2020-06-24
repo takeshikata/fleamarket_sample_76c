@@ -17,8 +17,8 @@
             出品画像
             %span.require 必須
             %p.upload_limit 最大10枚までアップロードできます
-          .post-new__field__uploader
-            = f.fields_for :post_images do |image|
+          .product-new__field__uploader
+            = f.fields_for :images do |image|
               // 写真のプレビューとインプットボタンのul
               %ul#previews
                 %li.input

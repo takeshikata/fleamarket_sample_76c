@@ -5,45 +5,28 @@
         %h2.mainbox-header__text
           商品の情報を入力
         .product__block__form
-          .sell__block__form__upload
-          %h3.sell__block__form__upload__head
+        .new-wrapper
+          %span.label_title.profile-form__label
             出品画像
             %span.require 必須
-          %p 最大10枚までアップロードできます
-
-          .post__drop__box__container
-            .prev-content
-
-              //JSで挿入したhtmlと同じ形　each文でのプレビュー表示
-              - @product.images.each do |image|
-                .preview-box{ id: "" }
-                  .upper-box
-                    = image_tag image.image.url, width: "60", height: "60", alt: "preview"
-                  .lower-box
-                    .update-box
-                      -# %label.edit-btn 編集
-                    .delete-box
-                      .delete-btns
-                        %span 削除
-            .label-content
-
-              //プレビューの数に合わせてforオプションを指定
-              = f.label :"images_attributes_#{@product.images.length}_image", class: "label-box", id: "label-box--#{@product.images.length}" do
-                %pre.label-box__text-visible クリックしてファイルをアップロード
-            .hidden-contents
-              = f.fields_for :images do |i|
-
-                //プレビューが出ている分のfile_fieldとdelete用のチェックボックスを設置
-                = i.file_field :image, class: "hidden-field"
-                = i.check_box:_destroy, class: "hidden-checkbox"
-
-                //10個のfile_fieldを準備するに当たって、足りない分を表示
-              - @product.images.length.upto(9) do |i|
-                %input{name: "product[images_attributes][#{i}][image]", id: "product_images_attributes_#{i}_image", class:"hidden-field", type:"file"}
-
-
-
-
+            %p.upload_limit 最大10枚までアップロードできます
+          .product-new__field__uploader
+            = f.fields_for :images do |image|
+              %ul#previews
+                - @product.images.each_with_index do |img, i|
+                  %li.image-preview
+                    %label.upload-label{style:"display: none;"}
+                      .upload-label__text
+                        %div
+                          %p クリックしてファイルをアップロード
+                      .input-area
+                        = image.file_field :image, value: img.image, class: "hidden image_upload"
+                        = image.hidden_field :id, value: img.id, name:"product[image][#{i}]"
+                    .image-preview__wrapper
+                      = image_tag img.image.to_s, class:"preview"
+                    .image-preview_btn
+                      .image-preview_btn_delete
+                        削除
           .product__block__form__name
             = f.label "商品名", class: "profile-form__label"
             %h4.require
