@@ -1,0 +1,201 @@
+body{
+  margin: 0;
+}
+.header{
+  width: 100vw;
+  height: 80px;
+  padding: 12px 30px 0;
+  background-color: #ffffff;
+  position: fixed;
+  position: 0;
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.1);
+  z-index: 9999;
+
+  &__top{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: unset;
+
+    &__title{
+      height: 36px;
+      width: 126px;
+      margin-top: 7px;
+      line-height: 40px;
+      text-align: center;
+    }
+
+    &__search{
+      height: 40px;
+      width: 845px;
+      }
+    }
+
+  &__nav {
+    height:50px;
+    width:100%;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+
+    &__left {
+      width: 33%;
+      display: flex;
+      padding-left: 120px;
+    }
+
+    &__right {
+      width: 33%;
+      display: flex;
+      padding-right: 120px;
+    }
+  }
+}
+
+
+
+.form{
+  position: relative;
+  height: 48px;
+  width: 100%;
+}
+.form-text{
+  padding:0 0 0 36px;
+  width: 100%;
+  height: 48px;
+  border-radius: 30px;
+  background-color: #EFEFEF;
+  border: none;
+  position: relative;
+}
+.search{
+  width: 16px;
+  height: 16px;
+  background-image: url(icon_search.png);
+  background-size: 16px 16px;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  border: none;
+}
+
+.category-search{
+  height: 48px;
+}
+.snav {
+  list-style: none;
+  margin: 0 auto;
+  width: 100%;
+}
+  > li{
+    width: 100%;
+  }
+  li { //親(カテゴリー)以降
+    font-size: 16px;
+    position: relative;
+    a {
+      font-size: 12px;
+      border-ridght: 1px solid white;
+      color: black;
+      display: block;
+      height: 50px;
+      line-height: 48px;
+      text-align: center;
+      text-decoration: none;
+      width: 100%;
+      background-color: #ffffff;
+    }
+    li { //子(レディースなど)以降
+      height: 0;
+      overflow: hidden;
+      transition: .5s;
+      a {
+        border-top: 1px solid white;
+      }
+      li {
+        a {
+          height: 30px;
+          line-height: 30px;
+        }
+        li {
+          a {
+            height: 25px;
+            line-height: 25px;
+          }
+        }
+      }
+    }
+}
+.navigation-btn{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+.snav > li:hover > ul > li {
+    height: 50px;
+    overflow: visible;
+}
+.snav > li > ul > li:hover > ul > li {
+    height: 30px;
+    overflow: visible;
+}
+.snav > li > ul > li > ul > li:hover > ul > li {
+    height: 25px;
+    overflow: visible;
+}
+
+.snav li ul li ul {
+    left: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+ul{
+  padding-left: 0;
+  list-style: none;
+}
+
+
+.brand-search {
+  height: 48px;
+  padding-right: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 48px;
+  padding: 0 16px;
+}
+
+.new-register {
+  height: 48px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 48px;
+  padding: 0 16px;
+  font-weight: 600;
+}
+.login {
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600px;
+  text-align: center;
+  line-height: 48px;
+  padding: 0 16px;
+  font-weight: 600;
+}
+.mypage {
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600px;
+  text-align: center;
+  line-height: 48px;
+  padding: 0 16px;
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
