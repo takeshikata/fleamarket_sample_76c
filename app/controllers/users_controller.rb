@@ -2,14 +2,17 @@ class UsersController < ApplicationController
   before_action :set_parent
 
   def index
-    
-    @address = Address.where(user_id: current_user.id).first
-    @user = User.find(current_user.id)
-    @products = @user.products
-    @address = Address.where(user_id: current_user.id).first
-    @profile = Profile.find(@user.id)
-    @product_sell = Product.where(user_id: current_user.id, purchaser_id: nil)
-    @product_selled = Product.where(user_id: current_user.id).where.not(purchaser_id: nil)
+    if user_signed_in?
+      @address = Address.where(user_id: current_user.id).first
+      @user = User.find(current_user.id)
+      @products = @user.products
+      @address = Address.where(user_id: current_user.id).first
+      @profile = Profile.find(@user.id)
+      @product_sell = Product.where(user_id: current_user.id, purchaser_id: nil)
+      @product_selled = Product.where(user_id: current_user.id).where.not(purchaser_id: nil)
+    else
+      redirect_to root_path
+    end
   #   binding.pry
   end
   

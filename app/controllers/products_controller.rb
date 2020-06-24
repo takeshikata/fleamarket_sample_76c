@@ -9,7 +9,6 @@ class ProductsController < ApplicationController
 
   def index
     images = Image.select("id", "image", "product_id")
-    @new_product = Product.limit(10).order(" created_at DESC ")
     @category_parents = Category.where(ancestry: nil).order("id ASC").limit(5)
     @category_products = Product.all
 
@@ -80,20 +79,11 @@ class ProductsController < ApplicationController
     @comment = Comment.new
     @comments = @product.comments.includes(:user).order(" created_at DESC ")
     @evaluation = Evaluation.where(product_id: @product.id)
-    if @product
-      d_evaluations = Evaluation.select(:user_id, :product_id, :evaluation).distinct
-
-      @evaluation_good_sum, @evaluation_normal_sum, @evaluation_bad_sum = 0, 0, 0
-      products.each do |product|
-        @evaluation_good_sum += d_evaluations.where(evaluation: :good, product_id: product.id).where.not(user_id: product.user_id).count
-        @evaluation_normal_sum += d_evaluations.where(evaluation: :normal, product_id: product.id).where.not(user_id: product.user_id).count
-        @evaluation_bad_sum += d_evaluations.where(evaluation: :bad, product_id: product.id).where.not(user_id: product.user_id).count
-      end
-    end
-
-    @evaluation_good_sum = Evaluation.where(user_id: current_user.id, evaluation: 1)
-    @evaluation_normal_sum = Evaluation.where(user_id: current_user.id, evaluation: 2)
-    @evaluation_bad_sum = Evaluation.where(user_id: current_user.id, evaluation: 3)
+    
+    @evaluation_good_sum = Evaluation.where(user_id: @product.user_id, evaluation: 1)
+    @evaluation_normal_sum = Evaluation.where(user_id: @product.user_id, evaluation: 2)
+    @evaluation_bad_sum = Evaluation.where(user_id: @product.user_id, evaluation: 3)
+    # binding.pry
   end
 
   def destroy

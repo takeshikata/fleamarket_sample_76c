@@ -4,18 +4,97 @@
       = @category.name 
       の一覧
   .categories__item-box
-    - @category_products.each do |product|
-      .categories__item-box__product
-        = link_to product_path(product),class: "category_btn" do
-          .categories__item-box__image
-            -product.images.limit(1).each do |images|
-              = image_tag images.image.to_s, size: "200x200", class: "categories__item-box__image__price" 
-          .categories__item-box__price
-            .categories__item-box__price__box
-              ¥ #{product.price.to_s(:delimited, delimiter: ',')}
-          -if product.purchaser_id.present?
-            .items-box_photo__sold-index
-              .items-box_photo__sold-index__inner
-                SOLD
-      
-        
+    - @category_products.limit(10).each do |product|
+      - if @category.id == product.category.root_id
+        .categories__item-box__product
+          = link_to product_path(product),class: "category_btn" do
+            .categories__item-box__image
+              -product.images.limit(1).each do |images|
+                = image_tag images.image.to_s, size: "200x200", class: "categories__item-box__image__price"
+            -if user_signed_in?
+              .like_prodct__index
+                .vertical_like
+                  - unless product.like_user(current_user.id).blank?
+                    %i.fa.fa-star{:class => "fa-spin", :style => "color: red;"}
+                    %span いいね!
+                    = product.likes.count
+                  - else
+                    %i.fa.fa-star{:class => "fa-spin", :style => "color: grey;"}
+                    %span いいね!
+                    = product.likes.count
+            - else
+              .like_prodct__index
+                .vertical_like
+                  %i.fa.fa-star{:class => "fa-spin", :style => "color: grey;"}
+                  %span いいね!
+                  = product.likes.count
+            .categories__item-box__price
+              .categories__item-box__price__box
+                ¥ #{product.price.to_s(:delimited, delimiter: ',')}
+            -if product.purchaser_id.present?
+              .items-box_photo__sold-index
+                .items-box_photo__sold-index__inner
+                  SOLD
+      - elsif @category.id == product.category.parent_id
+        .categories__item-box__product
+          = link_to product_path(product),class: "category_btn" do
+            .categories__item-box__image
+              -product.images.limit(1).each do |images|
+                = image_tag images.image.to_s, size: "200x200", class: "categories__item-box__image__price"
+            -if user_signed_in?
+              .like_prodct__index
+                .vertical_like
+                  - unless product.like_user(current_user.id).blank?
+                    %i.fa.fa-star{:class => "fa-spin", :style => "color: red;"}
+                    %span いいね!
+                    = product.likes.count
+                  - else
+                    %i.fa.fa-star{:class => "fa-spin", :style => "color: grey;"}
+                    %span いいね!
+                    = product.likes.count
+            - else
+              .like_prodct__index
+                .vertical_like
+                  %i.fa.fa-star{:class => "fa-spin", :style => "color: grey;"}
+                  %span いいね!
+                  = product.likes.count
+            .categories__item-box__price
+              .categories__item-box__price__box
+                ¥ #{product.price.to_s(:delimited, delimiter: ',')}
+            -if product.purchaser_id.present?
+              .items-box_photo__sold-index
+                .items-box_photo__sold-index__inner
+                  SOLD
+      - elsif @category.id == product.category.id
+        .categories__item-box__product
+          = link_to product_path(product),class: "category_btn" do
+            .categories__item-box__image
+              -product.images.limit(1).each do |images|
+                = image_tag images.image.to_s, size: "200x200", class: "categories__item-box__image__price"
+            -if user_signed_in?
+              .like_prodct__index
+                .vertical_like
+                  - unless product.like_user(current_user.id).blank?
+                    %i.fa.fa-star{:class => "fa-spin", :style => "color: red;"}
+                    %span いいね!
+                    = product.likes.count
+                  - else
+                    %i.fa.fa-star{:class => "fa-spin", :style => "color: grey;"}
+                    %span いいね!
+                    = product.likes.count
+            - else
+              .like_prodct__index
+                .vertical_like
+                  %i.fa.fa-star{:class => "fa-spin", :style => "color: grey;"}
+                  %span いいね!
+                  = product.likes.count
+            .categories__item-box__price
+              .categories__item-box__price__box
+                ¥ #{product.price.to_s(:delimited, delimiter: ',')}
+            -if product.purchaser_id.present?
+              .items-box_photo__sold-index
+                .items-box_photo__sold-index__inner
+                  SOLD
+      - else
+=render partial: 'layouts/footer'
+=render partial: 'layouts/post-btn'

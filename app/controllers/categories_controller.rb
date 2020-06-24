@@ -13,11 +13,9 @@ class CategoriesController < ApplicationController
   def show
 
     @category = Category.find(params[:id])
-    @category_products = @category.products
-    
-    
+    @category_products = Product.all
     images = Image.select("id", "image", "product_id")
-
+    # binding.pry
 
   end
 
