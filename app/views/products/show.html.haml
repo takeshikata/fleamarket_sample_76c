@@ -104,16 +104,10 @@
           = link_to "売り切れです", root_path, class: "product-show__purchase-item--btn"
         -else
           = link_to "トップへ戻る", root_path, class: "product-show__purchase-item--btn"
-      -# .product-show__owner-comment
-      -# .content__edit
-      -#   = link_to "商品の編集", "#", class: "content__edit--btn"
-
-      -# - if user_signed_in? && current_user.id == @product.user_id
-      -#   .product-poster-btn
-      -#     = link_to '編集', "/products/#{@product.id}/edit", method: :get, class: "product-edit-btn"
-      -#     = link_to '削除', "/products/#{@product.id}", method: :delete, class: "product-delete-btn"
       .like-btn{:id => "likes_buttons_#{@product.id}"}
         = render partial: 'likes/like', locals: { product: @product, likes: @likes}
+      %h4.product-show__introduction
+        = @product.introduction
       .comment-container
         - if current_user
           = form_with model: [@product, @comment], local: true, id: "new_comment", class: "comment-form" do |form|
