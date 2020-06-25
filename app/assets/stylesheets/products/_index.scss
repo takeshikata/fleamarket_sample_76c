@@ -80,8 +80,9 @@
     padding-left:10px;
   }
 }
-// 画像のSOLD表記
-.items-box_photo__sold-index {
+// /画像のSOLD表記
+
+.items-box_photo__sold-category-index {
   width: 0;
   height: 0;
   border-top: 60px solid #ea352d ;
@@ -103,27 +104,27 @@
   }
 }
 
-.items-box_photo__sold-products-show {
-  width: 0;
-  height: 0;
-  border-top: 60px solid #ea352d ;
-  border-right: 60px solid transparent;
-  border-bottom: 60px solid transparent;
-  border-left: 60px solid #ea352d ;
-  z-index:100;
-  position: relative;
-  bottom: 306px;
-  right: 0px;
-  border-top-left-radius: 25px;
-  &__inner{
-    transform: rotate(-45deg);
-    font-size: 28px;
-    margin:-35px 0px 0px -55px;
-    color: #fff;
-    letter-spacing: 2px;
-    font-weight: 600;
-  }
-}
+// .items-box_photo__sold-products-show {
+//   width: 0;
+//   height: 0;
+//   border-top: 120px solid #ea352d ;
+//   border-right: 120px solid transparent;
+//   border-bottom: 120px solid transparent;
+//   border-left: 120px solid #ea352d ;
+//   z-index:100;
+//   position: relative;
+//   bottom: 306px;
+//   right: 0px;
+//   border-top-left-radius: 25px;
+//   &__inner{
+//     transform: rotate(-45deg);
+//     font-size: 28px;
+//     margin:-35px 0px 0px -55px;
+//     color: #fff;
+//     letter-spacing: 2px;
+//     font-weight: 600;
+//   }
+// }
 
 
 //いいね表記
