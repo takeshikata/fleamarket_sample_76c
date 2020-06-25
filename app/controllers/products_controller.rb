@@ -224,7 +224,7 @@ class ProductsController < ApplicationController
 
 
   def set_address
-    @address = Address.where(user_id: current_user.id).first
+    @address = Address.where(user_id: current_user.id).first if @address.present?
   end
 
   def set_card
