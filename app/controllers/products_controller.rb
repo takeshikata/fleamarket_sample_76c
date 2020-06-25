@@ -3,8 +3,6 @@ class ProductsController < ApplicationController
   before_action :set_category, only: [:new, :create, :update, :edit]
   before_action :set_parent,   except: [:delete]
   before_action :set_product,  only: [:edit, :show, :update, :purchase, :pay]
-  before_action :set_address,  only: [:purchase, :pay]
-  before_action :set_card,     only: [:purchase, :pay]
 
 
   def index
@@ -144,7 +142,8 @@ class ProductsController < ApplicationController
       @user = User.find(current_user.id)
       @images = @product.images
       @image = @images.first
-
+      @address = Address.where(user_id: current_user.id).first
+      @card = Card.where(user_id: current_user.id).first  
       if current_user.id == @product.user_id || @product.purchaser_id.present?
         redirect_to root_path
       elsif @address.blank?
@@ -159,6 +158,8 @@ class ProductsController < ApplicationController
   def pay
     # 既に購入されていないか？ されていたらroot_path
     if user_signed_in?
+      @address = Address.where(user_id: current_user.id).first
+      @card = Card.where(user_id: current_user.id).first  
       if @product.purchaser_id.present? || @product.user_id == current_user.id
         redirect_to root_path
       elsif @card.blank?
@@ -226,15 +227,6 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
-  end
-
-
-  def set_address
-    @address = Address.where(user_id: current_user.id).first if @address.present?
-  end
-
-  def set_card
-    @card = Card.where(user_id: current_user.id).first if @card.present?
   end
 
 
