@@ -51,7 +51,8 @@
                 %br/
             .listing-select-wrapper--edit
               .listing-select-wrapper--edit__parent
-                = @product.category.parent.parent.name
+                -# = @product.category.parent.parent.name
+                = f.collection_select :root_category_id, @parent_categories, :id, :name, {selected: @product.category.root_id}, {class: 'listing-select-wrapper__box--select', id: 'parent_category_edit'}
                 -# = f.select :parent_name, @category_parent_array, {selected:@product.category.root.name}, {id: 'parent_category', name: 'product[root_category_id]'}
                 -# = f.collection_select :category_id, Category.roots, :id, :name ,{prompt: "選択してください", selected:  @product.category.parent.parent_id}, {class: 'listing-select-wrapper__box--select', id: 'parent_category_edit', name: "" }
               .listing-select-wrapper--edit__child

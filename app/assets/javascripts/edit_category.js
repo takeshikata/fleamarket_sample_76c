@@ -8,7 +8,7 @@ $(function(){
   function appendChild(insertHTML) {
     var childSelectHTML = '';
     childSelectHTML = ` <div class="listing-select-wrapper--edit__child">
-                          <select class="listing-select-wrapper--edit__child--select" id="child_category_edit" name="">
+                          <select class="listing-select-wrapper--edit__child--select input-form-xregular" id="child_category_edit" name="">
                             <option value="---" data-category="---">---</option>
                             ${insertHTML}
                           </select>
@@ -20,7 +20,7 @@ $(function(){
   function appendGrandChild(insertHTML) {
     var grandChildSelect = '';
     grandChildSelect = `<div class="listing-select-wrapper--edit__grandchild">
-                          <select class="listing-select-wrapper--edit__grandchild--select" id="grandchild_category_edit" name="product[category_id]">
+                          <select class="listing-select-wrapper--edit__grandchild--select input-form-xregular" id="grandchild_category_edit" name="product[category_id]">
                             <option value="---" data-category="---">---</option>
                             ${insertHTML}
                           </select>
@@ -30,16 +30,18 @@ $(function(){
 
 // 親カテゴリーの値が変わった時の処理を書きます
   $('#parent_category_edit').on('change', function() {
+    console.log("イベント発火")
     var parentCategoryEdit = document.getElementById('parent_category_edit').value;
     if (parentCategoryEdit != '選択してください'){
       $.ajax({
-        url: 'get_category_children',
+        url: '/products/get_category_children',
         type: 'GET',
-        data: { category_id: parentCategoryEdit },
+        data: { parent_id: parentCategoryEdit },
         dataType: 'json'
       })
 // 成功した時の処理
       .done(function(children){
+      console.log(children)
 // 元々あった子カテゴリーと孫カテゴリーを消す。
         $('.listing-select-wrapper--edit__child').remove();
         $('.listing-select-wrapper--edit__grandchild').remove();

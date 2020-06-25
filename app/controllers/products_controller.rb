@@ -41,10 +41,7 @@ class ProductsController < ApplicationController
     grandchild_category = @product.category
     child_category = grandchild_category.parent
     parent_category = grandchild_category.root
-    @category_parent_array = []
-    Category.where(ancestry: nil).each do |parent|
-      @category_parent_array << parent.name
-    end
+    @parent_categories = Category.where(ancestry: nil)
 
     @category_children_array = []
     Category.where(ancestry: child_category.ancestry).each do |children|
@@ -60,20 +57,6 @@ class ProductsController < ApplicationController
       redirect_to root_path
     end
   end
-
-  # def update
-  #   if @product
-  #     @product.update(product_params)
-  #     if @product.images.blank?
-  #       @product.destroy
-  #       redirect_to action: 'new'
-  #     else
-  #       redirect_to action: 'show'
-  #     end
-  #   else
-  #     redirect_to action: 'new'
-  #   end
-  # end
 
   def update
 
@@ -187,11 +170,12 @@ class ProductsController < ApplicationController
 
   def get_category_children
       #選択された親カテゴリーに紐付く子カテゴリーの配列を取得
+    # binding.pry
     @category_children = Category.find_by(id: "#{params[:parent_id]}", ancestry: nil).children
   end
 
   def get_category_grandchildren
-    #binding.pry
+    # binding.pry
       #選択された子カテゴリーに紐付く孫カテゴリーの配列を取得
     @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
