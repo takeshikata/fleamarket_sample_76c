@@ -63,7 +63,7 @@
             %h4.require
               必須
               %br/
-            = f.select :product_condition_id, options_for_select(ProductCondition.conditions), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
+            = f.collection_select :product_condition_id, ProductCondition.all, :id, :condition, {prompt: "選択して下さい"}, {class: "input-form-xregular"}
           .content__product-shipping
             .content__product-shipping__region
               %h3.grey 配送について
@@ -71,13 +71,13 @@
               %h4.require
                 必須
                 %br/
-              = f.select  :shipping_region_id, options_for_select(ShippingRegion.regions), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
+              = f.collection_select :shipping_region_id, ShippingRegion.all, :id, :region, {prompt: "選択して下さい"}, {class: "input-form-xregular"}
             .content__product-shipping__date
               = f.label "発送までの日数", class: "profile-form__label"
               %h4.require
                 必須
                 %br/
-              = f.select :preparation_term_id, options_for_select(PreparationTerm.terms), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
+              = f.collection_select :preparation_term_id, PreparationTerm.all, :id, :term, {prompt: "選択して下さい"}, {class: "input-form-xregular"}
           .content__product-price
             .content__product-price__limitation
               %h3.grey 価格(¥300~9,999,999)
