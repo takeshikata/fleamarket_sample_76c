@@ -172,6 +172,7 @@ th {
 
 
 
+
 .product-poster-btn {
   width: 100%;
   text-align: center;
@@ -256,4 +257,26 @@ th {
   background-color: #f5f5f5;
   text-align: center;
   border-radius: 10px;
+}
+
+.items-box_photo__sold-products-show {
+  width: 0;
+  height: 0;
+  border-top: 115px solid #ea352d ;
+  border-right: 114px solid transparent;
+  border-bottom: 120px solid transparent;
+  border-left: 120px solid #ea352d ;
+  z-index:100;
+  position: relative;
+  bottom: 306px;
+  right: 0px;
+  border-top-left-radius: 25px;
+  &__inner{
+    transform: rotate(-45deg);
+    font-size: 50px;
+    margin:-62px 0px 0px -109px;
+    color: #fff;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
 }

@@ -24,6 +24,6 @@ class EvaluationsController < ApplicationController
 
   private
   def evaluation_params
-    params.require(:evaluation).permit(:evaluation).merge(user_id: current_user.id, product_id: params[:product_id])
+    params.require(:evaluation).permit(:evaluation).merge(user_id: @product.user_id, product_id: params[:product_id])
   end
 end

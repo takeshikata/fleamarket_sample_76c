@@ -64,14 +64,14 @@
                   .image_box
                     = link_to product_path(sell), class: "sell-box" do
                       - sell.images.limit(1).each do |images|
-                        =image_tag images.image.to_s, size:"110x110"
+                        =image_tag images.image.to_s, size:"110x110", class: "sell-box_img"
               .tab-content.tab-2-content
                 - @product_selled.each do |selled|
                   .image_box
                     = link_to product_path(selled), class: "sell-box" do
                       .image
                         - selled.images.limit(1).each do |images|
-                          =image_tag images.image.to_s, size:"110x110"
+                          =image_tag images.image.to_s, size:"110x110", class: "sell-box_img"
                         -if selled.purchaser_id.present?
                           .items-box_photo__sold
                             .items-box_photo__sold__inner
