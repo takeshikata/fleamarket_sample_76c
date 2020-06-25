@@ -70,8 +70,8 @@
                         .price__box
                           ¥ #{product.price.to_s(:delimited, delimiter: ',')}
                       -if product.purchaser_id.present?
-                        .items-box_photo__sold-category-index
-                          .items-box_photo__sold-category-index__inner
+                        .items-box_photo__sold-index
+                          .items-box_photo__sold-index__inner
                             SOLD
 = render partial: 'layouts/footer'
 = render partial: 'layouts/post-btn'

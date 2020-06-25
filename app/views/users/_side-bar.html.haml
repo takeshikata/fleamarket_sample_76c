@@ -14,7 +14,7 @@
           %h2.bold
             出品する
       %li.mypage-sider-list
-        = link_to "#", class: "mypage-sideber-list__text" do
+        = link_to history_user_path(current_user.id), class: "mypage-sideber-list__text" do
           %h2.bold
             購入した商品
     .mypage-nav-head
