@@ -134,39 +134,47 @@ class ProductsController < ApplicationController
 
   def purchase
     # showからのページ遷移アクション
-    @user = User.find(current_user.id)
-    @images = @product.images
-    @image = @images.first
+    if user_signed_in?
+      @user = User.find(current_user.id)
+      @images = @product.images
+      @image = @images.first
 
-    if current_user.id == @product.user_id || @product.purchaser_id.present?
+      if current_user.id == @product.user_id || @product.purchaser_id.present?
+        redirect_to root_path
+      elsif @address.blank?
+        redirect_to new_address_path(@user)
+        # 売り切れの時に直打ち遷移しないようにする
+      end
+    else
       redirect_to root_path
-    elsif @address.blank?
-      redirect_to new_address_path(@user)
-      # 売り切れの時に直打ち遷移しないようにする
     end
   end
 
   def pay
     # 既に購入されていないか？ されていたらroot_path
-    if @product.purchaser_id.present? || @product.user_id == current_user.id
-      redirect_to root_path
-    elsif @card.blank?
-      # カード情報がなければ、カード登録画面に遷移
-      redirect_to new_card_path
-    else
-      Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
-      customer = Payjp::Customer.retrieve(@card.payjp_id)
-      Payjp::Charge.create(
-        amount: @product.price,
-        customer: customer.id,
-        currency: 'jpy'
-      )
-      # 売り切れになるので、productの情報をアップデートして売り切れにする
-      if @product.update(purchaser_id: current_user.id)
-        redirect_to action: 'show', id: @product.id
+    if user_signed_in?
+      if @product.purchaser_id.present? || @product.user_id == current_user.id
+        redirect_to root_path
+      elsif @card.blank?
+        # カード情報がなければ、カード登録画面に遷移
+        redirect_to new_card_path
       else
-        redirect_to action: 'show', id: @product.id
+        Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+        customer = Payjp::Customer.retrieve(@card.payjp_id)
+        Payjp::Charge.create(
+          amount: @product.price,
+          customer: customer.id,
+          currency: 'jpy'
+        )
+        # 売り切れになるので、productの情報をアップデートして売り切れにする
+        if @product.update(purchaser_id: current_user.id)
+          redirect_to action: 'show', id: @product.id
+        else
+          redirect_to action: 'show', id: @product.id
+        end
       end
+    else
+      redirect_to root_path
     end
   end
 
@@ -211,16 +219,16 @@ class ProductsController < ApplicationController
   end
 
   def set_product
-    @product = Product.find(params[:id])
+    @product = Product.find(params[:id]) if @product.present?
   end
 
 
   def set_address
-    @address = Address.where(user_id: current_user.id).first
+    @address = Address.where(user_id: current_user.id).first if @address.present?
   end
 
   def set_card
-    @card = Card.where(user_id: current_user.id).first
+    @card = Card.where(user_id: current_user.id).first if @card.present?
   end
 
 

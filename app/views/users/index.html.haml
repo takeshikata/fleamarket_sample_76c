@@ -15,42 +15,24 @@
                     = image_tag @profile.image.to_s, height: '70px', width: '70px', class: 'mypage-userinfo-regular__lists__img__data'
                   -else
                     = image_tag 'member_photo_noimage_thumb.png', height: '70px', width: '70px', class: 'mypage-userinfo-regular__lists__img__data'
-          - if user_signed_in? && @product && current_user.id == @product.user_id
-            .user-evaluation
-              .user-evaluation__box
-                %ul.evaluation
-                  %li.evaluation
-                    = icon('fas', 'grin',  class: "good")
-                    %i
-                      = @evaluation_good_sum
-                    
-                  %li.evaluation
-                    = icon('fas', 'meh',  class: "normal")
-                    %i
-                      = @evaluation_normal_sum
-                    
-                  %li.evaluation
-                    = icon('fas', 'frown',  class: "bad")
-                    %i
-                      = @evaluation_bad_sum         
-          - else
-            .user-evaluation
-              .user-evaluation__box
-                %ul.evaluation
-                  %li.evaluation
-                    = icon('fas', 'grin',  class: "good")
-                    %i
-                      0
-                    
-                  %li.evaluation
-                    = icon('fas', 'meh',  class: "normal")
-                    %i
-                      0
-                    
-                  %li.evaluation
-                    = icon('fas', 'frown',  class: "bad")
-                    %i
-                      0
+          .user-evaluation
+            .user-evaluation__box
+              %ul.evaluation
+                %li.evaluation
+                  = icon('fas', 'grin',  class: "good")
+                  %i
+                    = @evaluation_good_sum.count
+                  
+                %li.evaluation
+                  = icon('fas', 'meh',  class: "normal")
+                  %i
+                    = @evaluation_normal_sum.count
+                  
+                %li.evaluation
+                  = icon('fas', 'frown',  class: "bad")
+                  %i
+                    = @evaluation_bad_sum.count        
+
           .text-box
             = @profile.introduction
           .tabs
@@ -64,14 +46,14 @@
                   .image_box
                     = link_to product_path(sell), class: "sell-box" do
                       - sell.images.limit(1).each do |images|
-                        =image_tag images.image.to_s, size:"110x110"
+                        =image_tag images.image.to_s, size:"110x110", class: "sell-box_img"
               .tab-content.tab-2-content
                 - @product_selled.each do |selled|
                   .image_box
                     = link_to product_path(selled), class: "sell-box" do
                       .image
                         - selled.images.limit(1).each do |images|
-                          =image_tag images.image.to_s, size:"110x110"
+                          =image_tag images.image.to_s, size:"110x110", class: "sell-box_img"
                         -if selled.purchaser_id.present?
                           .items-box_photo__sold
                             .items-box_photo__sold__inner
