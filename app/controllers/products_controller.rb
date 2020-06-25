@@ -29,8 +29,12 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to root_path
     else
-      @product.images.new
-      render 'new'
+      unless @product.images.present?
+        @product.images.new
+        render 'new'
+      else
+        render 'new'
+      end
     end
   end
 
