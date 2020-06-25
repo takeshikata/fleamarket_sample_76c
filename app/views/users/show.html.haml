@@ -9,43 +9,24 @@
             = image_tag "member_photo_noimage_thumb.png",size: "180x180", class: "user_img"
           .product-user-name
           = @user.nickname
-      - if user_signed_in? && @product && current_user.id == @product.user_id
-        .user-evaluation
-          .user-evaluation__box
-            %ul.evaluation
-              %li.evaluation
-                = icon('fas', 'grin',  class: "good")
-                %i
-                  = @evaluation_good_sum.count
-                
-              %li.evaluation
-                = icon('fas', 'meh',  class: "normal")
-                %i
-                  = @evaluation_normal_sum.count
-                
-              %li.evaluation
-                = icon('fas', 'frown',  class: "bad")
-                %i
-                  = @evaluation_bad_sum.count         
+      .user-evaluation
+        .user-evaluation__box
+          %ul.evaluation
+            %li.evaluation
+              = icon('fas', 'grin',  class: "good")
+              %i
+                = @evaluation_good_sum.count
+              
+            %li.evaluation
+              = icon('fas', 'meh',  class: "normal")
+              %i
+                = @evaluation_normal_sum.count
+              
+            %li.evaluation
+              = icon('fas', 'frown',  class: "bad")
+              %i
+                = @evaluation_bad_sum.count         
 
-      - else
-        .user-evaluation
-          .user-evaluation__box
-            %ul.evaluation
-              %li.evaluation
-                = icon('fas', 'grin',  class: "good")
-                %i
-                  0
-                
-              %li.evaluation
-                = icon('fas', 'meh',  class: "normal")
-                %i
-                  0
-                
-              %li.evaluation
-                = icon('fas', 'frown',  class: "bad")
-                %i
-                  0
       .text-box
         = @profile.introduction
       .tabs

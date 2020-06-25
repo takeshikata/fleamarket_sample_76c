@@ -12,12 +12,13 @@ class Product < ApplicationRecord
   has_many :evaluations, dependent: :destroy
 
   validates :images, presence: { message: "を入力してください"}
-  validates :name,  presence: { message: "を入力してください"}
+  validates :name,  presence: { message: "を入力してください"}, length: { maximum: 40 }
   validates :introduction,  presence: { message: "を入力してください"}
-  validates :price,  presence: { message: "を入力してください"}
+  validates :price, presence: { message: "を入力してください"}
+  validates :price, :numericality => { greater_than: 300, less_than: 9999999 } 
   
   has_many :likes, dependent: :destroy
-  # has_many :liking_users, through: :likes, source: :user
+  
 
   def like_user(user_id)
     likes.find_by(user_id: user_id)
