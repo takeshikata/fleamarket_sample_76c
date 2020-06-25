@@ -1,4 +1,4 @@
-.wrapper
+.wrapper-product-show
   .main
     .product-show
       .product-show__item-name
@@ -124,3 +124,4 @@
                 %p.comments-display__detail
                   = link_to "#{comment.user.nickname} さん：", "/users/#{comment.user_id}"
                   = comment.text
+=render partial: 'layouts/footer'
