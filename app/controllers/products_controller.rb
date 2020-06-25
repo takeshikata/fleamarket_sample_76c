@@ -37,6 +37,7 @@ class ProductsController < ApplicationController
       end
     end
   end
+  
 
   def edit
     grandchild_category = @product.category
