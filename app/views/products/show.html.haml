@@ -96,13 +96,13 @@
           .product-poster-btn
             = link_to '編集', "/products/#{@product.id}/edit", method: :get, class: "product-edit-btn"
             = link_to '削除', "/products/#{@product.id}", method: :delete, class: "product-delete-btn"
-        -elsif @product.purchaser_id.blank? 
+        -elsif @product.purchaser_id.blank?
           = link_to "新規会員登録へ進む", new_user_registration_path, class: "product-show__purchase-item--btn"
-        -elsif @product.purchaser_id == current_user.id && @evaluation.blank?
+        -elsif user_signed_in? && @product.purchaser_id == current_user.id && @evaluation.blank?
           = link_to "出品者を評価する", new_product_evaluation_path(@product), class: "product-show__purchase-item--btn"
         -elsif @product.purchaser_id.present?
           = link_to "売り切れです", root_path, class: "product-show__purchase-item--btn"
-        -else 
+        -else
           = link_to "トップへ戻る", root_path, class: "product-show__purchase-item--btn"
       -# .product-show__owner-comment
       -# .content__edit
