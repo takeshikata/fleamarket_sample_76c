@@ -35,7 +35,7 @@ $(function () {
         alert("価格を入れてください");
         return false;
       }
-      else if ($(`#preview-box__0`).length == 0){
+      else if ($(`.preview`).length == 0){
         console.log("画像が0個のとき");
         alert("画像を添付してください");
         return false;
