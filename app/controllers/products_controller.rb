@@ -29,7 +29,8 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to root_path
     else
-      render :new and return
+      @product.images.new
+      render 'new'
     end
   end
 
@@ -72,9 +73,7 @@ class ProductsController < ApplicationController
   # end
 
   def update
-    # each do で並べた画像が image
-    # 新しくinputに追加された画像が image_attributes
-    # この二つがない時はupdateしない
+
     if params[:product].keys.include?("image") || params[:product].keys.include?("images_attributes") 
       if @product.valid?
         if params[:product].keys.include?("image") 
