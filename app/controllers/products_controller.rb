@@ -9,7 +9,6 @@ class ProductsController < ApplicationController
 
   def index
     images = Image.select("id", "image", "product_id")
-    @new_product = Product.limit(10).order(" created_at DESC ")
     @category_parents = Category.where(ancestry: nil).order("id ASC").limit(5)
     @category_products = Product.all
   end
@@ -19,6 +18,9 @@ class ProductsController < ApplicationController
     @product.images.new
     #@images = @product.build_images
     @category_parent_array = Category.where(ancestry: nil).order(id: "ASC")
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
 
   def create
@@ -48,6 +50,10 @@ class ProductsController < ApplicationController
     @category_grandchildren_array = []
     Category.where(ancestry: grandchild_category.ancestry).each do |grandchildren|
       @category_grandchildren_array << grandchildren
+    end
+
+    unless @product.user_id == current_user.id && @product.purchaser_id.blank?
+      redirect_to root_path
     end
   end
 
@@ -111,25 +117,16 @@ class ProductsController < ApplicationController
     @comment = Comment.new
     @comments = @product.comments.includes(:user).order(" created_at DESC ")
     @evaluation = Evaluation.where(product_id: @product.id)
-    if @product
-      d_evaluations = Evaluation.select(:user_id, :product_id, :evaluation).distinct
-
-      @evaluation_good_sum, @evaluation_normal_sum, @evaluation_bad_sum = 0, 0, 0
-      products.each do |product|
-        @evaluation_good_sum += d_evaluations.where(evaluation: :good, product_id: product.id).where.not(user_id: product.user_id).count
-        @evaluation_normal_sum += d_evaluations.where(evaluation: :normal, product_id: product.id).where.not(user_id: product.user_id).count
-        @evaluation_bad_sum += d_evaluations.where(evaluation: :bad, product_id: product.id).where.not(user_id: product.user_id).count
-      end
-    end
-
-    @evaluation_good_sum = Evaluation.where(user_id: current_user.id, evaluation: 1)
-    @evaluation_normal_sum = Evaluation.where(user_id: current_user.id, evaluation: 2)
-    @evaluation_bad_sum = Evaluation.where(user_id: current_user.id, evaluation: 3)
+    
+    @evaluation_good_sum = Evaluation.where(user_id: @product.user_id, evaluation: 1)
+    @evaluation_normal_sum = Evaluation.where(user_id: @product.user_id, evaluation: 2)
+    @evaluation_bad_sum = Evaluation.where(user_id: @product.user_id, evaluation: 3)
+    # binding.pry
   end
 
   def destroy
     @product = Product.find(params[:id])
-    if @product.user_id == current_user.id
+    if @product.user_id == current_user.id && @product.purchaser_id.blank?
       @product.destroy
       redirect_to root_path
     end
@@ -141,19 +138,17 @@ class ProductsController < ApplicationController
     @images = @product.images
     @image = @images.first
 
-    if current_user.id == @product.user_id
+    if current_user.id == @product.user_id || @product.purchaser_id.present?
       redirect_to root_path
     elsif @address.blank?
       redirect_to new_address_path(@user)
       # 売り切れの時に直打ち遷移しないようにする
-    elsif @product.purchaser_id.present?
-      redirect_to root_path
     end
   end
 
   def pay
     # 既に購入されていないか？ されていたらroot_path
-    if @product.purchaser_id.present? && @product.user_id == current_user.id
+    if @product.purchaser_id.present? || @product.user_id == current_user.id
       redirect_to root_path
     elsif @card.blank?
       # カード情報がなければ、カード登録画面に遷移
