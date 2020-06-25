@@ -5,7 +5,4 @@
         = @user.nickname + "さん"
     %li.mypage-userinfo-regular__lists__img
       = link_to user_path(@user), class: "mypage-userinfo-regular__lists__link" do
-        - if @profile.image.present?
-          = image_tag @profile.image.to_s, height: '70px', width: '70px', class: 'mypage-userinfo-regular__lists__img__data'
-        -else
-          = image_tag 'member_photo_noimage_thumb.png', height: '70px', width: '70px', class: 'mypage-userinfo-regular__lists__img__data'
+        = image_tag 'member_photo_noimage_thumb.png', height: '70px', width: '70px', class: 'mypage-userinfo-regular__lists__img__data'

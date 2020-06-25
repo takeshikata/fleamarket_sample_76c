@@ -5,9 +5,6 @@ class AddressesController < ApplicationController
     @user = User.find(current_user.id)
     @address = Address.new
     @profile = Profile.find(@user.id)
-    # if @address.present?
-    #   redirect_to edit_address_path(@user)
-    # end
     
   end
 
