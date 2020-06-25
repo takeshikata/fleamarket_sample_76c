@@ -37,11 +37,41 @@ ActiveRecord::Schema.define(version: 2020_06_23_063540) do
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
+  create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "payjp_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cards_on_user_id"
+  end
+
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry"
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.text "text"
+
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_comments_on_product_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "evaluations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.integer "evaluation", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_evaluations_on_product_id"
+    t.index ["user_id"], name: "index_evaluations_on_user_id"
   end
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -104,6 +134,9 @@ ActiveRecord::Schema.define(version: 2020_06_23_063540) do
     t.bigint "category_id", null: false
     t.bigint "brand_id"
     t.bigint "product_condition_id", null: false
+
+    t.bigint "shipping_payer_id"
+
     t.bigint "shipping_region_id", null: false
     t.bigint "preparation_term_id", null: false
     t.integer "likes_count"
@@ -158,6 +191,9 @@ ActiveRecord::Schema.define(version: 2020_06_23_063540) do
   add_foreign_key "images", "products"
   add_foreign_key "likes", "products"
   add_foreign_key "likes", "users"
+
+  add_foreign_key "products", "brands"
+
   add_foreign_key "products", "categories"
   add_foreign_key "products", "preparation_terms"
   add_foreign_key "products", "product_conditions"

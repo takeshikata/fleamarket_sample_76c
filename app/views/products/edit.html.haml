@@ -1,4 +1,10 @@
 .content-bg-gray
+  - if @product.errors.any?
+    .product-form__errors
+      %div.product-form__errors__count= "#{@product.errors.full_messages.count}件のエラーが発生しました"
+      %ul
+        - @product.errors.full_messages.each do |message|
+          %li.error-message= message
   .shadowed-rounded-rectangle
     = form_with(model: @product, local: true, class: "product-new-form") do |f|
       %section.mainbox-header
@@ -10,23 +16,19 @@
             出品画像
             %span.require 必須
             %p.upload_limit 最大10枚までアップロードできます
-          .product-new__field__uploader
-            = f.fields_for :images do |image|
-              %ul#previews
-                - @product.images.each_with_index do |img, i|
-                  %li.image-preview
-                    %label.upload-label{style:"display: none;"}
-                      .upload-label__text
-                        %div
-                          %p クリックしてファイルをアップロード
-                      .input-area
+            %ul#previews
+              - @product.images.each_with_index do |img, i|
+                %li.image-preview
+                  %label.upload-label{style:"display: none;"}
+                    .input-area
+                      = f.fields_for :images do |image|
                         = image.file_field :image, value: img.image, class: "hidden image_upload"
                         = image.hidden_field :id, value: img.id, name:"product[image][#{i}]"
-                    .image-preview__wrapper
-                      = image_tag img.image.to_s, class:"preview"
-                    .image-preview_btn
-                      .image-preview_btn_delete
-                        削除
+                  .image-preview__wrapper
+                    = image_tag img.image.to_s, size: "80x80", class:"preview"
+                  .image-preview_btn
+                    .image-preview_btn_delete
+                      削除
           .product__block__form__name
             = f.label "商品名", class: "profile-form__label"
             %h4.require

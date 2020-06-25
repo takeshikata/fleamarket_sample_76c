@@ -185,7 +185,7 @@ class ProductsController < ApplicationController
     @products = Product.search(params[:keyword])
 
   end
-
+  
   private
   def product_params
     params.require(:product).permit(
