@@ -51,8 +51,8 @@ class ProductsController < ApplicationController
     Category.where(ancestry: grandchild_category.ancestry).each do |grandchildren|
       @category_grandchildren_array << grandchildren
     end
-
-    unless @product.user_id == current_user.id && @product.purchaser_id.blank?
+    # ログインかつ、投稿者かつ、商品が売り切れてない場合
+    unless user_signed_in? && @product.user_id == current_user.id && @product.purchaser_id.blank?
       redirect_to root_path
     end
   end
@@ -126,8 +126,10 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
-    if @product.user_id == current_user.id && @product.purchaser_id.blank?
+    if user_signed_in? && @product.user_id == current_user.id && @product.purchaser_id.blank?
       @product.destroy
+      redirect_to root_path
+    else
       redirect_to root_path
     end
   end
@@ -219,7 +221,7 @@ class ProductsController < ApplicationController
   end
 
   def set_product
-    @product = Product.find(params[:id]) if @product.present?
+    @product = Product.find(params[:id])
   end
 
 
