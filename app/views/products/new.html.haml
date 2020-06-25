@@ -68,7 +68,7 @@
           %br/
           = f.select  :shipping_region_id, options_for_select(ShippingRegion.regions), {prompt: "選択して下さい"}, class: "select", class: "input-form-xregular"
         .content__product-shipping__date
-          = f.label "発送までの日数", class: "profile-form__label", class: "input-form-xregular"
+          = f.label "発送までの日数", class: "profile-form__label"
           %h4.require
             必須
           %br/
