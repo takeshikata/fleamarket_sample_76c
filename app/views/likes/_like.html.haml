@@ -12,7 +12,7 @@
         %span いいね!
         = @product.likes_count
 - else
-  - if product.likes_count > 0
+  - if product.likes.count > 0
     .vertical_like__off
       %i.fa.fa-star{:class => "fa-spin", :style => "color: red;"}
       %span いいね!
