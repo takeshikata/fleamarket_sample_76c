@@ -3,9 +3,9 @@
 .wrapper-category
   .categoies__contents__top
     .categories____contents__top__name
-      お気に入り商品の一覧
+      購入した商品一覧
   .categories__item-box
-    - current_user.like_products.each do |product|
+    - @products.each do |product|
       .categories__item-box__product
         = link_to product_path(product), class: "category_btn" do
           .categories__item-box__image

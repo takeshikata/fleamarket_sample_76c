@@ -62,6 +62,10 @@ class UsersController < ApplicationController
     @likes = Like.where(user_id: current_user.id)
   end
 
+  def history
+    @products = Product.where(purchaser_id: params[:id])
+  end
+
 
   def set_parent
     @parents = Category.all.order("id ASC").limit(10)
