@@ -16,15 +16,12 @@ class ProfilesController < ApplicationController
     @user = User.find(params[:id])
     @profile = Profile.find(current_user.id)
     @address = Address.where(user_id: current_user.id).first
-    # binding.pry
-    # profile = Profile.where(user_id: current_user.id).first
   end
-  
+
   def update
     @user = User.find(params[:id])
     profile = Profile.find(current_user.id)
     profile.update(profile_params)
-    # binding.pry
     redirect_to user_path
   end
 
@@ -44,11 +41,4 @@ class ProfilesController < ApplicationController
       :image
     )
   end
-
-
 end
-
-
-
-# @profile = Profile.find(current_user.id)
-# @address = Address.find(user_id: current_user.id)

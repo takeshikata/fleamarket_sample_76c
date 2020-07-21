@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.create(product_params)
-    # @image = Image.create(image_params)
+
     if @product.save
       redirect_to root_path
     else
@@ -170,14 +170,12 @@ class ProductsController < ApplicationController
   end
 
   def get_category_children
-      #選択された親カテゴリーに紐付く子カテゴリーの配列を取得
-    # binding.pry
+    # 選択された親カテゴリーに紐付く子カテゴリーの配列を取得
     @category_children = Category.find_by(id: "#{params[:parent_id]}", ancestry: nil).children
   end
 
   def get_category_grandchildren
-    # binding.pry
-      #選択された子カテゴリーに紐付く孫カテゴリーの配列を取得
+    # 選択された子カテゴリーに紐付く孫カテゴリーの配列を取得
     @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
 
@@ -213,20 +211,5 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
-
-
-  def edit_product_params
-    params.require(:product).permit(
-      :name,
-      :introduction,
-      :price,
-      :category_id,
-      :brand_id,
-      :shipping_region_id,
-      :shipping_payer_id,
-      :preparation_term_id,
-      :product_condition_id,
-      images_attributes: [:image]
-    )
-  end
+  
 end
