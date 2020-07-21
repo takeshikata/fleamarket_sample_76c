@@ -1,5 +1,4 @@
 $(function(){
-  console.log("非同期");
   // カテゴリーセレクトボックスのオプションを作成
   function appendOption(category){
     var html = `<option value="${category.id}" data-category="${category.id}">${category.name}</option>`;
@@ -33,7 +32,6 @@ $(function(){
   }
   // 親カテゴリー選択後のイベント
   $('#parent_category').on('change', function(){
-    console.log("イベントchildren");
     var parentCategory = $('#parent_category').val(); //document.getElementById('parent_category').val(); //選択された親カテゴリーの名前を取得
     if (parentCategory != "---"){ //親カテゴリーが初期値でないことを確認
       $.ajax({
@@ -43,7 +41,6 @@ $(function(){
         dataType: 'json'
       })
       .done(function(children){
-        console.log(children);
         $('#children_wrapper').remove(); //親が変更された時、子以下を削除するする
         $('#grandchildren_wrapper').remove();
         $('#size_wrapper').remove();
@@ -66,7 +63,6 @@ $(function(){
   });
   // 子カテゴリー選択後のイベント
   $('.listing-product-detail__category').on('change', '#child_category', function(){
-    console.log("イベントgrandchildren");
     var childId = $('#child_category option:selected').data('category'); //選択された子カテゴリーのidを取得
     if (childId != "---"){ //子カテゴリーが初期値でないことを確認
       $.ajax({
@@ -76,7 +72,6 @@ $(function(){
         dataType: 'json'
       })
       .done(function(grandchildren){
-        console.log(grandchildren);
         if (grandchildren.length != 0) {
           $('#grandchildren_wrapper').remove(); //子が変更された時、孫以下を削除するする
           $('#size_wrapper').remove();

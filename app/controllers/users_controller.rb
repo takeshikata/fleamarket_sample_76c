@@ -3,23 +3,21 @@ class UsersController < ApplicationController
 
   def index
     if user_signed_in?
-      @address = Address.where(user_id: current_user.id).first
       @user = User.find(current_user.id)
+      @product = Product.find_by(user_id: params[:id])
       @products = @user.products
-      @address = Address.where(user_id: current_user.id).first
-      @profile = Profile.find(@user.id)
       @product_sell = Product.where(user_id: current_user.id, purchaser_id: nil)
       @product_selled = Product.where(user_id: current_user.id).where.not(purchaser_id: nil)
-      @product = Product.find_by(user_id: params[:id])
+      @profile = Profile.find(@user.id)
+      @address = Address.where(user_id: current_user.id).first
       @evaluation_good_sum = Evaluation.where(user_id: current_user.id, evaluation: 1)
       @evaluation_normal_sum = Evaluation.where(user_id: current_user.id, evaluation: 2)
       @evaluation_bad_sum = Evaluation.where(user_id: current_user.id, evaluation: 3)
     else
       redirect_to root_path
     end
-  #   binding.pry
   end
-  
+
   def show
     if user_signed_in?
       @user = User.find(current_user.id)
@@ -27,14 +25,14 @@ class UsersController < ApplicationController
       @products = Product.where(user_id: params[:id])
       @product_sell = Product.where(user_id: params[:id], purchaser_id: nil)
       @product_selled = Product.where(user_id: params[:id]).where.not(purchaser_id: nil)
-      @profile = Profile.find(params[:id])   
+      @profile = Profile.find(params[:id])
       @evaluation_good_sum = Evaluation.where(user_id: current_user.id, evaluation: 1)
       @evaluation_normal_sum = Evaluation.where(user_id: current_user.id, evaluation: 2)
       @evaluation_bad_sum = Evaluation.where(user_id: current_user.id, evaluation: 3)
     else
       redirect_to root_path
     end
-  
+
   end
 
   def destroy
