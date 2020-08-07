@@ -27,7 +27,7 @@ Basic認証をかけています。ご覧の際は以下のIDとPassを入力し
 # takeshikataの開発担当箇所
 ## トップページ
 ### カテゴリー検索機能
-![カテゴリー検索](./category.gif)
+![カテゴリー検索](./download.gif)
 
 ## Usersテーブル
 |Column|Type|Options|
