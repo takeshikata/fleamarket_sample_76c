@@ -14,7 +14,7 @@
               = link_to product_path(product), class: "item-box__product--btn" do
                 .image
                   - product.images.limit(1).each do |images|
-                    = image_tag images.image.to_s, size: "200x200", class: "image__tag"  
+                    = image_tag images.image.to_s, size: "200x200", class: "image__tag"
                 .like_prodct__index
                   .vertical_like
                     - unless product.like_user(current_user.id).blank?
