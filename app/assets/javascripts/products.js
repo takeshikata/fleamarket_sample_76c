@@ -1,7 +1,8 @@
+//remind
 // $(function(){
 //   const buildFileField = (num)=> {
 //     if (num < 10) {
-//     const html = `<div data-index="${num}" class="js-file_group">  
+//     const html = `<div data-index="${num}" class="js-file_group">
 //                     <input class="js-file" type="file"
 //                     name="product[images_attributes][${num}][image]"
 //                     id="images_attributes_${num}_src"><br>
